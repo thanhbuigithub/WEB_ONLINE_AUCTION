@@ -39,6 +39,7 @@ $(document).ready(function()
 	initIsotope();
 	initPriceSlider();
 	initFavs();
+	initCountingDown();
 
 	$(window).on('resize', function()
 	{
@@ -366,24 +367,24 @@ $(document).ready(function()
 			{
 				range: true,
 				min: 0,
-				max: 1000,
-				values: [ 0, 580 ],
+				max: 50000000,
+				values: [ 0, 50000000 ],
 				slide: function( event, ui )
 				{
-					$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+					$( "#amount" ).val( ui.values[ 0 ] +" đ" +" - "+ ui.values[ 1 ] + " đ"  );
 				}
 			});
 				
-			$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+			$( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) + " đ" + " - " + $( "#slider-range" ).slider( "values", 1 ) + " đ");
 			$('.ui-slider-handle').on('mouseup', function()
 			{
 				$('.product_grid').isotope({
 		            filter: function()
 		            {
 		            	var priceRange = $('#amount').val();
-			        	var priceMin = parseFloat(priceRange.split('-')[0].replace('$', ''));
-			        	var priceMax = parseFloat(priceRange.split('-')[1].replace('$', ''));
-			        	var itemPrice = $(this).find('.product_price').clone().children().remove().end().text().replace( '$', '' );
+			        	var priceMin = parseInt(priceRange.split('-')[0].replace('đ', ''));
+			        	var priceMax = parseInt(priceRange.split('-')[1].replace('đ', ''));
+			        	var itemPrice = $(this).find('.product_price').clone().children().remove().end().text().replace( 'đ', '' );
 
 			        	return (itemPrice > priceMin) && (itemPrice < priceMax);
 		            },
@@ -415,5 +416,43 @@ $(document).ready(function()
 				fn.target.classList.toggle('active');
 			});
 		}
+	}
+
+	/* 9. Init Countdownter*/
+
+	function initCountingDown()
+	{
+			// Set the date we're counting down to
+	var countDownDate = new Date().getTime() + 7*1000*60*60*24;
+
+	// Update the count down every 1 second
+	var x = setInterval(function() {
+
+	// Get today's date and time
+	var now = new Date().getTime();
+		
+	// Find the distance between now and the count down date
+	var distance = countDownDate - now;
+		
+	// Time calculations for days, hours, minutes and seconds
+	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		
+	// Output the result in an element with id="demo"
+	var x = document.getElementsByClassName("counter");
+	var i;
+	for (i = 0; i < x.length; i++) {
+		x[i].innerHTML = days + " d: " + hours + " h: "
+		+ minutes + " m: " + seconds + " s ";
+	}
+		
+	// If the count down is over, write some text 
+	if (distance < 0) {
+		clearInterval(x);
+		document.getElementsByClassName("counter").innerHTML = "Kết thúc";
+	}
+	}, 1000);
 	}
 });

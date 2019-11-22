@@ -1430,7 +1430,11 @@ select option
 {
 	font-size: 16px;
 	font-weight: 500;
-	margin-top: 25px;
+}
+.product_nowprice
+{
+	font-size: 16px;
+	font-weight: 500;
 }
 .product_item.discount
 {
@@ -1576,7 +1580,18 @@ select option
 	visibility: visible;
 	opacity: 1;	
 }
+/* Add my style */
+.container1{
+    padding-bottom:50px;
+}
 
+.breadcrumb a::after {
+    content:"\00a0/";
+}
+
+li.active:before {
+    content: "\00a0";
+}
 /*********************************
 5.2 Shop Page Navigation
 *********************************/
@@ -1668,7 +1683,7 @@ select option
 }
 .sidebar_title
 {
-	font-size: 18px;
+	font-size: 25px;
 	font-weight: 500;
 }
 .sidebar_categories
@@ -1714,7 +1729,7 @@ select option
 }
 .sidebar_subtitle
 {
-	font-size: 14px;
+	font-size: 21px;
 	font-weight: 500;
 	margin-top: 25px;
 }
@@ -2284,3 +2299,5 @@ select option
 {
 	margin-right: 0px;
 }
+
+/* Add  countdown timer*/
