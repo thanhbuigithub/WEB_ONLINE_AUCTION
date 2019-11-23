@@ -18,7 +18,8 @@
 7. Brands
 8. Newsletter
 9. Footer
-
+10. Timer box
+11. Timer box item
 
 ******************************/
 
@@ -107,11 +108,11 @@ p a:hover::after
 }
 ::selection
 {
-	
+
 }
 p::selection
 {
-	
+
 }
 h1{font-size: 48px;}
 h2{font-size: 36px;}
@@ -126,14 +127,14 @@ h1, h2, h3, h4, h5, h6
 	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
 	text-shadow: rgba(0,0,0,.01) 0 0 1px;
 }
-h1::selection, 
-h2::selection, 
-h3::selection, 
-h4::selection, 
-h5::selection, 
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
 h6::selection
 {
-	
+
 }
 .form-control
 {
@@ -599,15 +600,15 @@ section
 	line-height: 50px;
 	color: #a3a3a3 !important;
 }
-.header_search_input::-moz-placeholder /* Firefox 19+ */ 
+.header_search_input::-moz-placeholder /* Firefox 19+ */
 {
 	font-size: 16px !important;
 	font-weight: 300;
 	line-height: 50px;
 	color: #a3a3a3 !important;
-} 
+}
 .header_search_input:-ms-input-placeholder
-{ 
+{
 	font-size: 16px !important;
 	font-weight: 300;
 	line-height: 50px;
@@ -666,7 +667,7 @@ section
 }
 .custom_dropdown_placeholder i
 {
-	
+
 }
 .custom_list
 {
@@ -1360,7 +1361,7 @@ select option
 }
 .product_quantity
 {
-	width: 182px;
+	width: 325px;
 	height: 50px;
 	border: solid 1px #e5e5e5;
 	border-radius: 5px;
@@ -1375,24 +1376,23 @@ select option
 	height: 50px;
 	font-size: 16px;
 	font-weight: 300;
-	color: rgba(0,0,0,0.5);
+	color: rgba(0,0,0,0.8);
 	line-height: 50px;
 	float: left;
 }
 .product_quantity input
 {
 	display: block;
-	width: 30px;
+	width: 230px;
 	height: 50px;
 	border: none;
 	outline: none;
-	font-size: 16px;
-	font-weight: 300;
-	color: rgba(0,0,0,0.5);
-	text-align: left;
+	font-size: 25px;
+	font-weight: 500;
+	color: rgba(0,0,0,0.9);
+	text-align: center;
 	padding-left: 9px;
 	line-height: 50px;
-	float: left;
 }
 .quantity_buttons
 {
@@ -1403,7 +1403,7 @@ select option
 	width: 29px;
 	border-left: solid 1px #e5e5e5;
 }
-.quantity_inc, 
+.quantity_inc,
 .quantity_dec
 {
 	display: -webkit-box;
@@ -1549,12 +1549,12 @@ select option
 	display: inline-block;
 	font-size: 24px;
 	font-weight: 500;
-	margin-top: 75px;
+	margin-top: 55px;
 	clear: left;
 }
 .button_container
 {
-	margin-top: 43px;
+	margin-top: 10px;
 }
 .cart_button
 {
@@ -1914,9 +1914,9 @@ select option
 {
 	font-size: 16px;
 	color: rgba(0,0,0,0.3);
-} 
+}
 .newsletter_input:-ms-input-placeholder
-{ 
+{
 	font-size: 16px;
 	color: rgba(0,0,0,0.3);
 }
@@ -2079,7 +2079,7 @@ select option
 }
 .footer_list_2
 {
-	margin-top: 42px !important; 
+	margin-top: 42px !important;
 }
 
 .copyright
@@ -2103,7 +2103,7 @@ select option
 }
 .logos
 {
-	
+
 }
 .logos_list li
 {
@@ -2113,4 +2113,133 @@ select option
 .logos_list li:last-child
 {
 	margin-right: 0px;
+}
+
+/****************
+10. Time Box
+****************/
+
+.deals_timer_content
+{
+	padding-bottom: 17px;
+}
+.deals_timer_box
+{
+	width: 250px;
+	padding-left: 3px;
+	padding-right: 3px;
+	border: solid 1px #cccccc;
+	border-radius: 5px;
+	margin-right: 1px;
+}
+.deals_timer_unit
+{
+	width: 25%;
+	font-size: 24px;
+	font-weight: 500;
+	text-align: center;
+	color: #000000;
+	padding: auto;
+	padding-top: 3px;
+	padding-bottom: 2px;
+	float: left;
+}
+.deals_timer_unit:first-child::after,
+.deals_timer_unit:nth-child(2)::after,
+.deals_timer_unit:nth-child(3)::after
+{
+	display: block;
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	right: 0px;
+	width: 1px;
+	height: 25px;
+	background: #e5e5e5;
+	content: '';
+}
+.deals_timer_unit span
+{
+	position: absolute;
+	display: block;
+	bottom: -22px;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+	transform: translateX(-50%);
+	font-size: 8px;
+	color: rgba(0,0,0,0.5);
+	text-transform: uppercase;
+}
+
+.bid_now:hover{
+	background-color: #FFFFFF;
+	color: #007bff;
+}
+
+/****************
+19. Time Box Item
+****************/
+
+.deals_timer_box_item
+{
+	width: 80%;
+	padding-left: 3px;
+	padding-right: 3px;
+	border: solid 1px #cccccc;
+	border-radius: 5px;
+	margin-right: 1px;
+	margin: auto;
+	margin-top: 10px;
+}
+.deals_timer_unit_item
+{
+	width: 25%;
+	font-size: 18px;
+	font-weight: 400;
+	text-align: center;
+	color: #000000;
+	padding: auto;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	float: left;
+}
+.deals_timer_unit_item:first-child::after,
+.deals_timer_unit_item:nth-child(2)::after,
+.deals_timer_unit_item:nth-child(3)::after
+{
+	display: block;
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	right: 0px;
+	width: 1px;
+	height: 25px;
+	background: #e5e5e5;
+	content: '';
+}
+.deals_timer_unit_item span
+{
+	position: absolute;
+	display: block;
+	bottom: -22px;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+	transform: translateX(-50%);
+	font-size: 8px;
+	color: rgba(0,0,0,0.5);
+	text-transform: uppercase;
 }
