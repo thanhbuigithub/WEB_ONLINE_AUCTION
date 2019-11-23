@@ -1436,9 +1436,10 @@ select option
 	font-size: 16px;
 	font-weight: 500;
 }
-.product_item.discount
+.product_item.discount div.product_price,
+.product_item.discount div >:nth-child(4)
 {
-	color: #df3b3b;
+	color :red;
 }
 .product_price span
 {
@@ -2301,3 +2302,9 @@ li.active:before {
 }
 
 /* Add  countdown timer*/
+.counter
+{
+	display: block;
+	color: red;
+	font-weight: 800;
+}

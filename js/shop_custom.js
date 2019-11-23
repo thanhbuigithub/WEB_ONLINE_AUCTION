@@ -13,7 +13,8 @@
 7. Init Isotope
 8. Init Price Slider
 9. Init Favorites
-
+10. Init CountingDown
+11. Search Item Categories
 
 ******************************/
 
@@ -40,6 +41,7 @@ $(document).ready(function()
 	initPriceSlider();
 	initFavs();
 	initCountingDown();
+	selectCategories();
 
 	$(window).on('resize', function()
 	{
@@ -454,5 +456,11 @@ $(document).ready(function()
 		document.getElementsByClassName("counter").innerHTML = "Kết thúc";
 	}
 	}, 1000);
+	}
+
+	function selectCategories()
+	{
+		// var x = document.getElementById("searchItem").value;
+		// document.getElementsByTagName("h3")[0].innerHTML=x;
 	}
 });
