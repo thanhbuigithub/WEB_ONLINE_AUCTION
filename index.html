@@ -19,7 +19,49 @@
 
 	</head>
 	<body>
-	<!-- Form login -->
+<div class="super_container">
+	<!-- Header -->
+	<header class="header">
+		<!-- Top Bar -->
+
+		<div class="top_bar">
+			<div class="container">
+				<div class="row">
+					<div class="col d-flex flex-row">
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+38 068 005 3570</div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+						<div class="top_bar_content ml-auto">
+							<div class="top_bar_menu">
+								<ul class="standard_dropdown top_bar_dropdown">
+									<li>
+										<a href="#">Việt Nam<i class="fas fa-chevron-down"></i></a>
+										<ul>
+											<li><a href="#">English</a></li>
+											<li><a href="#">Spanish</a></li>
+											<li><a href="#">Japanese</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">$ VNĐ<i class="fas fa-chevron-down"></i></a>
+										<ul>
+											<li><a href="#">EUR Euro</a></li>
+											<li><a href="#">USD</a></li>
+											<li><a href="#">JPY Japanese Yen</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="top_bar_user">
+								<div class="user_icon"><img src="images/user.svg" alt=""></div>
+								<div id="btnSignUp"><a href="#" onclick="document.getElementById('signup').style.display='block'" style="width:auto;">Đăng kí</a></div>
+								<div id="btnLogin"><a href="#" onclick="document.getElementById('login').style.display='block'" style="width:auto;">Đăng nhập</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Form login -->
 		<div class="body_login">
 			<div id="login" class="modal">
 				<form class="modal-content animate" action="index.html" method="post">
@@ -80,49 +122,6 @@
 					</form>
 			</div>
 	</div>
-<div class="super_container">
-	<!-- Header -->
-	<header class="header">
-		<!-- Top Bar -->
-
-		<div class="top_bar">
-			<div class="container">
-				<div class="row">
-					<div class="col d-flex flex-row">
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+38 068 005 3570</div>
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
-						<div class="top_bar_content ml-auto">
-							<div class="top_bar_menu">
-								<ul class="standard_dropdown top_bar_dropdown">
-									<li>
-										<a href="#">Việt Nam<i class="fas fa-chevron-down"></i></a>
-										<ul>
-											<li><a href="#">English</a></li>
-											<li><a href="#">Spanish</a></li>
-											<li><a href="#">Japanese</a></li>
-										</ul>
-									</li>
-									<li>
-										<a href="#">$ VNĐ<i class="fas fa-chevron-down"></i></a>
-										<ul>
-											<li><a href="#">EUR Euro</a></li>
-											<li><a href="#">USD</a></li>
-											<li><a href="#">JPY Japanese Yen</a></li>
-										</ul>
-									</li>
-								</ul>
-							</div>
-							<div class="top_bar_user">
-								<div class="user_icon"><img src="images/user.svg" alt=""></div>
-								<div id="btnSignUp"><a href="#" onclick="document.getElementById('signup').style.display='block'" style="width:auto;">Đăng kí</a></div>
-								<div id="btnLogin"><a href="#" onclick="document.getElementById('login').style.display='block'" style="width:auto;">Đăng nhập</a></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
 		<!-- Header Main -->
 
 		<div class="header_main">
@@ -153,7 +152,7 @@
 												</ul>
 											</div>
 										</div>
-										<button type="submit" class="header_search_button trans_300" value="Submit"><img src="images/search.png" alt=""></button>
+										<button onclick="location.href='search.html'" type="submit" class="header_search_button trans_300" value="Submit"><img src="images/search.png" alt=""></button>
 									</form>
 								</div>
 							</div>
@@ -210,7 +209,7 @@
 									<!-- <li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
 									<li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li> -->
 									<li class="hassubs">
-										<a href="#">Điện tử<i class="fas fa-chevron-right"></i></a>
+										<a href="shop.html">Điện tử<i class="fas fa-chevron-right"></i></a>
 										<ul>
 											<!-- <li class="hassubs">
 												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
@@ -221,8 +220,8 @@
 													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
 												</ul>
 											</li> -->
-											<li><a href="#">Điện thoại di động<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Máy tính xách tay<i class="fas fa-chevron-right"></i></a></li>
+											<li><a href="shop.html">Điện thoại di động<i class="fas fa-chevron-right"></i></a></li>
+											<li><a href="shop.html">Máy tính xách tay<i class="fas fa-chevron-right"></i></a></li>
 											<!-- <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li> -->
 										</ul>
 									</li>
@@ -418,7 +417,7 @@
 						<button type="button" class="btn btn-primary ml-2 bid_now" style="height: 50px"><i class="fas fa-gavel pr-2"></i>Ra giá ngay</button>
 						<div class="h3 pt-4 text-danger"><span>Giá mua ngay: 20.000.000</span></div>
 						<div class="banner_product_name">Apple Iphone 6s</div>
-						<div class="button banner_button"><a href="#">Mua ngay</a></div>
+						<div class="button banner_button"><a href="cart.html">Mua ngay</a></div>
 					</div>
 				</div>
 			</div>
@@ -545,7 +544,7 @@
 											</div>
 										</div>
 									</div>
-									<button type="button" class="btn btn-primary btn-lg btn-block mt-4">Đấu giá ngay</button>
+									<button onclick="location.href='product.html'" type="button" class="btn btn-primary btn-lg btn-block mt-4">Đấu giá ngay</button>
 								</div>
 
 								<!-- Deals Item -->
@@ -694,7 +693,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -737,7 +736,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button active">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button active">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -780,7 +779,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -824,7 +823,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -868,7 +867,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -912,7 +911,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -956,7 +955,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1000,7 +999,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1025,7 +1024,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1050,7 +1049,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1075,7 +1074,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1100,7 +1099,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1125,7 +1124,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1284,7 +1283,7 @@
 											</div>
 										</div>
 									</div>
-									<button type="button" class="btn btn-primary btn-lg btn-block mt-4">Đấu giá ngay</button>
+									<button onclick="location.href='product.html'" type="button" class="btn btn-primary btn-lg btn-block mt-4">Đấu giá ngay</button>
 								</div>
 
 								<!-- Deals Item -->
@@ -2023,7 +2022,7 @@
 											</div>
 										</div>
 									</div>
-									<button type="button" class="btn btn-primary btn-lg btn-block mt-4">Đấu giá ngay</button>
+									<button onclick="location.href='product.html'"type="button" class="btn btn-primary btn-lg btn-block mt-4">Đấu giá ngay</button>
 								</div>
 
 								<!-- Deals Item -->
@@ -2172,7 +2171,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2215,7 +2214,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button active">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button active">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2258,7 +2257,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2302,7 +2301,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2346,7 +2345,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2390,7 +2389,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2434,7 +2433,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2478,7 +2477,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2503,7 +2502,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2528,7 +2527,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2553,7 +2552,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2578,7 +2577,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2603,7 +2602,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2628,7 +2627,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2653,7 +2652,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2678,7 +2677,7 @@
 														<input type="radio" name="product_color" style="background:#000000">
 														<input type="radio" name="product_color" style="background:#999999">
 													</div>
-													<button class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='cart.html'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2778,7 +2777,7 @@
 				<div class="col-lg-3 footer_col">
 					<div class="footer_column footer_contact">
 						<div class="logo_container">
-							<div class="logo"><a href="#">OneTech</a></div>
+							<div class="logo"><a href="#">Auction</a></div>
 						</div>
 						<div class="footer_title">Got Question? Call Us 24/7</div>
 						<div class="footer_phone">+38 068 005 3570</div>

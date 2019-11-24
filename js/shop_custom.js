@@ -41,7 +41,7 @@ $(document).ready(function()
 	initPriceSlider();
 	initFavs();
 	initCountingDown();
-	selectCategories();
+	
 
 	$(window).on('resize', function()
 	{
@@ -457,10 +457,7 @@ $(document).ready(function()
 	}
 	}, 1000);
 	}
+	
 
-	function selectCategories()
-	{
-		// var x = document.getElementById("searchItem").value;
-		// document.getElementsByTagName("h3")[0].innerHTML=x;
-	}
+	
 });
