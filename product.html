@@ -17,6 +17,8 @@
 	<link rel="stylesheet" type="text/css" href="styles/responsive.css">
 	<link rel="stylesheet" type="text/css" href="styles/product_styles.css">
 	<link rel="stylesheet" type="text/css" href="styles/product_responsive.css">
+	<link rel="stylesheet" type="text/css" href="styles/login/login.css">
+	<link rel="stylesheet" type="text/css" href="styles/login/signup.css">
 
 </head>
 
@@ -63,15 +65,75 @@
 								</div>
 								<div class="top_bar_user">
 									<div class="user_icon"><img src="images/user.svg" alt=""></div>
-									<div><a href="#">Đăng kí</a></div>
-									<div><a href="#">Đăng nhập</a></div>
+									<div id="btnSignUp"><a href="#" onclick="document.getElementById('signup').style.display='block'" style="width:auto;">Đăng kí</a></div>
+								<div id="btnLogin"><a href="#" onclick="document.getElementById('login').style.display='block'" style="width:auto;">Đăng nhập</a></div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
+			<!-- Form login -->
+		<div class="body_login">				
+				<div id="login" class="modal">				  
+					<form class="modal-content animate" action="index.html" method="post">
+						<div class="imgcontainer">
+							<span >Đăng nhập</span>
+						  <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close">&times;</span>
+						  <hr>
+						</div>
+					
+						<div class="container">
+						  <label for="uname"><b>Tên đăng nhập</b></label>
+						  <input type="text" placeholder="Nhập tên đăng nhập" name="uname" required>
+					
+						  <label for="psw"><b>Mật khẩu</b></label>
+						  <input type="password" placeholder="Nhập mật khẩu" name="psw" required>
+							
+						  <button type="submit">Đăng nhập</button>
+						  <label>
+							<input type="checkbox" checked="checked" name="remember"> Remember me
+						  </label>
+						</div>
+					
+						<div class="container" style="background-color:#f1f1f1">
+						  <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
+						  <span class="psw"><a href="#"><u>Quên mật khẩu?</u></a></span>
+						</div>
+					</form>
+			</div>
+			
+			</div>
+			
+		<!-- Form Sign Up -->
+		<div class="body_signup">
+				<div id="signup" class="modal">					
+						<form class="modal-content" action="index.html">
+							<span>Đăng kí</span>
+							<span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close">&times;</span>		
+							<hr>
+						<div class="container">
+	
+							<label for="email"><b>Email</b></label>
+							<input type="text" placeholder="Nhập Email" name="email" required>
+					  
+							<label for="psw"><b>Mật khẩu</b></label>
+							<input type="password" placeholder="Nhập mật khẩu" name="psw" required>
+					  
+							<label for="psw-repeat"><b>Xác nhận mật khẩu</b></label>
+							<input type="password" placeholder="Nhập lại mật khẩu" name="psw-repeat" required>
+							
+							<label>
+							<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+							</label>			
+							<div class="clearfix">
+							  <button type="button" onclick="document.getElementById('signup').style.display='none'" class="cancelbtn">Cancel</button>
+							  <button type="submit" class="signupbtn">Sign Up</button>
+							</div>
+						</div>
+						</form>
+				</div>
+		</div>
 			<!-- Header Main -->
 
 			<div class="header_main">
@@ -159,7 +221,7 @@
 										<!-- <li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
 									<li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li> -->
 										<li class="hassubs">
-											<a href="#">Điện tử<i class="fas fa-chevron-right"></i></a>
+											<a href="shop.html">Điện tử<i class="fas fa-chevron-right"></i></a>
 											<ul>
 												<!-- <li class="hassubs">
 												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
@@ -170,8 +232,8 @@
 													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
 												</ul>
 											</li> -->
-												<li><a href="#">Điện thoại di động<i class="fas fa-chevron-right"></i></a></li>
-												<li><a href="#">Máy tính xách tay<i class="fas fa-chevron-right"></i></a></li>
+												<li><a href="shop.html">Điện thoại di động<i class="fas fa-chevron-right"></i></a></li>
+												<li><a href="shop.html">Máy tính xách tay<i class="fas fa-chevron-right"></i></a></li>
 												<!-- <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li> -->
 											</ul>
 										</li>
@@ -182,7 +244,7 @@
 
 								<div class="main_nav_menu ml-auto">
 									<ul class="standard_dropdown main_nav_dropdown">
-										<li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
+										<li><a href="index.html">Home<i class="fas fa-chevron-down"></i></a></li>
 										<li class="hassubs">
 											<a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
 											<ul>
@@ -438,7 +500,7 @@
 										<h3>25.000.000</h3>
 									</div>
 									<div class="button_container">
-										<button type="button" class="button cart_button">Mua ngay</button>
+										<button onclick="location.href='cart.html'" type="button" class="button cart_button">Mua ngay</button>
 										<div class="product_fav"><i class="fas fa-heart"></i></div>
 									</div>
 
@@ -856,6 +918,7 @@
 	<script src="plugins/easing/easing.js"></script>
 	<script src="js/custom.js"></script>
 	<script src="js/product_custom.js"></script>
+	<script src="styles/login/login.js"></script>
 </body>
 
 </html>
