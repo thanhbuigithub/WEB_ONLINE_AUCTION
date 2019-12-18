@@ -13,11 +13,12 @@
     "express-handlebars-sections": "^1.0.1",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "mysql": "^2.17.1"
   },
   "description": "Auction Online Web",
   "main": "app.js",
   "devDependencies": {},
-  "author": "",
+  "author": "1712764 - 1712780",
   "license": "ISC"
 }

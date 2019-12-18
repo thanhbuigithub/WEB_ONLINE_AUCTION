@@ -3,7 +3,7 @@ var express = require('express');
 const exphbs = require('express-handlebars');
 const hbs_sections = require('express-handlebars-sections');
 var express = require('express');
-var path = require('path');
+// var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -29,22 +29,22 @@ app.engine('hbs', exphbs({
     section: hbs_sections(),
   }
 }));
-app.set('views', path.join(__dirname, '/views'));
+// app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 app.use('/', indexRouter);
 app.use('/cart', cartRouter);
-app.use('/post', postRouter);
+app.use('/post_product', postRouter);
 app.use('/product', productRouter);
 app.use('/search', searchRouter);
 app.use('/shop', shopRouter);
-app.use('/user_info', infoRouter);
+app.use('/user_information', infoRouter);
 app.use('/admin_category', admCategory_Router);
 app.use('/admin_product', admProduct_Router);
 app.use('/admin_user', admUser_Router);
