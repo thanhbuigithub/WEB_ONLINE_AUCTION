@@ -1,62 +1,114 @@
 var createError = require('http-errors');
 var express = require('express');
-const exphbs = require('express-handlebars');
-const hbs_sections = require('express-handlebars-sections');
-var express = require('express');
-// var path = require('path');
-var cookieParser = require('cookie-parser');
+var path = require('path');
+var favicon = require('serve-favicon');
 var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var exphbs = require('express-handlebars');
+var hbs_sections = require('express-handlebars-sections');
+var mongoose = require('mongoose');
+var session = require('express-session');
+var passport = require('passport');
+var flash = require('connect-flash');
+var validator = require('express-validator');
 
+//Config
+var settings = require('./configs/settings');
+var database = require('./configs/database');
+
+//Router Main
 var indexRouter = require('./routes/index');
-var cartRouter = require('./routes/cart');
-var postRouter = require('./routes/post_product');
 var productRouter = require('./routes/product');
-var searchRouter = require('./routes/search'); 
+var searchRouter = require('./routes/search');
 var shopRouter = require('./routes/shop');
-var infoRouter = require('./routes/user_information');
-var admCategory_Router = require('./routes/admin/admin_category');
-var admProduct_Router = require('./routes/admin/admin_product');
-var admUser_Router = require('./routes/admin/admin_user');
 
+//Router Account
+var account = require('./routes/account');
+
+//Router Admin
+var admin = require('./routes/admin.router');
+
+//Init app
 var app = express();
+
+/* Kết nối tới cơ sở dữ liệu */
+
+mongoose.connect(database.dbStr, { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+db.once('open', _ => {
+  console.log('Database connected succesful !')
+})
+
+db.on('error', err => {
+  console.error('Connection failed:', err)
+})
+
+/* Khai báo để sử dụng kịch bản passport */
+require('./configs/passport')(passport);
 
 // view engine setup
 app.engine('hbs', exphbs({
   defaultLayout: 'main.hbs',
-  extname:'.hbs',
+  extname: '.hbs',
   layoutsDir: 'views/layouts',
+  partialsDir:'views/partials',
   helpers: {
     section: hbs_sections(),
   }
 }));
-// app.set('views', path.join(__dirname, '/views'));
+
+app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'hbs');
 
+// log tất cả request ra console log
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(validator());
+// BodyParser MiddleWare
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// Set static folder
 app.use(express.static('public'));
 
+/* Cấu hình passport */
+app.use(session({
+  secret: settings.secured_key,
+  resave: false,
+  saveUninitialized: false
+}))
+// ConnectFlash MiddleWare
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Set local
+app.use(function(req, res, next) {
+  res.locals.settings = settings;
+  res.locals.logged = req.isAuthenticated();
+  res.locals.user = req.user;
+  next();
+});
+
+//
 app.use('/', indexRouter);
-app.use('/cart', cartRouter);
-app.use('/post_product', postRouter);
 app.use('/product', productRouter);
 app.use('/search', searchRouter);
 app.use('/shop', shopRouter);
-app.use('/user_information', infoRouter);
-app.use('/admin_category', admCategory_Router);
-app.use('/admin_product', admProduct_Router);
-app.use('/admin_user', admUser_Router);
-
+//
+app.use('/account', account);
+//
+app.use('/admin', admin);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
