@@ -12,12 +12,16 @@
 						<a href="#" class="social"><i class="fab fa-twitter"></i></a>
 						<a href="#" class="social"><i class="fab fa-github"></i></a>
 					</div>
-					<span>Hoặc đăng kí bằng Email</span>
-					<input type="text" placeholder="Name" />
-					<input type="email" placeholder="Email" />
+					<span>Thông tin tài khoản</span>
+					<input type="text" placeholder="UserName" />
+
 					<input type="password" placeholder="Password" />
 					<input type="password" placeholder="Confirm Password" />
-					
+
+					<span>Thông tin cá nhân</span>
+					<input type="text" placeholder="Name" />
+					<input type="text" placeholder="Email" />
+					<input type="text" placeholder="Date Of Birth" />
 					<button>Đăng kí</button>
 				</form>
 			</div>
@@ -32,7 +36,7 @@
 						<a href="#" class="social"><i class="fab fa-github"></i></a>
 					</div>
 					<span>Hoặc sử dụng tài khoản Email</span>
-					<input type="email" placeholder="Email" />
+					<input type="text" placeholder="Email" />
 					<input type="password" placeholder="Password" />
 					<a href="#"><u id="txtForget">Quên mật khẩu?</u></a>
 					<button>Đăng nhập</button>
@@ -42,12 +46,12 @@
 				<div class="overlay">
 					<div class="overlay-panel overlay-left">
 						<h1>Welcome Back!</h1>
-						<p>Vui lòng đăng nhập thông tin của bạn để kết nối với chúng tôi</p>
+						<p>Vui lòng đăng nhập tài khoản để kết nối với chúng tôi !</p>
 						<button class="ghost" id="signIn">Đăng nhập</button>
 					</div>
 					<div class="overlay-panel overlay-right">
 						<h1>Hello, Friend!</h1>
-						<p>Vui lòng điền đầy đủ thông tin và bắt đầu đấu giá với chúng tôi</p>
+						<p>Vui lòng đăng kí tài khoản để bắt đầu đấu giá cùng chúng tôi !</p>
 						<button class="ghost" id="signUp">Đăng kí</button>
 					</div>
 				</div>
@@ -61,8 +65,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col d-flex flex-row">
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+38 068 005 3570</div>
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="/images/phone.png" alt=""></div>+38 068 005 3570</div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="/images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
 						<div class="top_bar_content ml-auto">
 							<div class="top_bar_menu">
 								<ul class="standard_dropdown top_bar_dropdown">
@@ -85,7 +89,7 @@
 								</ul>
 							</div>
 							<div class="top_bar_user">
-								<div class="user_icon"><img src="images/user.svg" alt=""></div>
+								<div class="user_icon"><img src="/images/user.svg" alt=""></div>
 								<div id="button-signup"><a href="#" >Đăng kí</a></div>
 								<div id="button-signin"><a href="#" >Đăng nhập</a></div>
 							</div>
@@ -94,7 +98,7 @@
 				</div>
 			</div>
 		</div>
-	
+
 	<!-- Header Main -->
 		<div class="header_main">
 			<div class="container">
@@ -103,7 +107,7 @@
 					<!-- Logo -->
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
-							<div class="logo"><a href="#">Auction</a></div>
+							<div class="logo"><a href="/">Auction</a></div>
 						</div>
 					</div>
 
@@ -124,7 +128,7 @@
 												</ul>
 											</div>
 										</div>
-										<button onclick="location.href='search.html'" type="submit" class="header_search_button trans_300" value="Submit"><img src="images/search.png" alt=""></button>
+										<button onclick="location.href='/search'" type="submit" class="header_search_button trans_300" value="Submit"><img src="/images/search.png" alt=""></button>
 									</form>
 								</div>
 							</div>
@@ -135,7 +139,7 @@
 					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
-								<div class="wishlist_icon"><img src="images/heart.png" alt=""></div>
+								<div class="wishlist_icon"><img src="/images/heart.png" alt=""></div>
 								<div class="wishlist_content">
 									<div class="wishlist_text"><a href="#">Wishlist</a></div>
 									<div class="wishlist_count">115</div>
@@ -146,7 +150,7 @@
 							<div class="cart">
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
-										<img src="images/cart.png" alt="">
+										<img src="/images/cart.png" alt="">
 										<div class="cart_count"><span>10</span></div>
 									</div>
 									<div class="cart_content">
@@ -209,7 +213,7 @@
 										<a href="/post_product">Đăng sản phẩm<i class="fas fa-chevron-down"></i></a>
 									</li>
 									<li>
-										<a href="/user_infomation">Thông tin người dùng<i class="fas fa-chevron-down"></i></a>
+										<a href="/user_information">Thông tin người dùng<i class="fas fa-chevron-down"></i></a>
 									</li>
 								</ul>
 							</div>
@@ -265,7 +269,7 @@
 									</ul>
 								</li>
 								<li class="page_menu_item">
-									<a href="/index">Trang chủ<i class="fa fa-angle-down"></i></a>
+									<a href="/">Trang chủ<i class="fa fa-angle-down"></i></a>
 								</li>
 								<li class="page_menu_item">
 									<a href="/post_product">Đăng sản phẩm<i class="fas fa-angle-down"></i></a>
@@ -277,10 +281,10 @@
 
 							<div class="menu_contact">
 								<div class="menu_contact_item">
-									<div class="menu_contact_icon"><img src="images/phone_white.png" alt=""></div>+38 068 005 3570
+									<div class="menu_contact_icon"><img src="/images/phone_white.png" alt=""></div>+38 068 005 3570
 								</div>
 								<div class="menu_contact_item">
-									<div class="menu_contact_icon"><img src="images/mail_white.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a>
+									<div class="menu_contact_icon"><img src="/images/mail_white.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a>
 								</div>
 							</div>
 						</div>

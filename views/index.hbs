@@ -6,10 +6,10 @@
 	<!-- Banner -->
 
 	<div class="banner">
-		<div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
+		<div class="banner_background" style="background-image:url(/images/banner_background.jpg)"></div>
 		<div class="container fill_height">
 			<div class="row fill_height">
-				<div class="banner_product_image"><img src="images/banner_product.png" alt=""></div>
+				<div class="banner_product_image"><img src="/images/banner_product.png" alt=""></div>
 				<div class="col-lg-5 offset-lg-4 fill_height">
 					<div class="banner_content">
 						<h1 class="banner_text">new era of smartphones IPHONE 6s</h1>
@@ -31,13 +31,10 @@
 							</span>
 						</div>
 						<div class="h3 pt-4 text-primary"><span>Giá hiện tại: 15.000.000</span></div>
-						<button onclick="location.href='product.html'" type="button"
-							class="btn btn-primary ml-2 bid_now" style="height: 50px"><i
-								class="fas fa-gavel pr-2"></i>Ra giá ngay</button>
+						<button onclick="location.href='/product'" type="button" class="btn btn-primary ml-2 bid_now" style="height: 50px"><i class="fas fa-gavel pr-2"></i>Ra giá ngay</button>
 						<div class="h3 pt-4 text-danger"><span>Giá mua ngay: 20.000.000</span></div>
 						<div class="banner_product_name">Apple Iphone 6s</div>
-						<div onclick="location.href='cart.html'" class="button banner_button"><a href="cart.html">Mua
-								ngay</a></div>
+						<div onclick="location.href='/cart'"class="button banner_button"><a href="/cart">Mua ngay</a></div>
 					</div>
 				</div>
 			</div>
@@ -54,7 +51,7 @@
 				<div class="col-lg-3 col-md-6 char_col">
 
 					<div class="char_item d-flex flex-row align-items-center justify-content-start">
-						<div class="char_icon"><img src="images/char_1.png" alt=""></div>
+						<div class="char_icon"><img src="/images/char_1.png" alt=""></div>
 						<div class="char_content">
 							<div class="char_title">Free Delivery</div>
 							<div class="char_subtitle">from $50</div>
@@ -66,7 +63,7 @@
 				<div class="col-lg-3 col-md-6 char_col">
 
 					<div class="char_item d-flex flex-row align-items-center justify-content-start">
-						<div class="char_icon"><img src="images/char_2.png" alt=""></div>
+						<div class="char_icon"><img src="/images/char_2.png" alt=""></div>
 						<div class="char_content">
 							<div class="char_title">Free Delivery</div>
 							<div class="char_subtitle">from $50</div>
@@ -78,7 +75,7 @@
 				<div class="col-lg-3 col-md-6 char_col">
 
 					<div class="char_item d-flex flex-row align-items-center justify-content-start">
-						<div class="char_icon"><img src="images/char_3.png" alt=""></div>
+						<div class="char_icon"><img src="/images/char_3.png" alt=""></div>
 						<div class="char_content">
 							<div class="char_title">Free Delivery</div>
 							<div class="char_subtitle">from $50</div>
@@ -90,7 +87,7 @@
 				<div class="col-lg-3 col-md-6 char_col">
 
 					<div class="char_item d-flex flex-row align-items-center justify-content-start">
-						<div class="char_icon"><img src="images/char_4.png" alt=""></div>
+						<div class="char_icon"><img src="/images/char_4.png" alt=""></div>
 						<div class="char_content">
 							<div class="char_title">Free Delivery</div>
 							<div class="char_subtitle">from $50</div>
@@ -121,7 +118,7 @@
 								<!-- Deals Item -->
 								{{#each this.products}}
 								<div class="owl-item deals_item">
-									<div class="deals_image"><img src="images/deals.png" alt=""></div>
+									<div class="deals_image"><img src="/images/deals.png" alt=""></div>
 									<div class="deals_content">
 										<div class="deals_info_line d-flex flex-row justify-content-start">
 											<div class="deals_item_category"><a href="#">Điện thoại di động</a></div>
@@ -168,15 +165,14 @@
 											</div>
 										</div>
 									</div>
-									<button onclick="location.href='product.html'" type="button"
-										class="btn btn-primary btn-lg btn-block mt-4">Đấu giá ngay</button>
+									<button onclick="location.href='/product'" type="button" class="btn btn-primary btn-lg btn-block mt-4">Đấu giá ngay</button>
 								</div>
 
 								{{/each}}
 
 								{{!-- <!-- Deals Item -->
 								<div class="owl-item deals_item">
-									<div class="deals_image"><img src="images/deals.png" alt=""></div>
+									<div class="deals_image"><img src="/images/deals.png" alt=""></div>
 									<div class="deals_content">
 										<div class="deals_info_line d-flex flex-row justify-content-start">
 											<div class="deals_item_category"><a href="#">Headphones</a></div>
@@ -220,7 +216,7 @@
 
 								<!-- Deals Item -->
 								<div class="owl-item deals_item">
-									<div class="deals_image"><img src="images/deals.png" alt=""></div>
+									<div class="deals_image"><img src="/images/deals.png" alt=""></div>
 									<div class="deals_content">
 										<div class="deals_info_line d-flex flex-row justify-content-start">
 											<div class="deals_item_category"><a href="#">Headphones</a></div>
@@ -333,8 +329,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -376,7 +371,7 @@
 
 								<!-- Deals Item -->
 								<div class="owl-item deals_item">
-									<div class="deals_image"><img src="images/deals.png" alt=""></div>
+									<div class="deals_image"><img src="/images/deals.png" alt=""></div>
 									<div class="deals_content">
 										<div class="deals_info_line d-flex flex-row justify-content-start">
 											<div class="deals_item_category"><a href="#">Điện thoại di động</a></div>
@@ -421,13 +416,12 @@
 											</div>
 										</div>
 									</div>
-									<button onclick="location.href='product.html'" type="button"
-										class="btn btn-primary btn-lg btn-block mt-4">Đấu giá ngay</button>
+									<button onclick="location.href='/product'" type="button" class="btn btn-primary btn-lg btn-block mt-4">Đấu giá ngay</button>
 								</div>
 
 								<!-- Deals Item -->
 								<div class="owl-item deals_item">
-									<div class="deals_image"><img src="images/deals.png" alt=""></div>
+									<div class="deals_image"><img src="/images/deals.png" alt=""></div>
 									<div class="deals_content">
 										<div class="deals_info_line d-flex flex-row justify-content-start">
 											<div class="deals_item_category"><a href="#">Headphones</a></div>
@@ -472,7 +466,7 @@
 
 								<!-- Deals Item -->
 								<div class="owl-item deals_item">
-									<div class="deals_image"><img src="images/deals.png" alt=""></div>
+									<div class="deals_image"><img src="/images/deals.png" alt=""></div>
 									<div class="deals_content">
 										<div class="deals_info_line d-flex flex-row justify-content-start">
 											<div class="deals_item_category"><a href="#">Headphones</a></div>
@@ -1249,7 +1243,7 @@
 
 								<!-- Deals Item -->
 								<div class="owl-item deals_item">
-									<div class="deals_image"><img src="images/deals.png" alt=""></div>
+									<div class="deals_image"><img src="/images/deals.png" alt=""></div>
 									<div class="deals_content">
 										<div class="deals_info_line d-flex flex-row justify-content-start">
 											<div class="deals_item_category"><a href="#">Điện thoại di động</a></div>
@@ -1294,13 +1288,12 @@
 											</div>
 										</div>
 									</div>
-									<button onclick="location.href='product.html'" type="button"
-										class="btn btn-primary btn-lg btn-block mt-4">Đấu giá ngay</button>
+									<button onclick="location.href='/product'"type="button" class="btn btn-primary btn-lg btn-block mt-4">Đấu giá ngay</button>
 								</div>
 
 								<!-- Deals Item -->
 								<div class="owl-item deals_item">
-									<div class="deals_image"><img src="images/deals.png" alt=""></div>
+									<div class="deals_image"><img src="/images/deals.png" alt=""></div>
 									<div class="deals_content">
 										<div class="deals_info_line d-flex flex-row justify-content-start">
 											<div class="deals_item_category"><a href="#">Headphones</a></div>
@@ -1345,7 +1338,7 @@
 
 								<!-- Deals Item -->
 								<div class="owl-item deals_item">
-									<div class="deals_image"><img src="images/deals.png" alt=""></div>
+									<div class="deals_image"><img src="/images/deals.png" alt=""></div>
 									<div class="deals_content">
 										<div class="deals_info_line d-flex flex-row justify-content-start">
 											<div class="deals_item_category"><a href="#">Headphones</a></div>
@@ -1456,8 +1449,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1508,8 +1500,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button active">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button active">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1560,8 +1551,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1666,8 +1656,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1772,8 +1761,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1825,8 +1813,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1859,8 +1846,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1893,8 +1879,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1927,8 +1912,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1961,8 +1945,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -1995,8 +1978,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2029,8 +2011,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2063,8 +2044,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2097,8 +2077,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='cart.html'"
-														class="product_cart_button">Add to Cart</button>
+													<button onclick="location.href='/cart'" class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
 											<div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -2146,45 +2125,40 @@
 
 							<!-- Popular Categories Item -->
 							<div class="owl-item">
-								<div
-									class="popular_category d-flex flex-column align-items-center justify-content-center">
-									<div class="popular_category_image"><img src="images/popular_1.png" alt=""></div>
+								<div class="popular_category d-flex flex-column align-items-center justify-content-center">
+									<div class="popular_category_image"><img src="/images/popular_1.png" alt=""></div>
 									<div class="popular_category_text">Smartphones & Tablets</div>
 								</div>
 							</div>
 
 							<!-- Popular Categories Item -->
 							<div class="owl-item">
-								<div
-									class="popular_category d-flex flex-column align-items-center justify-content-center">
-									<div class="popular_category_image"><img src="images/popular_2.png" alt=""></div>
+								<div class="popular_category d-flex flex-column align-items-center justify-content-center">
+									<div class="popular_category_image"><img src="/images/popular_2.png" alt=""></div>
 									<div class="popular_category_text">Computers & Laptops</div>
 								</div>
 							</div>
 
 							<!-- Popular Categories Item -->
 							<div class="owl-item">
-								<div
-									class="popular_category d-flex flex-column align-items-center justify-content-center">
-									<div class="popular_category_image"><img src="images/popular_3.png" alt=""></div>
+								<div class="popular_category d-flex flex-column align-items-center justify-content-center">
+									<div class="popular_category_image"><img src="/images/popular_3.png" alt=""></div>
 									<div class="popular_category_text">Gadgets</div>
 								</div>
 							</div>
 
 							<!-- Popular Categories Item -->
 							<div class="owl-item">
-								<div
-									class="popular_category d-flex flex-column align-items-center justify-content-center">
-									<div class="popular_category_image"><img src="images/popular_4.png" alt=""></div>
+								<div class="popular_category d-flex flex-column align-items-center justify-content-center">
+									<div class="popular_category_image"><img src="/images/popular_4.png" alt=""></div>
 									<div class="popular_category_text">Video Games & Consoles</div>
 								</div>
 							</div>
 
 							<!-- Popular Categories Item -->
 							<div class="owl-item">
-								<div
-									class="popular_category d-flex flex-column align-items-center justify-content-center">
-									<div class="popular_category_image"><img src="images/popular_5.png" alt=""></div>
+								<div class="popular_category d-flex flex-column align-items-center justify-content-center">
+									<div class="popular_category_image"><img src="/images/popular_5.png" alt=""></div>
 									<div class="popular_category_text">Accessories</div>
 								</div>
 							</div>

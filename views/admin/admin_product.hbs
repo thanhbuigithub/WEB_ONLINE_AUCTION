@@ -21,7 +21,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin_category.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin_category">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -33,7 +33,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item ">
-        <a class="nav-link" href="admin_category.html">
+        <a class="nav-link" href="/admin_category">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Quản lý danh sách</span></a>
       </li>
@@ -43,9 +43,9 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
-        <a class="nav-link" href="admin_product.html">
+        <a class="nav-link" href="/admin_product">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Quản lý sản phẩm</span></a>
+          <span class="active-collect">Quản lý sản phẩm</span></a>
       </li>
 
       <!-- Divider -->
@@ -53,18 +53,10 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="admin_user.html" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link" href="/admin_user">
           <i class="fas fa-fw fa-wrench"></i>
           <span>Quản lý người dùng</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">LOẠI NGƯỜI DÙNG:</h6>
-            <a class="collapse-item wrap" href="utilities-color.html">Bidder xin nâng cấp <br/> tài khoản</a>
-            <a class="collapse-item" href="utilities-border.html">Bidders</a>
-            <a class="collapse-item" href="utilities-animation.html">Sellers</a>
-          </div>
-        </div>
       </li>
 
       <!-- Divider -->
@@ -121,26 +113,26 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Quản lý sản phẩm</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Thêm</a>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm"></i> Thêm</a>
           </div>
 
           <table class="table">
 						<thead class="thead-dark">
 							<tr>
-								<th scope="col">#</th>
-								<th scope="col">Tên sản phẩm</th>
-								<th scope="col">Người bán</th>
-								<th scope="col">Hành động</th>
+								<th scope="col" class="text-center">#</th>
+								<th scope="col" class="text-center">Tên sản phẩm</th>
+								<th scope="col" class="text-center">Người bán</th>
+								<th scope="col" class="text-center">Thao tác</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<th scope="row">1</th>
-								<td>Macbook</td>
-								<td>Nguyễn Văn A</td>
-								<td>
-                  <button type="button" class="btn btn-primary">Sửa</button>
-                  <button type="button" class="btn btn-danger">Xoá</button>
+								<th scope="row" class="text-center">1</th>
+								<td class="text-center">Macbook</td>
+								<td class="text-center">Nguyễn Văn A</td>
+								<td class="text-center">
+                  <button type="button" class="btn btn-outline-primary mr-2"><i class="far fa-edit mr-2"></i>Sửa</button>
+                  <button type="button" class="btn btn-outline-danger"><i class="far fa-trash-alt mr-2"></i>Xoá</button>
                 </td>
 							</tr>
 
