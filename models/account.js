@@ -5,10 +5,10 @@ var bcrypt = require('bcryptjs');
 var userSchema = new mongoose.Schema({
     info: {
         fname: String,
-        lname:String,
+        lname: String,
         email: String,
-        addr:String,
-        dob: Date,        
+        addr: String,
+        dob: Date,
     },
     local: {
         username: {
@@ -16,7 +16,12 @@ var userSchema = new mongoose.Schema({
         },
         password: {
             type: String
-        }    
+        },
+        permission: Boolean,
+        rate_point: {
+            sum: Number,
+            plus: Number
+        }
     },
     // facebook: { 
     //     id: String,
@@ -36,7 +41,7 @@ var userSchema = new mongoose.Schema({
 });
 
 // Mã hóa mật khẩu
-userSchema.methods.encryptPassword = function(password) {
+userSchema.methods.encryptPassword = function (password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 }
 // Giải mã mật khẩu
@@ -44,7 +49,7 @@ userSchema.methods.validPassword = function (password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 //Kiểm tra tài khoản có được kích hoạt không ?
-userSchema.methods.isInActivated = function(checkStatus) {
+userSchema.methods.isInActivated = function (checkStatus) {
     if (checkStatus === "INACTIVE") {
         return true;
     } else {
@@ -52,7 +57,7 @@ userSchema.methods.isInActivated = function(checkStatus) {
     }
 };
 
-userSchema.methods.isSuspended = function(checkStatus) {
+userSchema.methods.isSuspended = function (checkStatus) {
     if (checkStatus === "SUSPENDED") {
         return true;
     } else {

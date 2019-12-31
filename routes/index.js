@@ -1,8 +1,16 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-var home_controller = require('../controllers/homeController');
-/* GET home page. */
-router.get('/', home_controller.index);
+const Category = require("../models/Category");
+const User = require("../models/account");
+const Product = require("../models/Product");
+const Bid = require("../models/Bid");
+
+Product.find().exec((err, db) => {
+  /* GET home page. */
+  router.get("/", function(req, res, next) {
+    res.render("index", { title: "Acution Online", products: db });
+  });
+});
 
 module.exports = router;

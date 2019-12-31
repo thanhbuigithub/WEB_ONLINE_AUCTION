@@ -44,6 +44,26 @@ db.on('error', err => {
   console.error('Connection failed:', err)
 })
 
+// Models
+const Category = require("./models/Category");
+const User = require("./models/account");
+const Product = require("./models/Product");
+const Bid = require("./models/Bid");
+
+// var id = "5e09fcf39a99352394f22edf";
+
+// Category.find().exec((err, product) => {
+//   if (err) console.log(err);
+//   else {
+//     console.log(product[0].name, product[0].child_cat_name);
+//     Product.find().exec((err, db) => {
+//       console.log(db);
+//     });
+//   }
+// });
+
+
+
 /* Khai báo để sử dụng kịch bản passport */
 require('./configs/passport')(passport);
 
@@ -52,7 +72,7 @@ app.engine('hbs', exphbs({
   defaultLayout: 'main.hbs',
   extname: '.hbs',
   layoutsDir: 'views/layouts',
-  partialsDir:'views/partials',
+  partialsDir: 'views/partials',
   helpers: {
     section: hbs_sections(),
   }
@@ -85,7 +105,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Set local
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.settings = settings;
   res.locals.logged = req.isAuthenticated();
   res.locals.user = req.user;
@@ -102,6 +122,7 @@ app.use('/account', account);
 //
 app.use('/admin', admin);
 
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -111,11 +132,11 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render("error");
 });
 
 module.exports = app;

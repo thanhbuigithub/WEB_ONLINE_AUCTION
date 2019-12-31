@@ -70,7 +70,7 @@ exports.notLogin_use = function (req, res, next) {
     next();
 };
 
-// District
+// District to previous page
 exports.restrict = (req, res) => {
     res.redirect(req.session.retUrl || '/');
     delete req.session.retUrl;
