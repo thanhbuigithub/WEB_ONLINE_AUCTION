@@ -48,12 +48,12 @@ $(document).ready(function()
 	initDealsSlider();
 	initTabLines();
 	initFeaturedSlider();
-	featuredSliderZIndex();
+	//featuredSliderZIndex();
 	initPopularSlider();
 	initBanner2Slider();
 	initFavs();
 	initArrivalsSlider();
-	arrivalsSliderZIndex();
+	//arrivalsSliderZIndex();
 	bestsellersSlider();
 	initTabs();
 	initTrendsSlider();
@@ -62,6 +62,7 @@ $(document).ready(function()
 	initBrandsSlider();
 	initTimer();
 	initTimerList();
+	resize_text();
 	$(window).on('resize', function()
 	{
 		setHeader();
@@ -430,12 +431,12 @@ $(document).ready(function()
 		})
 		.slick(
 		{
-			rows:2,
+			rows:1,
 			slidesToShow:4,
 			slidesToScroll:4,
 			infinite:false,
 			arrows:false,
-			dots:true,
+			dots:false,
 			responsive:
 			[
 				{
@@ -1135,4 +1136,38 @@ $(document).ready(function()
 					}
 				}
 			}	
+			function resize_text() {
+				var el, elements, _i, _len, _results;
+				elements = $('.resize');
+				console.log(elements);
+				if (elements.length < 0) {
+				  return;
+				}
+				_results = [];
+				for (_i = 0, _len = elements.length; _i < _len; _i++) {
+				  el = elements[_i];
+				  _results.push((function(el) {
+					var resizeText, _results1;
+					resizeText = function() {
+					  var elNewFontSize;
+					  elNewFontSize = (parseInt($(el).css('font-size').slice(0, -2)) - 1) + 'px';
+					  return $(el).css('font-size', elNewFontSize);
+					};
+					_results1 = [];
+					while (el.scrollHeight > el.offsetHeight) {
+					  _results1.push(resizeText());
+					}
+					return _results1;
+				  })(el));
+				}
+				return _results;
+			  };
+});
+
+
+
+$(function() {
+    while( $('.deals_item_name div').height() > $('.deals_item_name').height() ) {
+        $('.deals_item_name div').css('font-size', (parseInt($('.deals_item_name div').css('font-size')) - 1) + "px" );
+    }
 });

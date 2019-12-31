@@ -1382,6 +1382,21 @@ select option
 	font-weight: 400;
 	color: #000000;
 }
+
+.resize
+{
+	width: 180px;
+	height: 100px;
+	font-size: 24px;
+}
+
+#fitin{
+	width: 180px;
+    height: 100px;
+    overflow: hidden;
+    font-size: 24em;
+}
+
 .deals_item_price
 {
 	font-size: 24px;
@@ -1635,7 +1650,7 @@ select option
 }
 .featured_slider .slick-track
 {
-	padding-bottom: 120px;
+	padding-bottom: 160px;
 }
 .featured_slider_item
 {
@@ -1697,20 +1712,19 @@ select option
 }
 .product_name
 {
+	width: 80%;
+	margin: 0 auto;
 	margin-top: 4px;
 	overflow: hidden;
 }
 .product_name div
 {
 	width: 100%;
-
 }
 .product_name div a
 {
-	font-size: 14px;
 	font-weight: 400;
 	color: #000000;
-	white-space: nowrap;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
 	-ms-transition: all 200ms ease;
