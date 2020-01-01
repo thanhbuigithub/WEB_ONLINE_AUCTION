@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 const CatSchema = new mongoose.Schema({
   name: String,
-  child_cat_name: [String]
+  childcat_name: [{ name: String }]
 });
 
-module.exports = mongoose.model("Category", CatSchema);
+var instance = mongoose.model("Category", CatSchema);
+
+module.exports = {
+  instance
+};

@@ -1,11 +1,11 @@
-var createError = require('http-errors');
-var express = require('express');
-const exphbs = require('express-handlebars');
-const hbs_sections = require('express-handlebars-sections');
-var express = require('express');
+var createError = require("http-errors");
+var express = require("express");
+const exphbs = require("express-handlebars");
+const hbs_sections = require("express-handlebars-sections");
+var express = require("express");
 // var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
 
 //db
 var mongoose = require("mongoose");
@@ -29,15 +29,21 @@ const Bid = require("./models/Bid");
 
 var id = "5e09fcf39a99352394f22edf";
 
-Category.find().exec((err, product) => {
-  if (err) console.log(err);
-  else {
-    console.log(product[0].name, product[0].child_cat_name);
-    Product.find().exec((err, db) => {
-      console.log(db);
-    });
-  }
-});
+// Category.instance.find().exec((err, product) => {
+//   if (err) console.log(err);
+//   else {
+//     console.log(product[0].name, product[0]._id);
+//     Product.instance.find().exec((err, db) => {
+//       db.forEach(element => {
+//         const cat = product.find(item => item._id.$oid === element.cat_id.$oid);
+//         element.childcat_name = cat.childcat_name[element.childcat_pos];
+//         console.log(element.childcat_name);
+//       });
+//       console.log(db);
+//       console.log(db[0].childcat_name);
+//     });
+//   }
+// });
 
 //routes
 var indexRouter = require("./routes/index");
@@ -54,36 +60,37 @@ var admUser_Router = require("./routes/admin/admin_user");
 var app = express();
 
 // view engine setup
-app.engine('hbs', exphbs({
-  defaultLayout: 'main.hbs',
-  extname:'.hbs',
-  layoutsDir: 'views/layouts',
-  helpers: {
-    section: hbs_sections(),
-  }
-}));
+app.engine(
+  "hbs",
+  exphbs({
+    defaultLayout: "main.hbs",
+    extname: ".hbs",
+    layoutsDir: "views/layouts",
+    helpers: {
+      section: hbs_sections()
+    }
+  })
+);
 // app.set('views', path.join(__dirname, '/views'));
-app.set('view engine', 'hbs');
+app.set("view engine", "hbs");
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 
-app.use('/', indexRouter);
-app.use('/cart', cartRouter);
-app.use('/post_product', postRouter);
-app.use('/product', productRouter);
-app.use('/search', searchRouter);
-app.use('/shop', shopRouter);
-app.use('/user_information', infoRouter);
-app.use('/admin_category', admCategory_Router);
-app.use('/admin_product', admProduct_Router);
-app.use('/admin_user', admUser_Router);
-
-
+app.use("/", indexRouter);
+app.use("/cart", cartRouter);
+app.use("/post_product", postRouter);
+app.use("/product", productRouter);
+app.use("/search", searchRouter);
+app.use("/shop", shopRouter);
+app.use("/user_information", infoRouter);
+app.use("/admin_category", admCategory_Router);
+app.use("/admin_product", admProduct_Router);
+app.use("/admin_user", admUser_Router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

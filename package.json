@@ -17,7 +17,6 @@
     "mongoose": "^5.8.1",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2"
-    "mysql": "^2.17.1"
   },
   "description": "Auction Online Web",
   "main": "app.js",
