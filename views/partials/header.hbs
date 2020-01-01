@@ -33,7 +33,7 @@
 											<a href="account/information">Thông tin tài khoản<i
 													class="fa-search-minus"></i></a>
 										</li>
-										
+
 										<div class="dropdown-divider"></div>
 										<li><a href="/account/logout">Đăng xuất</a></li>
 									</ul>
@@ -80,7 +80,9 @@
 											<i class="fas fa-chevron-down"></i>
 											<ul class="custom_list clc">
 												<li><a class="clc" href="#">Toàn bộ</a></li>
-												<li><a class="clc" href="#">Điện tử</a></li>
+												{{#each this.categories}}
+												<li><a class="clc" href="#">{{name}}</a></li>
+												{{/each}}
 											</ul>
 										</div>
 									</div>
@@ -143,7 +145,8 @@
 								<!-- <li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
 									<li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li> -->
 								<li class="hassubs">
-									<a href="/shop">Điện tử<i class="fas fa-chevron-right"></i></a>
+									{{#each this.categories}}
+									<a href="/shop">{{name}}<i class="fas fa-chevron-right"></i></a>
 									<ul>
 										<!-- <li class="hassubs">
 												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
@@ -154,12 +157,14 @@
 													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
 												</ul>
 											</li> -->
-										<li><a href="/shop">Điện thoại di động<i class="fas fa-chevron-right"></i></a>
-										</li>
-										<li><a href="/shop">Máy tính xách tay<i class="fas fa-chevron-right"></i></a>
-										</li>
+										{{#each childcat_name}}
+										<li><a href="/shop">{{name}}<i class="fas fa-chevron-right"></i></a></li>
+										{{/each}}
+
+
 										<!-- <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li> -->
 									</ul>
+									{{/each}}
 								</li>
 							</ul>
 						</div>
@@ -170,9 +175,12 @@
 							<ul class="standard_dropdown main_nav_dropdown">
 								<li><a href="/">Trang chủ<i class="fas fa-chevron-down"></i></a></li>
 								<li>
-									<a href="/admin/post_product">Đăng sản phẩm<i class="fas fa-chevron-down"></i></a>
+									<a href="/seller/post_product">Đăng sản phẩm<i class="fas fa-chevron-down"></i></a>
 								</li>
-
+								{{!-- <li>
+									<a href="/user_information">Thông tin người dùng<i
+											class="fas fa-chevron-down"></i></a>
+								</li> --}}
 							</ul>
 						</div>
 
@@ -231,11 +239,11 @@
 								<a href="/">Trang chủ<i class="fa fa-angle-down"></i></a>
 							</li>
 							<li class="page_menu_item">
-								<a href="/account/post">Đăng sản phẩm<i class="fas fa-angle-down"></i></a>
+								<a href="/seller/post_product">Đăng sản phẩm<i class="fas fa-angle-down"></i></a>
 							</li>
-							<li class="page_menu_item">
+							{{!-- <li class="page_menu_item">
 								<a href="#">Thông tin người dùng<i class="fa fa-angle-down"></i></a>
-							</li>
+							</li> --}}
 						</ul>
 
 						<div class="menu_contact">

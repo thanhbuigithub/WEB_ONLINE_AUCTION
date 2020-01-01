@@ -1,17 +1,15 @@
+var validator = require("express-validator");
+var LocalStrategy = require("passport-local").Strategy;
+var FacebookStrategy = require("passport-facebook");
+var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+var moment = require("moment");
 
-var validator = require('express-validator');
-var LocalStrategy = require('passport-local').Strategy;
-var FacebookStrategy = require('passport-facebook');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var moment = require('moment');
+var settings = require("../configs/settings");
+var User = require("../models/user.model");
 
-var settings = require('../configs/settings');
-var User = require('../models/account');
-var Auth = require('../configs/auth');
 var provider = null;
 
-
-module.exports = function (passport) {
+module.exports = function(passport) {
   passport.serializeUser((user, done) => {
     done(null, user._id);
   });
@@ -19,7 +17,7 @@ module.exports = function (passport) {
   passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => {
       var newUser = user.toObject();
-      newUser['provider'] = provider;
+      newUser["provider"] = provider;
       done(err, newUser);
     });
   });

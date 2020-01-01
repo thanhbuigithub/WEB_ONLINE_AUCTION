@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Category = require("./category.model");
 const ProSchema = new mongoose.Schema({
   name: String,
   cat_id: mongoose.Schema.Types.ObjectId,
@@ -16,5 +17,15 @@ const ProSchema = new mongoose.Schema({
   bid_count: Number,
   auto_renew: Boolean
 });
+var instance = mongoose.model("Product", ProSchema);
+module.exports = {
+  instance,
 
-module.exports = mongoose.model("Product", ProSchema);
+  getChildCatName: _id => {
+    instance.findById(_id).exec((err, product) => {
+      Category.instance.findById(product.cat_id).exec((err, category) => {
+        return category.childcat_name[product.childcat_pos];
+      });
+    });
+  }
+};
