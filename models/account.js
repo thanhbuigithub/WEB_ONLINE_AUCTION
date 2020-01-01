@@ -6,11 +6,11 @@ var userSchema = new mongoose.Schema({
     info: {
         fname: String,
         lname: String,
-        email: String,
         addr: String,
         dob: Date,
     },
     local: {
+        email: String,
         username: {
             type: String
         },
@@ -23,20 +23,20 @@ var userSchema = new mongoose.Schema({
             plus: Number
         }
     },
-    // facebook: { 
-    //     id: String,
-    //     token: String,
-    //     email: String,
-    //     name: String,
-    //     photo: String
-    // },
-    // google: { 
-    //     id: String,
-    //     token: String,
-    //     email: String,
-    //     name: String,
-    //     photo: String
-    // },
+    facebook: {
+        id: String,
+        token: String,
+        email: String,
+        name: String,
+        photo: String
+    },
+    google: {
+        id: String,
+        token: String,
+        email: String,
+        name: String,
+        photo: String
+    },
     status: String //ACTIVE, INACTIVE, SUSPENDED
 });
 
@@ -48,6 +48,14 @@ userSchema.methods.encryptPassword = function (password) {
 userSchema.methods.validPassword = function (password) {
     return bcrypt.compareSync(password, this.local.password);
 };
+//Kiểm tra tài khoản có trùng username không ?
+userSchema.methods.validAccount = function (username) {
+    if (this.local.username === username) {
+        return true;
+    } else {
+        return false;
+    }
+};
 //Kiểm tra tài khoản có được kích hoạt không ?
 userSchema.methods.isInActivated = function (checkStatus) {
     if (checkStatus === "INACTIVE") {
@@ -56,7 +64,7 @@ userSchema.methods.isInActivated = function (checkStatus) {
         return false;
     }
 };
-
+//Kiểm tra tài khoản có bị vô hiệu hóa không ?
 userSchema.methods.isSuspended = function (checkStatus) {
     if (checkStatus === "SUSPENDED") {
         return true;

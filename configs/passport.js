@@ -7,7 +7,7 @@ var moment = require('moment');
 
 var settings = require('../configs/settings');
 var User = require('../models/account');
-
+var Auth = require('../configs/auth');
 var provider = null;
 
 
@@ -24,12 +24,12 @@ module.exports = function (passport) {
     });
   });
 
-  // Passport register
+  // Passport local account
   passport.use('local.register', new LocalStrategy({
-    usernameField: 'username',
+    usernameField: 'email',
     passswordField: 'password',
     passReqToCallback: true
-  }, (req, username, password, done) => {
+  }, (req, email, password, done) => {
     // Validator
     req.checkBody('first_name', 'Vui lòng điền First Name !').notEmpty();
     req.checkBody('last_name', 'Vui lòng điền Last Name !').notEmpty();
@@ -53,13 +53,14 @@ module.exports = function (passport) {
     }
 
     User.findOne({
-      'local.username': username
+      'local.email': email
     }, (err, user) => {
       if (err) {
         return done(err);
       }
       if (user) {
-        return done(null, false, { message: 'Tên đăng nhập đã tồn tại, vui lòng thử với tên khác !' });
+        if (user.validAccount(req.body.username)) return done(null, false, { message: 'Tên đăng nhập đã tồn tại, vui lòng thử với tên khác !' });
+        return done(null, false, { message: 'Email đã tồn tại, vui lòng thử với tên khác !' });
       }
 
       // Create user
@@ -68,7 +69,7 @@ module.exports = function (passport) {
       // Save user
       newUser.info.fname = req.body.first_name;
       newUser.info.lname = req.body.last_name;
-      newUser.info.email = req.body.email;
+      newUser.local.email = req.body.email;
       newUser.info.dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
       newUser.info.addr = req.body.addr;
       newUser.local.username = req.body.username;
@@ -100,59 +101,59 @@ module.exports = function (passport) {
 
   // Passport Login
   passport.use('local.login', new LocalStrategy({
-    usernameField: 'f_Username', 
+    usernameField: 'f_Username',
     passwordField: 'password',
     passReqToCallback: true
-}, function (req, username, password, done) {
+  }, function (req, username, password, done) {
     req.checkBody('f_Username', 'Tên đăng nhập không hợp lệ , thử lại !').notEmpty();
     req.checkBody('password', 'Mật khẩu không hợp lệ, thử lại !').notEmpty();
 
     var errors = req.validationErrors();
 
     if (errors) {
-        var messages = [];
-        errors.forEach(function (error) {
-            messages.push(error.msg);
-        });
-        return done(null, false, req.flash('error', messages));
+      var messages = [];
+      errors.forEach(function (error) {
+        messages.push(error.msg);
+      });
+      return done(null, false, req.flash('error', messages));
     }
 
     User.findOne({
-        'local.username': username
+      'local.username': username
     }, function (err, user) {
-        if (err) {
-            return done(err);
-        }
+      if (err) {
+        return done(err);
+      }
 
-        if (!user) {
-            return done(null, false, {
-                message: 'Tên đăng nhập không tìm thấy !'
-            });
-        }
+      if (!user) {
+        return done(null, false, {
+          message: 'Tên đăng nhập không tìm thấy !'
+        });
+      }
 
-        if (!user.validPassword(password)) {
-            return done(null, false, {
-                message: 'Mật khẩu không đúng, thử lại !'
-            });
-        };
+      if (!user.validPassword(password)) {
+        return done(null, false, {
+          message: 'Mật khẩu không đúng, thử lại !'
+        });
+      }
 
-        if (user.isInActivated(user.status)) {
-            return done(null, false, {
-                message: 'Tài khoản của bạn chưa kích hoạt !'
-            });
-        }
+      if (user.isInActivated(user.status)) {
+        return done(null, false, {
+          message: 'Tài khoản của bạn chưa kích hoạt !'
+        });
+      }
 
-        if (user.isSuspended(user.status)) {
-            return done(null, false, {
-                message: 'Tài khoản của bạn bị treo !'
-            });
-        }
+      if (user.isSuspended(user.status)) {
+        return done(null, false, {
+          message: 'Tài khoản của bạn bị treo !'
+        });
+      }
 
-        provider = "local";
-        return done(null, user);
+      provider = "local";
+      return done(null, user);
 
     });
 
-}));
+  }));
 
 }

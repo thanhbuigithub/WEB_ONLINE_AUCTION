@@ -75,3 +75,12 @@ exports.restrict = (req, res) => {
     res.redirect(req.session.retUrl || '/');
     delete req.session.retUrl;
 };
+
+//Facebook
+exports.get_facebook_login = passport.authenticate('facebook', {
+    scope: ['email, public_profile']
+});
+
+exports.get_facebook_login_callback = passport.authenticate('facebook', {
+    failureRedirect: '/account/login'
+});

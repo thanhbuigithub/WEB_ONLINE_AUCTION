@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var request = require('request');
 var exphbs = require('express-handlebars');
 var hbs_sections = require('express-handlebars-sections');
 var mongoose = require('mongoose');
@@ -121,6 +122,32 @@ app.use('/shop', shopRouter);
 app.use('/account', account);
 //
 app.use('/admin', admin);
+
+app.post('/login', async (req, res) => {
+  if (!req.body.captcha)
+    return res.json({ success: false, msg: 'Please select captcha' });
+
+  // Secret key
+  const secretKey = '6LfWcssUAAAAAILwan4CXeu9AJFfD-YN-yU1Nhmw';
+
+  // Verify URL
+  const query = stringify({
+    secret: secretKey,
+    response: req.body.captcha,
+    remoteip: req.connection.remoteAddress
+  });
+  const verifyURL = `https://google.com/recaptcha/api/siteverify?secret=${query.secretKey}&response=${query.response}&remoteip=${query.remoteip}`;
+
+  // Make a request to verifyURL
+  const body = await fetch(verifyURL).then(res => res.json());
+
+  // If not successful
+  if (body.success !== undefined && !body.success)
+    return res.json({ success: false, msg: 'Failed captcha verification' });
+
+  // If successful
+  return res.json({ success: true, msg: 'Captcha passed' });
+});
 
 
 // catch 404 and forward to error handler
