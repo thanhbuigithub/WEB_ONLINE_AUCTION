@@ -39,7 +39,7 @@ $(document).ready(function()
 	initBrandsSlider();
 	initIsotope();
 	initPriceSlider();
-	initFavs();
+	// initFavs();
 	initCountingDown();
 	
 

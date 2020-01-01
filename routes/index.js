@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 const Category = require("../models/Category");
-const User = require("../models/User");
+const User = require("../models/account");
 const Product = require("../models/Product");
 const Bid = require("../models/Bid");
 

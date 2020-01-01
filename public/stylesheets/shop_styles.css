@@ -2174,12 +2174,12 @@ li.active:before {
 	margin-top: -10px;
 }
 .footer .logo
-{
+{   
 	top: auto;
-	-webkit-transform: transform: none;
-    -moz-transform: transform: none;
-    -ms-transform: transform: none;
-    -o-transform: transform: none;
+	-webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
     transform: none;
 }
 .footer .logo a

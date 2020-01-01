@@ -1,0 +1,87 @@
+{{#section 'css'}}
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Font-->
+<link rel="stylesheet" type="text/css" href="/stylesheets/login/opensans-font.css">
+<link rel="stylesheet" type="text/css" href="/javascript/plugins/fonts/line-awesome/css/line-awesome.min.css">
+<!-- Main Style Css -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/stylesheets/login/style.css" />
+<style>
+	.form-left{
+		margin-right: 350px !important;
+		width: 200px;
+	}
+</style>
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+{{/section}}
+		
+<body class="form-v4">
+	<div class="page-content">
+		<div class="form-v4-content">
+			<div class="col-3 ">
+				<div class="form-left">
+					<h1>Welcome Back !</h1>
+					<p class="text-1">Vui lòng đăng kí tài khoản để bắt đầu đấu giá cùng với chúng tôi !</p>
+					<div class="form-left-last">
+						<button type="submit" name="account" class="account" onclick="location.href='/account/register'">Đăng kí</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-9">
+				<div class="row w-100 flex-column" id="Sign-in">
+					<h1>Đăng nhập</h1>
+					{{#if hasErrors}}
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<ul>
+						{{#each messages}}
+						<span type="button" aria-hidden="true" class="close pull-right" data-dismiss="alert"
+							aria-label="Close">&times;</span>
+							<li>{{this}}</li>						
+						{{/each}}
+						</ul>
+					</div>
+					{{/if}}
+					<div class="social-container">
+						<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+						<a href="#" class="social"><i class="fab fa-google"></i></a>
+						<a href="#" class="social"><i class="fab fa-twitter"></i></a>
+					</div>
+				</div>
+				<form class="form-detail " action="/account/login" method="post" id="myform">
+					<div class="row d-flex justify-content-between h-auto">
+						<div class="col-12 flex-column">
+							<div class="form-row">
+								<label for="txtUsername">User Name</label>
+								<input type="text" name="f_Username" id="txtUsername" class="input-text"
+									placeholder="admin">
+							</div>
+							<div class="form-row">
+								<label for="txtPassword">Password</label>
+								<input type="password" name="password" id="txtPassword" class="input-text"
+									placeholder="admin">
+							</div>
+						</div>
+					</div>
+
+					<div class="row d-flex justify-content-around">
+						
+						<div class="form-row-last pull-right">
+							<input type="hidden" name="_csrf" value="{{csrfToken}}">
+								<button type="submit" name="register" class="register">Đăng nhập</button>
+							</div>
+					</div>
+
+				</form>
+
+			</div>
+		</div>
+
+
+	</div>
+
+</body>
