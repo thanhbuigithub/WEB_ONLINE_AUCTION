@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Category = require("./Category");
+const Category = require("./category.model");
 const ProSchema = new mongoose.Schema({
   name: String,
   cat_id: mongoose.Schema.Types.ObjectId,

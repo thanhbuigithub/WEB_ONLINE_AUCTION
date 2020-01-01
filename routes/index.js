@@ -1,10 +1,10 @@
 var express = require("express");
 var router = express.Router();
 
-const Category = require("../models/Category");
-const User = require("../models/account");
-const Product = require("../models/Product");
-const Bid = require("../models/Bid");
+const Category = require("../models/category.model");
+const User = require("../models/user.model");
+const Product = require("../models/product.model");
+const Bid = require("../models/bid.model");
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
