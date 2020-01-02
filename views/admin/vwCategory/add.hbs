@@ -1,9 +1,13 @@
 {{#section 'css'}}
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/sb-admin-2.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link href="/stylesheets/sb-admin-2.min.css" rel="stylesheet">
 {{/section}}
 
 {{#section 'js'}}
+	<!-- Bootstrap core JavaScript-->
+  <script src="/javascript/js/jquery-3.3.1.min.js"></script>
+  <script src="/stylesheets/bootstrap4/bootstrap.min.js"></script>
+
   <!-- Custom scripts for all pages-->
   <script src="/javascript/js/sb-admin-2.min.js"></script>
 {{/section}}
@@ -36,11 +40,11 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <!-- Nav Item - Pages Collapse Menu -->
+      {{!-- <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="/admin/upgrade">
+        <a class="nav-link" href="/admin_product">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Duyệt nâng cấp</span></a>
+          <span>Quản lý sản phẩm</span></a>
       </li>
 
       <!-- Divider -->
@@ -48,14 +52,14 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="/admin/user-info">
+        <a class="nav-link" href="/admin_user">
           <i class="fas fa-fw fa-wrench"></i>
           <span>Quản lý người dùng</span>
         </a>
       </li>
 
       <!-- Divider -->
-      <hr class="sidebar-divider">
+      <hr class="sidebar-divider"> --}}
 
     </ul>
     <!-- End of Sidebar -->
@@ -67,39 +71,9 @@
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <div class=" bg-white topbar mb-4 shadow">
 
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
-
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-
-          <!-- Topbar Navbar -->
-          <ul class="navbar-nav ml-auto">
-
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-
-            </li>
-
-          </ul>
-
-        </nav>
+        </div>
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
@@ -107,11 +81,20 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Quản lý danh sách</h1>
-            <a href="/admin/categories/add" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm"></i> Thêm</a>
+            <h1 class="h3 mb-0 text-gray-800">New Category</h1>
           </div>
-
-          <table class="table">
+          <label for="txtCatName">Category</label>
+          <input type="text" class="form-control" id="txtCatName" name="CatName" placeholder="Enter category name"
+          autofocus>
+          <a class="btn btn-outline-primary mt-3" href="/admin/categories" role="button">
+          <i class="fa fa-backward" aria-hidden="true"></i>
+          Back to Category
+          </a>
+          <button type="submit" class="btn btn-outline-success mt-3 float-right">
+          <i class="fa fa-check" aria-hidden="true"></i>
+          Save
+          </button>
+          {{!-- <table class="table">
 						<thead class="thead-dark">
 							<tr>
 								<th scope="col">#</th>
@@ -126,13 +109,13 @@
 								<td class="text-center">Điện tử</td>
 								<td class="text-center">10</td>
 								<td class="text-right text-center">
-                  <button type="button" onclick="location.href='/admin/categories/edit'" class="btn btn-outline-primary mr-2"><i class="far fa-edit mr-2"></i>Sửa</button>
-                  <button type="button" onclick="location.href='/admin/categories/delete'" class="btn btn-outline-danger"><i class="far fa-trash-alt mr-2"></i>Xoá</button>
+                  <button type="button" class="btn btn-outline-primary mr-2"><i class="far fa-edit mr-2"></i>Sửa</button>
+                  <button type="button" class="btn btn-outline-danger"><i class="far fa-trash-alt mr-2"></i>Xoá</button>
                 </td>
 							</tr>
 
 						</tbody>
-					</table>
+					</table> --}}
 
         </div>
         <!-- /.container-fluid -->
@@ -141,7 +124,7 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <footer class="sticky-footer bg-white shadow">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
           </div>

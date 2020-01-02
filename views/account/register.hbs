@@ -1,6 +1,6 @@
 {{#section 'css'}}
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Font-->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <link rel="stylesheet" type="text/css" href="/stylesheets/login/opensans-font.css">
 <link rel="stylesheet" type="text/css" href="/javascript/plugins/fonts/line-awesome/css/line-awesome.min.css">
 <!-- Main Style Css -->
@@ -72,11 +72,11 @@
 					{{#if hasErrors}}
 					<div class="alert alert-warning alert-dismissible fade show" role="alert">
 						<ul>
-						{{#each messages}}
-						<span type="button" aria-hidden="true" class="close pull-right" data-dismiss="alert"
-							aria-label="Close">&times;</span>
-							<li>{{this}}</li>						
-						{{/each}}
+							{{#each messages}}
+							<span type="button" aria-hidden="true" class="close pull-right" data-dismiss="alert"
+								aria-label="Close">&times;</span>
+							<li>{{this}}</li>
+							{{/each}}
 						</ul>
 					</div>
 					{{/if}}
@@ -144,11 +144,7 @@
 					</div>
 
 					<div class="row d-flex justify-content-around">
-						<div class="col-2">
-							<button type="submit" name="register" class="register"><i
-									class="fas fa-backward pull-left mt-1"></i>Back</button>
-						</div>
-						<div class="col-8 d-flex justify-content-center align-self-center">
+						<div class="col-6 d-flex justify-content-center align-self-center">
 							<div class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input " id="customCheck1" name="accept"
 									value="1">
@@ -156,21 +152,17 @@
 										href="#"><u> quy định và chính sách</u></a></label>
 							</div>
 						</div>
-						<div class="col-2">
-							<div class="form-row-last pull-right">
+
+						<div class="col-6 align-self-center">
+							<div class="form-row-last d-flex justify-content-center">
 								<input type="hidden" name="_csrf" value="{{csrfToken}}">
 								<button type="submit" name="register" class="register"><i
 										class="fas fa-check pull-left mt-1"></i>Submit</button>
 							</div>
 						</div>
 					</div>
-
 				</form>
-
 			</div>
 		</div>
-
-
 	</div>
-
 </body>

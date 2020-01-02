@@ -1,5 +1,6 @@
 var passport = require('passport');
-var session = require('express-session');
+// var session = require('express-session');
+
 // GET Register
 exports.get_register = function (req, res, next) {
     var messages = req.flash('error');
@@ -14,6 +15,7 @@ exports.get_register = function (req, res, next) {
 // POST Register
 exports.post_register = passport.authenticate('local.register', {
     // successRedirect: '/account/information',
+    badRequestMessage: 'Bạn chưa điền đủ thông tin !',
     failureRedirect: '/account/register',
     failureFlash: true
 });

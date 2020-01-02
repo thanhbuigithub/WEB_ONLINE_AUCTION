@@ -22,6 +22,9 @@ var database = require("./configs/database");
 var locals = require("./middlewares/locals.mdw");
 var routes = require("./middlewares/routes.mdw");
 
+//Router Seller
+var seller = require("./routes/seller");
+
 //Init app
 var app = express();
 
@@ -117,6 +120,7 @@ locals(app);
 
 //Set routes
 routes(app);
+app.use("/seller", seller);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,23 +1,24 @@
 {{#section 'css'}}
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/sb-admin-2.min.css">
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+<link rel="stylesheet" type="text/css" href="/stylesheets/sb-admin-2.min.css">
 {{/section}}
 
 {{#section 'js'}}
 
-  <!-- Custom scripts for all pages-->
-  <script src="/javascript/js/sb-admin-2.min.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="/javascript/js/sb-admin-2.min.js"></script>
 {{/section}}
 
 <div id="page-top">
-<!-- Page Wrapper -->
+  <!-- Page Wrapper -->
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin_category">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/categories">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -29,9 +30,9 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item ">
-        <a class="nav-link" href="/admin_category">
+        <a class="nav-link" href="/admin/categories">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Quản lý danh sách</span></a>
+          <span>Quản lý danh mục</span></a>
       </li>
 
       <!-- Divider -->
@@ -39,9 +40,9 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="/admin_product">
+        <a class="nav-link" href="/admin/upgrade">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Quản lý sản phẩm</span></a>
+          <span>Duyệt nâng cấp</span></a>
       </li>
 
       <!-- Divider -->
@@ -49,7 +50,7 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item active">
-        <a class="nav-link" href="/admin_user">
+        <a class="nav-link" href="/admin/user-info">
           <i class="fas fa-fw fa-wrench"></i>
           <span class="active-collect">Quản lý người dùng</span>
         </a>
@@ -76,9 +77,11 @@
           </button>
 
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline ml-md-3 mr-auto my-2 my-md-0 mw-100 navbar-search float-right">
+          <form
+            class="d-none d-sm-inline-block form-inline ml-md-3 mr-auto my-2 my-md-0 mw-100 navbar-search float-right">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small justify-content-center " placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text" class="form-control bg-light border-0 small justify-content-center "
+                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-primary" type="button">
                   <i class="fas fa-search fa-sm"></i>
@@ -92,7 +95,8 @@
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
             <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
               </a>
 
@@ -109,42 +113,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Bidders</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2"><i class="fas fa-plus fa-sm"></i> Thêm</a>
-          </div>
-
-          <table class="table">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col" class="text-center">#</th>
-								<th scope="col" class="text-center">Email</th>
-								<th scope="col" class="text-center">Tên người dùng</th>
-								<th scope="col" class="text-center">Thao tác</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row" class="text-center">1</th>
-								<td class="text-center">ngvana@gmail.com</td>
-								<td class="text-center">Nguyễn Văn A</td>
-								<td class="text-center">
-                  <button type="button" class="btn btn-outline-primary mr-2"><i class="far fa-edit mr-2"></i>Sửa</button>
-                  <button type="button" class="btn btn-outline-danger"><i class="far fa-trash-alt mr-2"></i>Xoá</button>
-                </td>
-							</tr>
-
-						</tbody>
-					</table>
-
-        </div>
-        <!-- /.container-fluid -->
-
-        <!-- Begin Page Content -->
-        <div class="container-fluid tab-content" id="v-pills-tabContent">
-
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Sellers</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2"><i class="fas fa-plus fa-sm"></i> Thêm</a>
+            {{!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2"><i class="fas fa-plus fa-sm"></i> Thêm</a> --}}
           </div>
 
           <table class="table">
@@ -162,7 +131,7 @@
                 <td class="text-center">ngvana@gmail.com</td>
                 <td class="text-center">Nguyễn Văn A</td>
                 <td class="text-center">
-                  <button type="button" class="btn btn-outline-primary mr-2"><i class="far fa-edit mr-2"></i>Sửa</button>
+                  {{!-- <button type="button" class="btn btn-outline-primary mr-2"><i class="far fa-edit mr-2"></i>Sửa</button> --}}
                   <button type="button" class="btn btn-outline-danger"><i class="far fa-trash-alt mr-2"></i>Xoá</button>
                 </td>
               </tr>
@@ -174,6 +143,41 @@
         <!-- /.container-fluid -->
 
         <!-- Begin Page Content -->
+        <div class="container-fluid tab-content" id="v-pills-tabContent">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Sellers</h1>
+            {{!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2"><i class="fas fa-plus fa-sm"></i> Thêm</a> --}}
+          </div>
+
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col" class="text-center">Email</th>
+                <th scope="col" class="text-center">Tên người dùng</th>
+                <th scope="col" class="text-center">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="text-center">1</th>
+                <td class="text-center">ngvana@gmail.com</td>
+                <td class="text-center">Nguyễn Văn A</td>
+                <td class="text-center">
+                  {{!-- <button type="button" class="btn btn-outline-primary mr-2"><i class="far fa-edit mr-2"></i>Sửa</button> --}}
+                  <button type="button" class="btn btn-outline-danger"><i class="far fa-trash-alt mr-2"></i>Xoá</button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        {{!-- <!-- Begin Page Content -->
         <div class="container-fluid tab-content" id="v-pills-tabContent">
 
           <!-- Page Heading -->
@@ -196,7 +200,8 @@
                 <td class="text-center">ngvana@gmail.com</td>
                 <td class="text-center">Nguyễn Văn A</td>
                 <td class="text-center">
-                  <button type="button" class="btn btn-outline-success mr-2"><i class="fas fa-check mr-2"></i>Duyệt</button>
+                  <button type="button" class="btn btn-outline-success mr-2"><i
+                      class="fas fa-check mr-2"></i>Duyệt</button>
                   <button type="button" class="btn btn-outline-danger"><i class="fas fa-times mr-2"></i>Huỷ</button>
                 </td>
               </tr>
@@ -205,7 +210,7 @@
           </table>
 
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.container-fluid --> --}}
 
       </div>
       <!-- End of Main Content -->

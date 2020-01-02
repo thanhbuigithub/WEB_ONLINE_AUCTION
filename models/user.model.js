@@ -3,42 +3,42 @@ var bcrypt = require("bcryptjs");
 // var moment = require('moment');
 
 var userSchema = new mongoose.Schema({
-  info: {
-    fname: String,
-    lname: String,
-    email: String,
-    addr: String,
-    dob: Date
-  },
-  local: {
-    username: {
-      type: String
+    info: {
+        fname: String,
+        lname: String,
+        addr: String,
+        dob: Date,
     },
-    password: {
-      type: String
+    local: {
+        email: String,
+        username: {
+            type: String
+        },
+        password: {
+            type: String
+        },
+        permission: Boolean,
+        rate_point: {
+            sum: Number,
+            plus: Number
+        }
     },
-    permission: Boolean,
-    rate_point: {
-      sum: Number,
-      plus: Number
-    }
-  },
-  // facebook: {
-  //     id: String,
-  //     token: String,
-  //     email: String,
-  //     name: String,
-  //     photo: String
-  // },
-  // google: {
-  //     id: String,
-  //     token: String,
-  //     email: String,
-  //     name: String,
-  //     photo: String
-  // },
-  status: String, //ACTIVE, INACTIVE, SUSPENDED
-  wish_list: { type: Array }
+    facebook: {
+        id: String,
+        token: String,
+        email: String,
+        name: String,
+        photo: String
+    },
+    google: {
+        id: String,
+        token: String,
+        email: String,
+        name: String,
+        photo: String
+    },
+    status: String //ACTIVE, INACTIVE, SUSPENDED
+    wish_list: { type: Array }
 });
 
 // Mã hóa mật khẩu
@@ -49,6 +49,14 @@ userSchema.methods.encryptPassword = function(password) {
 userSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.local.password);
 };
+//Kiểm tra tài khoản có trùng username không ?
+userSchema.methods.validAccount = function (username) {
+    if (this.local.username === username) {
+        return true;
+    } else {
+        return false;
+    }
+};
 //Kiểm tra tài khoản có được kích hoạt không ?
 userSchema.methods.isInActivated = function(checkStatus) {
   if (checkStatus === "INACTIVE") {
@@ -57,12 +65,12 @@ userSchema.methods.isInActivated = function(checkStatus) {
     return false;
   }
 };
-
-userSchema.methods.isSuspended = function(checkStatus) {
-  if (checkStatus === "SUSPENDED") {
-    return true;
-  } else {
-    return false;
-  }
+//Kiểm tra tài khoản có bị vô hiệu hóa không ?
+userSchema.methods.isSuspended = function (checkStatus) {
+    if (checkStatus === "SUSPENDED") {
+        return true;
+    } else {
+        return false;
+    }
 };
 module.exports = mongoose.model("User", userSchema);
