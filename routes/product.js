@@ -7,26 +7,14 @@ const Product = require("../models/product.model");
 const Bid = require("../models/bid.model");
 
 /* GET home page. */
-router.get("/:id", function(req, res, next) {
+router.get("/:id", async function(req, res, next) {
   var id = req.params.id;
-
-  Product.instance.find().exec((err, pros) => {
-    Category.instance.find().exec((err, cats) => {
-      pros.forEach(element => {
-        element.childcat_name = cats.find(
-          obj => obj._id.$oid === element.cat_id.$oid
-        ).childcat_name[element.childcat_pos].name;
-      });
-
-      var pro = pros.find(obj => obj._id == id);
-      console.log(pro);
-      res.render("product", {
-        title: "Product Page",
-        products: pros,
-        thisPro: pro,
-        categories: cats
-      });
-    });
+  var pro = await Product.instance.findById(id).exec();
+  var cat = await Category.instance.findById(pro.cat_id).exec();
+  pro.childcat_name = cat.childcat_name[pro.childcat_pos].name;
+  res.render("product", {
+    title: "Product Page",
+    product: pro
   });
 });
 

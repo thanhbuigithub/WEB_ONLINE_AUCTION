@@ -17,7 +17,7 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/main_styles.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/responsive.css">
   {{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> --}}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript" ></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
   <script src="/stylesheets/login/auto-complete-google-API.js" type="text/javascript"></script>
   {{{_sections.cssCustom}}}
 </head>
@@ -26,7 +26,11 @@
   {{> header }}
   {{{body}}}
   {{> footer }}
-  
+  <script>
+    var logged = JSON.parse('{{{json logged}}}');
+    if (logged)
+      var user = JSON.parse('{{{json user}}}');
+  </script>
   <script src="/javascript/js/jquery-3.3.1.min.js"></script>
   <script src="/stylesheets/bootstrap4/popper.js"></script>
   <script src="/stylesheets/bootstrap4/bootstrap.min.js"></script>
@@ -40,9 +44,9 @@
   <script src="/javascript/plugins/easing/easing.js"></script>
   <script src="/javascript/js/custom.js"></script>
   <script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvS6l-HQde7pRnnDhiR6hTTGqs1k30lK8&libraries=places&callback=initAutocomplete"
-	async defer>
-	</script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvS6l-HQde7pRnnDhiR6hTTGqs1k30lK8&libraries=places&callback=initAutocomplete"
+    async defer>
+    </script>
   {{{_sections.js}}}
 </body>
 
