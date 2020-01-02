@@ -33,10 +33,13 @@
 			<!-- Description -->
 			<div class="col-lg-5 order-3">
 				<div class="product_description">
-					<div class="product_category">{{this.thisPro.childcat_name}}</div>
-					<div class="product_name">{{this.thisPro.name}}</div>
+					<div class="product_category">{{product.childcat_name}}</div>
+					<div class="product_name">{{product.name}}</div>
 					<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-					<p class="text-primary font-weight-bold h4 pt-4">Giá hiện tại: {{this.thisPro.cur_price}}</p>
+					<p class="text-primary font-weight-bold h4 pt-4">Giá hiện tại: <div
+							class="price text-primary font-weight-bold h3">
+							{{product.cur_price}}</div>
+					</p>
 					<div class="product_text">
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum. laoreet turpis,
 							nec sollicitudin dolor cursus at. Maecenas aliquet, dolor a faucibus efficitur, nisi tellus
@@ -44,7 +47,7 @@
 					</div>
 					<p class="text-danger h5 pt-4">Còn lại: </p>
 					<div class="deals_timer_content">
-						<div class="deals_timer_box clearfix" data-target-time="">
+						<div class="deals_timer_box clearfix" data-target-time="{{product.exp_date}}">
 							<div class="deals_timer_unit">
 								<div id="deals_timer1_hr" class="deals_timer_day"></div>
 								<span>days</span>
@@ -112,7 +115,8 @@
 								<h3>25.000.000</h3>
 							</div>
 							<div class="button_container">
-								<button onclick="location.href='/account/cart'" type="button" class="button cart_button">Mua
+								<button onclick="location.href='/account/cart'" type="button"
+									class="button cart_button">Mua
 									ngay</button>
 								<div class="product_fav"><i class="fas fa-heart"></i></div>
 							</div>

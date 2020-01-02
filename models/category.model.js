@@ -7,5 +7,9 @@ const CatSchema = new mongoose.Schema({
 var instance = mongoose.model("Category", CatSchema);
 
 module.exports = {
-  instance
+  instance,
+  getAll: async () => {
+    var cats = await Category.instance.find().exec();
+    return cats;
+  }
 };

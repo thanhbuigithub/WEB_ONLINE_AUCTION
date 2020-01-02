@@ -12,22 +12,15 @@ var session = require("express-session");
 var passport = require("passport");
 var flash = require("connect-flash");
 var validator = require("express-validator");
+var hbs = require("handlebars");
 
 //Config
 var settings = require("./configs/settings");
 var database = require("./configs/database");
 
-//Router Main
-var indexRouter = require("./routes/index");
-var productRouter = require("./routes/product");
-var searchRouter = require("./routes/search");
-var shopRouter = require("./routes/shop");
-
-//Router Account
-var account = require("./routes/account");
-
-//Router Admin
-var admin = require("./routes/admin.router");
+//MiddleWare
+var locals = require("./middlewares/locals.mdw");
+var routes = require("./middlewares/routes.mdw");
 
 //Init app
 var app = express();
@@ -54,20 +47,24 @@ const Bid = require("./models/bid.model");
 
 // var id = "5e09fcf39a99352394f22edf";
 
-Category.instance.find().exec((err, product) => {
-  if (err) console.log(err);
-  else {
-    console.log(product[0].name, product[0]._id);
-    Product.instance.find().exec((err, db) => {
-      db.forEach(element => {
-        const cat = product.find(item => item._id.$oid === element.cat_id.$oid);
-        element.childcat_name = cat.childcat_name[element.childcat_pos].name;
-        console.log(element.childcat_name);
-      });
-      console.log(db);
-      console.log(db[0].childcat_name);
-    });
-  }
+// Category.instance.find().exec((err, product) => {
+//   if (err) console.log(err);
+//   else {
+//     console.log(product[0].name, product[0]._id);
+//     Product.instance.find().exec((err, db) => {
+//       db.forEach(element => {
+//         const cat = product.find(item => item._id.$oid === element.cat_id.$oid);
+//         element.childcat_name = cat.childcat_name[element.childcat_pos].name;
+//         console.log(element.childcat_name);
+//       });
+//       console.log(db);
+//       console.log(db[0].childcat_name);
+//     });
+//   }
+// });
+
+hbs.registerHelper("json", function(context) {
+  return JSON.stringify(context);
 });
 
 /* Khai báo để sử dụng kịch bản passport */
@@ -116,22 +113,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Set local
-app.use(function(req, res, next) {
-  res.locals.settings = settings;
-  res.locals.logged = req.isAuthenticated();
-  res.locals.user = req.user;
-  next();
-});
+locals(app);
 
-//
-app.use("/", indexRouter);
-app.use("/product", productRouter);
-app.use("/search", searchRouter);
-app.use("/shop", shopRouter);
-//
-app.use("/account", account);
-//
-app.use("/admin", admin);
+//Set routes
+routes(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

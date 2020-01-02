@@ -41,7 +41,6 @@ $(document).ready(function () {
 	var header = $('.header');
 
 	setHeader();
-
 	initCustomDropdown();
 	initPageMenu();
 	initDealsSlider();
@@ -62,6 +61,8 @@ $(document).ready(function () {
 	initTimer();
 	initTimerList();
 	resize_text();
+	setThousandSeperator();
+	initWishList();
 	$(window).on('resize', function () {
 		setHeader();
 		featuredSliderZIndex();
@@ -421,8 +422,87 @@ $(document).ready(function () {
 		var items = document.getElementsByClassName('product_fav');
 		for (var x = 0; x < items.length; x++) {
 			var item = items[x];
+			var id = $(item).data("id");
+			
+			if(!logged)
+			{ $(item).css("visibility","hidden"); }
+			else
+			{
+			$(item).css("visibility","");
+			 var wish_list = user.wish_list;
+			 if (wish_list.findIndex(v => v.pro_id == id)!=-1)
+			 	$(item).addClass('active')
+			}
+			
 			item.addEventListener('click', function (fn) {
-				fn.target.classList.toggle('active');
+				console.log(fn.target);
+				var check = fn.target.classList.toggle('active');
+				var proid = $(fn.target).data("id");
+				console.log(proid);
+				var wishItem = {
+					pro_id: proid
+				}
+				var wish_list = $('.wishlist_count span')
+				if (check)
+				{
+				$.ajax({		
+					url: '/' + proid + '/addToWishList',
+					type: 'post',
+					dataType: 'json',
+					data: JSON.stringify(wishItem),
+					success: (data) => {
+						if (data == "-1"){
+							console.log("ajax wish list: send false");
+							window.location.href = ("/");
+						}
+						if (data == "1"){
+							// new SnackBar({
+							// 	message: "Đã thêm vào danh sách yêu thích",
+							// 	status: "success",
+							// 	fixed: true,
+							// 	timeout: 2000
+							// });
+							$(wish_list).html(parseInt($(wish_list).html()) + 1);
+							for (var i = 0; i < items.length; i++) {
+								var sameitem = items[i];
+								var sameid = $(sameitem).data("id");
+								if (sameitem!=fn.target && sameid == proid){
+									$(sameitem).addClass('active');
+								}
+							}
+						}
+					}
+				})
+				} else {
+				$.ajax({		
+					url: '/' + proid + '/removeFromWishList',
+					type: 'post',
+					dataType: 'json',
+					data: JSON.stringify(wishItem),
+					success: (data) => {
+						if (data == "-1"){
+							console.log("ajax wish list: send false");
+							window.location.href = ("/");
+						}
+						if (data == "1"){
+							// new SnackBar({
+							// 	message: "Đã xoá khỏi danh sách yêu thích",
+							// 	status: "success",
+							// 	fixed: true,
+							// 	timeout: 2000
+							// });
+							$(wish_list).html(parseInt($(wish_list).html()) - 1);
+							for (var i = 0; i < items.length; i++) {
+								var sameitem = items[i];
+								var sameid = $(sameitem).data("id");
+								if (sameitem!=fn.target && sameid == proid){
+									$(sameitem).removeClass('active');
+								}
+							}
+						}
+					}
+				})
+			}
 			});
 		}
 	}
@@ -855,7 +935,9 @@ $(document).ready(function () {
 				// Format: "Feb 17, 2018"
 				if (timer.data('target-time') !== "") {
 					targetTime = timer.data('target-time');
+					console.log("target time: ",targetTime);
 					target_date = new Date(targetTime).getTime();
+					console.log("target date: ",target_date);
 				}
 				else {
 					var date = new Date();
@@ -882,7 +964,7 @@ $(document).ready(function () {
 					seconds_left = seconds_left % 86400;
 
 					hours = parseInt(seconds_left / 3600);
-					hours = hours + days * 24;
+					//hours = hours + days * 24;
 					seconds_left = seconds_left % 3600;
 
 
@@ -928,7 +1010,7 @@ $(document).ready(function () {
 				// Add a date to data-target-time of the .deals_timer_box
 				// Format: "Feb 17, 2018"
 				if (timer.data('target-time') !== "") {
-					targetTime = timer.data('');
+					targetTime = timer.data('target-time');
 					target_date = new Date(targetTime).getTime();
 				}
 				else {
@@ -956,7 +1038,7 @@ $(document).ready(function () {
 					seconds_left = seconds_left % 86400;
 
 					hours = parseInt(seconds_left / 3600);
-					hours = hours + days * 24;
+					//hours = hours + days * 24;
 					seconds_left = seconds_left % 3600;
 
 
@@ -1010,6 +1092,34 @@ $(document).ready(function () {
 		return _results;
 	};
 
+	function setThousandSeperator() {
+		var deals_price = $('.deals_item_price');
+		for (var i = 0; i <= deals_price.length; i++){
+			if ($(deals_price[i]).html())
+			$(deals_price[i]).html($(deals_price[i]).html().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+		}
+		
+		var products_price = $('.product_price');
+		for (var i = 0; i <= products_price.length; i++){
+			if ($(products_price[i]).html())
+			$(products_price[i]).html($(products_price[i]).html().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+		}
+
+		var price = $('.price');
+		for (var i = 0; i <= price.length; i++){
+			if ($(price[i]).html())
+			$(price[i]).html($(price[i]).html().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+		}
+	}
+
+	function initWishList(){
+		var wish_list = $('.wishlist_count span')
+		if (logged)
+		{
+			const count = user.wish_list.length;
+			$(wish_list).html(count)
+		}
+	}
 });
 
 
