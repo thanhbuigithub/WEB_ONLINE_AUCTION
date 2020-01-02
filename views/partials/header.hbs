@@ -80,7 +80,7 @@
 											<i class="fas fa-chevron-down"></i>
 											<ul class="custom_list clc">
 												<li><a class="clc" href="#">Toàn bộ</a></li>
-												{{#each this.categories}}
+												{{#each lcCategories}}
 												<li><a class="clc" href="#">{{name}}</a></li>
 												{{/each}}
 											</ul>
@@ -181,12 +181,21 @@
 						<div class="main_nav_menu ml-auto">
 							<ul class="standard_dropdown main_nav_dropdown">
 								<li><a href="/">Trang chủ<i class="fas fa-chevron-down"></i></a></li>
+								{{#if isSeller}}
 								<li>
-									<a href="/seller/post_product">Đăng sản phẩm<i class="fas fa-chevron-down"></i></a>
+									<a href="/post_product">Đăng sản phẩm<i class="fas fa-chevron-down"></i></a>
+								</li>
+								{{/if}}
+
+								{{#if isAdmin}}
+								<li>
+									<a href="/post_product">Đăng sản phẩm<i class="fas fa-chevron-down"></i></a>
 								</li>
 								<li>
 									<a href="/admin/categories">Admin<i class="fas fa-chevron-down"></i></a>
 								</li>
+								{{/if}}
+
 								{{!-- <li>
 									<a href="/user_information">Thông tin người dùng<i
 											class="fas fa-chevron-down"></i></a>

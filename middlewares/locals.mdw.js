@@ -20,6 +20,10 @@ module.exports = app => {
     });
     res.locals.lcCategories = cats;
     res.locals.lcProducts = pros;
+    if (req.user) {
+      res.locals.isSeller = req.user.local.permission == 1;
+      res.locals.isAdmin = req.user.local.permission == 2;
+    }
 
     next();
   });
