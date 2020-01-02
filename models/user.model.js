@@ -23,20 +23,6 @@ var userSchema = new mongoose.Schema({
             plus: Number
         }
     },
-    facebook: {
-        id: String,
-        token: String,
-        email: String,
-        name: String,
-        photo: String
-    },
-    google: {
-        id: String,
-        token: String,
-        email: String,
-        name: String,
-        photo: String
-    },
     status: String //ACTIVE, INACTIVE, SUSPENDED
 });
 

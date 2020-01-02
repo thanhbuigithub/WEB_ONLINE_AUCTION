@@ -1,5 +1,6 @@
 var passport = require('passport');
 // var session = require('express-session');
+var Request = require("request");
 
 // GET Register
 exports.get_register = function (req, res, next) {
@@ -67,6 +68,31 @@ exports.notLoggedIn = function (req, res, next) {
     res.redirect('/account/information');
 };
 
+
+exports.recaptcha = async(request, response, next) => {
+        
+    if(!request.body.recaptcha)
+    {
+        
+        
+        // return response.json({"msg":"Please select recaptcha !"});
+    }
+    var recaptcha_url = "https://www.google.com/recaptcha/api/siteverify?";
+    recaptcha_url += "secret=" + "6LdotcsUAAAAAJkkmp-3UA9mEANITR-OIbOzCguN" + "&";
+    recaptcha_url += "response=" + request.body["g-recaptcha-response"] + "&";
+    recaptcha_url += "remoteip=" + request.connection.remoteAddress;
+    recaptcha_url += "remoteip=" + request.connection.remoteAddress;
+    Request(recaptcha_url, function (error, resp, body) {
+        body = JSON.parse(body);
+        if (body.success !== undefined && !body.success) {
+            response.redirect('/account/register');
+        }
+        else {
+            next();
+        }
+
+    });
+};
 
 exports.notLogin_use = function (req, res, next) {
     next();
