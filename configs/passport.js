@@ -1,7 +1,5 @@
 var validator = require("express-validator");
 var LocalStrategy = require("passport-local").Strategy;
-var FacebookStrategy = require("passport-facebook");
-var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 var moment = require("moment");
 
 var settings = require("../configs/settings");
@@ -39,7 +37,7 @@ module.exports = function(passport) {
       min: settings.passwordLength
     });
     req.checkBody('password', 'Mật khẩu không trùng khớp, thử lại !').equals(req.body.raw_Comfirm);
-    req.checkBody('accept', 'Bạn phải chấp nhận các điều khoản của chúng tôi !').equals("1");
+    // req.checkBody('accept', 'Bạn phải chấp nhận các điều khoản của chúng tôi !').equals("1");
 
     var errors = req.validationErrors();
     if (errors) {

@@ -425,7 +425,7 @@ section
 	display: block;
 	position: absolute;
 	top: 120%;
-	left: 0;
+	right: 0;
 	width: auto;
 	visibility: hidden;
 	opacity: 0;

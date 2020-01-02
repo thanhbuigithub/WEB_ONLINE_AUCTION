@@ -30,6 +30,7 @@
     "passport-http": "^0.3.0",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
+    "request": "^2.88.0",
     "serve-favicon": "^2.5.0"
   },
   "description": "Auction Online Web",
