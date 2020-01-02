@@ -23,7 +23,7 @@ var userSchema = new mongoose.Schema({
             plus: Number
         }
     },
-    status: String //ACTIVE, INACTIVE, SUSPENDED
+    status: String, //ACTIVE, INACTIVE, SUSPENDED
     wish_list: { type: Array }
 });
 

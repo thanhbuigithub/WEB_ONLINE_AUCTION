@@ -12,6 +12,9 @@ var member_controller = require('../controllers/accountController');
 /* Local Account */
 
 router.get('/information', member_controller.isLoggedIn, member_controller.get_profile);
+router.get('/information/change', member_controller.isLoggedIn, function (req, res, next) {
+    res.render('account/change_information', { title: 'Change Information' });
+});
 router.get('/logout', member_controller.isLoggedIn, member_controller.get_logout);
 router.use('/', member_controller.notLogin_use);
 
@@ -29,4 +32,7 @@ router.get('/wishlist', member_controller.isLoggedIn, function (req, res, next) 
     res.render('account/wishlist', { title: 'Wishlist Product' });
 });
 
+router.get('/payment', member_controller.isLoggedIn, function (req, res, next) {
+    res.render('account/payment', { title: 'Payment' });
+});
 module.exports = router;
