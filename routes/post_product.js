@@ -46,7 +46,7 @@ router.post("/", member_controller.isSeller, async function(req, res, next) {
       var f = req.files;
       f.forEach(element => {
         var file = {
-          filename: element.path
+          filename: element.filename
         };
         product.img.push(file);
       });
