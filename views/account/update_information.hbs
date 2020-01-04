@@ -42,73 +42,102 @@
 <script src="/javascript/js/product_custom.js"></script>
 {{/section}}
 
+{{!-- /images/user.svg --}}
 <!-- Product infomation -->
 
 <div class="container mt-5">
-  <div class="row">
-    <div class="col-md-3 align-items-center justify-content-center text-center">
-      <img src="/images/user.svg" alt="" class="img-rounded center-block" style="height: 200px">
-      <button type="button" class="btn btn-danger mt-4">Thêm ảnh đại diện</button>
-      <label class="file mt-3">
-        <input type="file" id="file">
-        <span class="file-custom"></span>
-      </label>
-    </div>
-    <div class="col-md-9 pl-4">
-      <form>
+  <form action="/account/{{user._id}}/information/update" method="post">
+    <div class="row">
+      <div class="col-md-3 align-items-center text-center d-flex flex-column">
+        <img src="{{user.info.imageUser}}" alt="Ảnh đại diện" class="img-rounded center-block" style="width: 200px;height: 200px" >
+        <button type="button" class="btn btn-danger mt-4">Thêm ảnh đại diện</button>
+        <label class="file mt-3">
+          <input type="file" id="fileUser" name="fileUser">
+          <span class="file-custom"></span>
+        </label>
+      </div>
+      <div class="col-md-9 pl-4">
+
+        <div class="form-group">
+          <div class="row ">
+            {{#if hasErrors}}
+            <div class="alert alert-warning alert-dismissible fade show w-100" role="alert">
+              <ul>
+                {{#each messages}}
+                <span type="button" aria-hidden="true" class="close pull-right" data-dismiss="alert"
+                  aria-label="Close">&times;</span>
+                <li>{{this}}</li>
+                {{/each}}
+              </ul>
+            </div>
+            {{/if}}
+          </div>
+        </div>
         <div class="form-group">
           <div class="row">
             <label for="first_name">First Name</label>
-            <input type="text" class="form-control" id="first_name" name="first_name">
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{user.info.fname}}">
           </div>
 
         </div>
         <div class="form-group">
           <div class="row">
             <label for="last_name">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name="last_name">
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{user.info.lname}}">
           </div>
         </div>
         <div class="form-group">
           <div class="row">
             <label for="your_dob">Date of Birth</label>
-            <input type="text" class="form-control input-text js-datepicker" id="your_dob" name="dob">
+            <input type="text" class="form-control input-text js-datepicker" id="your_dob" name="dob"
+              value="{{user.info.dob}}">
             <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
           </div>
         </div>
         <div class="form-group">
           <div class="row">
             <label for="autocomplete">Your Address</label>
-            <input type="text" class="form-control" onFocus="geolocate()" id="autocomplete" name="addr">
+            <input type="text" class="form-control" onFocus="geolocate()" id="autocomplete" name="addr"
+              value="{{user.info.addr}}">
           </div>
         </div>
         <div class="form-group">
           <div class="row">
             <label for="txtUsername">User Name</label>
-            <input type="text" class="form-control" id="txtUsername" name="username">
+            <input type="text" class="form-control" id="txtUsername" name="username" value="{{user.local.username}}">
           </div>
         </div>
         <div class="form-group">
           <div class="row">
             <label for="your_email">Your Email</label>
-            <input type="text" class="form-control" id="your_email" name="email">
+            <input type="text" class="form-control" id="your_email" name="email" value="{{user.local.email}}">
           </div>
         </div>
         <div class="form-group">
           <div class="row">
-            <label for="txtPassword">Old Password</label>
-            <input type="password" class="form-control" id="txtPassword" name="password" readonly>
+            <label for="txtPassword">Input Old Password</label>
+            <input type="password" class="form-control" id="txtPassword" name="password">
           </div>
         </div>
         <div class="form-group">
           <div class="row">
             <label for="txtNPassword">New Password</label>
-            <input type="password" class="form-control" id="txtNPassword" name="Npassword">
+            <input type="password" class="form-control" id="txtNPassword" name="txtNPassword">
           </div>
         </div>
-        <button type="button" onclick="location.href='/account/information'" class="btn btn-outline-primary btn-lg mt-4 float-left "> <i class="fa fa-backward mr-2" aria-hidden="true"></i>Quay lại</button>
-        <button type="button" onclick="location.href='#'" class="btn btn-outline-success btn-lg mt-4 float-right "><i class="fa fa-check mr-2" aria-hidden="true"></i>Save</button>
-      </form>
+        <div class="form-group">
+          <div class="row">
+            <label for="txtCPassword">Confirm New Password</label>
+            <input type="password" class="form-control" id="txtCPassword" name="txtCPassword">
+          </div>
+        </div>
+        <button type="button" onclick="location.href='/account/{{user._id}}/information'"
+          class="btn btn-outline-primary btn-lg mt-4 float-left "> <i class="fa fa-backward mr-2"
+            aria-hidden="true"></i>Quay lại</button>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button type="submit" class="btn btn-outline-success btn-lg mt-4 float-right "><i class="fa fa-check mr-2"
+            aria-hidden="true"></i>Save</button>
+      </div>
     </div>
-  </div>
+  </form>
 </div>

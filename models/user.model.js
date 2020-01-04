@@ -7,7 +7,7 @@ var userSchema = new mongoose.Schema({
         fname: String,
         lname: String,
         addr: String,
-        dob: Date,
+        dob: String
     },
     local: {
         email: String,
@@ -28,12 +28,12 @@ var userSchema = new mongoose.Schema({
 });
 
 // Mã hóa mật khẩu
-userSchema.methods.encryptPassword = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+userSchema.methods.encryptPassword = function (password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 };
 // Giải mã mật khẩu
-userSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.local.password);
+userSchema.methods.validPassword = function (password) {
+    return bcrypt.compareSync(password, this.local.password);
 };
 //Kiểm tra tài khoản có trùng username không ?
 userSchema.methods.validAccount = function (username) {
@@ -44,12 +44,12 @@ userSchema.methods.validAccount = function (username) {
     }
 };
 //Kiểm tra tài khoản có được kích hoạt không ?
-userSchema.methods.isInActivated = function(checkStatus) {
-  if (checkStatus === "INACTIVE") {
-    return true;
-  } else {
-    return false;
-  }
+userSchema.methods.isInActivated = function (checkStatus) {
+    if (checkStatus === "INACTIVE") {
+        return true;
+    } else {
+        return false;
+    }
 };
 //Kiểm tra tài khoản có bị vô hiệu hóa không ?
 userSchema.methods.isSuspended = function (checkStatus) {

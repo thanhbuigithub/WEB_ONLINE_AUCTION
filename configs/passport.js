@@ -1,13 +1,12 @@
 var validator = require("express-validator");
 var LocalStrategy = require("passport-local").Strategy;
-var moment = require("moment");
-
+// var moment = require("moment");
 var settings = require("../configs/settings");
 var User = require("../models/user.model");
 
 var provider = null;
 
-module.exports = function(passport) {
+module.exports = function (passport) {
   passport.serializeUser((user, done) => {
     done(null, user._id);
   });
@@ -66,7 +65,7 @@ module.exports = function(passport) {
       newUser.info.fname = req.body.first_name;
       newUser.info.lname = req.body.last_name;
       newUser.local.email = req.body.email;
-      newUser.info.dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
+      newUser.info.dob = req.body.dob;
       newUser.info.addr = req.body.addr;
       newUser.local.username = req.body.username;
       newUser.local.password = newUser.encryptPassword(req.body.password);
