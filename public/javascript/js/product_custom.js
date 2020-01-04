@@ -119,11 +119,11 @@ $(document).ready(function() {
       }
     });
 
-    $("select").on("change", function(e) {
-      placeholder.text(this.value);
+    // $("select").on("change", function(e) {
+    //   placeholder.text(this.value);
 
-      $(this).animate({ width: placeholder.width() + "px" });
-    });
+    //   $(this).animate({ width: placeholder.width() + "px" });
+    // });
   }
 
   /*
@@ -432,4 +432,51 @@ $(document).ready(function() {
         );
     }
   }
+});
+
+function check() {
+  var proName = $("#inputProductName");
+  var category = $("#selectCategory");
+  var startPrice = $("#inputStartPrice");
+  var stepPrice = $("#inputPriceStep");
+  var purcharePrice = $("#inputPurchasePrice");
+  //var startPrice = $('#inputStartPrice');
+  var ch = true;
+  if (proName.val() == "") {
+    $(".reqProductName").html("Không được bỏ trống tên sản phẩm");
+    ch = false;
+  } else $(".reqProductName").html("verified");
+  if (startPrice.val() <= 0) {
+    $(".reqStartPrice").html("Không được bỏ trống giá khởi điểm");
+    ch = false;
+  } else $(".reqStartPrice").html("verified");
+  if (stepPrice.val() <= 0) {
+    $(".reqStepPrice").html("Không được bỏ trống bước giá");
+    ch = false;
+  } else $(".reqStepPrice").html("verified");
+  var files = $("#img")[0].files;
+  if (files.length < 3) {
+    $(".reqImg").html("Hãy chọn tối thiểu 3 ảnh");
+    ch = false;
+  } else {
+    $(".reqImg").html("");
+  }
+  if (ch == true) window.alert("Đăng sản phẩm thành công!");
+  return ch;
+}
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $("#imgHolder").attr("src", e.target.result);
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#img").change(function() {
+  readURL(this);
 });

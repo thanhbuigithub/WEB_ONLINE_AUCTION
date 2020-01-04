@@ -12,9 +12,11 @@ router.get("/:id", async function(req, res, next) {
   var pro = await Product.instance.findById(id).exec();
   var cat = await Category.instance.findById(pro.cat_id).exec();
   pro.childcat_name = cat.childcat_name[pro.childcat_pos].name;
+
   res.render("product", {
     title: "Product Page",
-    product: pro
+    product: pro,
+    suggest_price: pro.cur_price + pro.step_price
   });
 });
 
