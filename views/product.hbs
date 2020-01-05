@@ -128,27 +128,30 @@
 			</div>
 		</div>
 		<div class="row my-5">
+			{{#if logged}}
 			<div class="col-lg-6">
-				<div class="row d-flex">
-					<!-- Product Quantity -->
-					<div class="product_quantity" style="margin: 0 auto">
-						<span>Mức giá: </span>
-						<input id="quantity_input" type="number" pattern="[0-1000000000]*" value="{{suggest_price}}"
-							min={{suggest_price}} step={{product.step_price}}>
-						{{!-- <div class="quantity_buttons">
+				<form action="/product/{{product._id}}/bid" method="post" onsubmit="return notification()">
+					<div class="row d-flex">
+						<!-- Product Quantity -->
+						<div class="product_quantity" style="margin: 0 auto">
+							<span>Mức giá: </span>
+							<input id="quantity_input" type="number" pattern="[0-1000000000]*" value="{{suggest_price}}"
+								min="{{product.cur_price}}" step="{{product.step_price}}" name="max_price">
+							{{!-- <div class="quantity_buttons">
 										<div id="quantity_inc_button" class="quantity_inc quantity_control"><i
 												class="fas fa-chevron-up"></i></div>
 										<div id="quantity_dec_button" class="quantity_dec quantity_control"><i
 												class="fas fa-chevron-down"></i></div>
 									</div> --}}
+						</div>
 					</div>
-				</div>
-				<div class="row mt-3">
-					<button type="button" class="btn btn-primary bid_now font-weight-bold pt-2"
-						style="height: 50px; width: 325px;margin: 0 auto">
-						<h3><i class="fas fa-gavel pr-3"></i>Ra giá ngay</h3>
-					</button>
-				</div>
+					<div class="row mt-3">
+						<button type="submit" class="btn btn-primary bid_now font-weight-bold pt-2"
+							style="height: 50px; width: 325px;margin: 0 auto">
+							<h3><i class="fas fa-gavel pr-3"></i>Ra giá ngay</h3>
+						</button>
+					</div>
+				</form>
 			</div>
 			<div class="col-lg-6">
 				<div class="row">
@@ -165,6 +168,10 @@
 					</div>
 				</div>
 			</div>
+			{{else}}
+			<h3 class="text-danger m-auto">Phải đăng nhập để đấu giá sản phẩm!</h3>
+			{{/if}}
+
 
 		</div>
 	</div>
@@ -179,11 +186,13 @@
 						aria-selected="true">Mô
 						tả chi tiết</a>
 				</li>
+				{{#if logged}}
 				<li class="nav-item">
 					<a class="flex-sm-fill text-sm-center nav-link p-3" style="font-size: 20px" id="pills-profile-tab"
 						data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
 						aria-selected="false">Lịch sử đấu giá</a>
 				</li>
+				{{/if}}
 				<li class="nav-item">
 					<a class="flex-sm-fill text-sm-center nav-link p-3" style="font-size: 20px" id="pills-contact-tab"
 						data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
@@ -222,24 +231,14 @@
 						</tr>
 					</thead>
 					<tbody>
+						{{#each bidList}}
 						<tr>
-							<th scope="row">1</th>
-							<td>1/11/2019 10:43</td>
-							<td>****Khoa</td>
-							<td>20.000.000</td>
+							<th scope="row" class="index">{{@index}}</th>
+							<td>{{bid_time_convert}}</td>
+							<td>****{{user_name}}</td>
+							<td class="price">{{price}}</td>
 						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>1/11/2019 9:43</td>
-							<td>****Quang</td>
-							<td>18.000.000</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>1/11/2019 8:43</td>
-							<td>****Tuấn</td>
-							<td>17.000.000</td>
-						</tr>
+						{{/each}}
 					</tbody>
 				</table>
 			</div>
@@ -248,15 +247,19 @@
 
 			<div class="tab-pane fade mx-5 mb-5" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 				<p><i class="fas fa-shopping-cart mr-4"></i>Tên người bán: <span
-						style="color: #007bff; font-size: 20px"><strong>Nguyễn Văn A</strong></span></p>
+						style="color: #007bff; font-size: 20px"><strong>{{seller.full_name}}</strong></span></p>
 				<p><i class="fas fa-map-marker mr-4"></i>Địa chỉ: <span
-						style="color: #007bff; font-size: 20px"><strong>TP.HCM</strong></span></p>
-				<p>
-					<h4 style="color: orange"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-							class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star mr-4"></i>4.00
-						trong 10
-						bài đánh giá</h4>
-				</p>
+						style="color: #007bff; font-size: 20px"><strong>{{seller.info.addr}}</strong></span></p>
+				{{#if seller.isNew}}
+				<h4 class="text-danger">Người bán chưa từng được đánh giá</h4>
+				{{else}}
+				{{!-- <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+						class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star mr-4"></i> --}}
+				<h4 style="color: orange">Điểm đánh giá: {{seller.point}}%
+					trong {{seller.rate_point.sum}}
+					bài đánh giá</h4>
+				{{/if}}
+
 			</div>
 		</div>
 	</div>

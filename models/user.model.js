@@ -19,8 +19,8 @@ var userSchema = new mongoose.Schema({
     },
     permission: { type: Number, default: 0 },
     rate_point: {
-      sum: Number,
-      plus: Number
+      sum: { type: Number, default: 0 },
+      plus: { type: Number, default: 0 }
     }
   },
   facebook: {

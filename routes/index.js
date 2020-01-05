@@ -36,6 +36,7 @@ router.get("/", async function(req, res, next) {
     highPriceList: danhSachGiaCao.slice(1),
     highPricePro: danhSachGiaCao[0]
   });
+  console.log(danhSachSapKetThuc[0].isNew);
 });
 
 router.post("/:id/addToWishList", async (req, res) => {

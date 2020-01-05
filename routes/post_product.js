@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 //var csrf = require("csurf");
-var bodyParser = require("body-parser");
 var Product = require("../models/product.model");
 var multer = require("multer");
 var path = require("path");
