@@ -46,18 +46,19 @@
 <!-- Product infomation -->
 
 <div class="container mt-5">
-  <form action="/account/{{user._id}}/information/update" method="post">
-    <div class="row">
-      <div class="col-md-3 align-items-center text-center d-flex flex-column">
-        <img src="{{user.info.imageUser}}" alt="Ảnh đại diện" class="img-rounded center-block" style="width: 200px;height: 200px" >
-        <button type="button" class="btn btn-danger mt-4">Thêm ảnh đại diện</button>
-        <label class="file mt-3">
-          <input type="file" id="fileUser" name="fileUser">
-          <span class="file-custom"></span>
-        </label>
-      </div>
-      <div class="col-md-9 pl-4">
 
+  <div class="row">
+    <div class="col-md-3 align-items-center text-center d-flex flex-column">
+      <img src="/images/user.svg" alt="Ảnh đại diện" class="img-rounded center-block"
+        style="width: 200px;height: 200px">      
+      <button type="submit" class="btn btn-danger mt-4">Thêm ảnh đại diện</button>
+      <label class="file mt-3">
+        <input type="file" id="fileUser" name="fileUser">
+        <span class="file-custom"></span>
+      </label>
+    </div>
+    <div class="col-md-9 pl-4">
+      <form action="/account/{{user._id}}/information/update" method="post">
         <div class="form-group">
           <div class="row ">
             {{#if hasErrors}}
@@ -137,7 +138,8 @@
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <button type="submit" class="btn btn-outline-success btn-lg mt-4 float-right "><i class="fa fa-check mr-2"
             aria-hidden="true"></i>Save</button>
-      </div>
+      </form>
     </div>
-  </form>
+  </div>
+
 </div>

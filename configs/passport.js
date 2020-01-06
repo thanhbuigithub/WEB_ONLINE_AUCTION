@@ -85,7 +85,7 @@ module.exports = function (passport) {
         else {
           req.logIn(newUser, err => {
             provider = 'local';
-            return done(err, newUser);
+            return done(err, newUser,{ message: 'Đăng kí thành công !' });
           })
 
         }
