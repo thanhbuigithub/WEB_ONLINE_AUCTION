@@ -1,3 +1,4 @@
+//import { isLoggedIn } from "../../../controllers/accountController";
 /* JS Document */
 
 /******************************
@@ -42,6 +43,8 @@ $(document).ready(function() {
   initImage();
   initTimerList();
   setThousandSeperator();
+  setIndex();
+  setInputFormat();
 
   $(window).on("resize", function() {
     setHeader();
@@ -432,6 +435,31 @@ $(document).ready(function() {
         );
     }
   }
+
+  function setIndex() {
+    var index = $(".index");
+    for (var i = 0; i <= index.length; i++) {
+      var value = parseInt($(index[i]).html());
+      if (value == 0) {
+        $(index[i]).html("Current Winner");
+      } else {
+        $(index[i]).html(value + 1);
+      }
+    }
+  }
+
+  function setInputFormat() {
+    // $("input#quantity_input").on("keyup", function(event) {
+    //   // When the arrow keys are pressed, abort.
+    //   var $this = $(this);
+    //   // Get the value.
+    //   var input = $this.val().toString();
+    //   input = input.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    //   $this.val(function() {
+    //     return parseInt(input);
+    //   });
+    // });
+  }
 });
 
 function check() {
@@ -480,3 +508,7 @@ function readURL(input) {
 $("#img").change(function() {
   readURL(this);
 });
+
+function notification() {
+  window.alert("Ra giá thành công!");
+}

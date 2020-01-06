@@ -25,8 +25,14 @@ const ProSchema = new mongoose.Schema({
   winner_id: mongoose.Schema.Types.ObjectId,
   bid_count: { type: Number, default: 0 },
   auto_renew: Boolean,
-  product_info: String
+  product_info: String,
+  max_price: { type: Number, default: 0 },
+  isEnd: { type: Boolean, default: false }
 });
+ProSchema.method.isNew = () => {
+  return (this.submit_date - Date.now()) / 1000 < 3600;
+};
+
 var instance = mongoose.model("Product", ProSchema);
 
 module.exports = {
@@ -36,6 +42,10 @@ module.exports = {
       element.childcat_name = cats.find(
         obj => obj._id.$oid === element.cat_id.$oid
       ).childcat_name[element.childcat_pos].name;
+      var date = new Date(element.submit_date);
+      element.isNew = (Date.now() - date) / 1000 < 3600;
+      if (element.img[0] != undefined)
+        element.imgFileName = element.img[0].filename;
     });
   }
 };
