@@ -7,7 +7,7 @@ var userSchema = new mongoose.Schema({
         fname: String,
         lname: String,
         addr: String,
-        dob: String
+        dob: String,
     },
     local: {
         email: String,
@@ -17,15 +17,15 @@ var userSchema = new mongoose.Schema({
         password: {
             type: String
         },
-
-    permission: { type: Number, default: 0 },
-    rate_point: {
-      sum: { type: Number, default: 0 },
-      plus: { type: Number, default: 0 }
-    }
-  },
-  status: String, //ACTIVE, INACTIVE, SUSPENDED
-  wish_list: { type: Array }
+        permission: Boolean,
+        rate_point: {
+            sum: Number,
+            plus: Number
+        }
+    },
+    status: String,
+    wish_list: { type: Array },
+    cart_item:{type:Array}
 });
 
 // Mã hóa mật khẩu

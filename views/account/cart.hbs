@@ -20,6 +20,7 @@
 					{{#each products}}
 					<div class="cart_items">
 						<ul class="cart_list">
+
 							<li class="cart_item clearfix">
 								<div class="cart_item_image"><img
 										style="max-height: 100%; position: absolute; top: 50%;-ms-transform: translateY(-50%); transform: translateY(-50%);"
@@ -78,7 +79,9 @@
 									</div>
 
 								</div>
+
 							</li>
+
 						</ul>
 					</div>
 					{{/each}}
@@ -97,10 +100,11 @@
 
 						<button type="button" onclick="location.href='/'" class="button left cart_button_checkout">Tiếp
 							tục đấu giá</button>
-						<button type="button" onclick="location.href='/account/payment'"
-							class="button cart_button_checkout">Add to Cart</button>
+						<button type="submit" onclick="location.href='/account/cart/{{this._id}}'"
+							class="button cart_button_checkout">Payment Now</button>
 
 					</div>
+					{{/each}}
 				</div>
 			</div>
 		</div>

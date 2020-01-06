@@ -2,6 +2,15 @@
 <link rel="stylesheet" type="text/css" href="/javascript/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/shop_styles.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/shop_responsive.css">
+<style>
+	.product_price {
+		margin-top: 0px !important;
+	}
+
+	.cursor {
+		cursor: pointer;
+	}
+</style>
 {{/section}}
 
 {{#section 'js'}}
@@ -113,38 +122,66 @@
 						</div>
 					</div>
 					<div class="product_grid">
+
+						{{#each this.Products}}
 						<div class="product_grid_border"></div>
 
-						<!-- Product Item 1 -->
 						<div class="product_item is_new">
 							<div class="product_border"></div>
+							
 							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-									src="/images/new_5.jpg" alt=""></div>
+									src="  " alt=""></div>
+							
+
+							{{!--  /uploads/{{this.img[0].filename}}--}}
 							<div class="product_content">
 								<div class="product_name">
-									<div><a href="#" tabindex="0">Philips BT6900A</a></div>
+									<div><a href="#" tabindex="0">{{this.name}}</a></div>
 								</div>
 								<div style="margin-top: 0.5rem;">
 									<p style="margin-bottom: 0rem;">Giá hiện tại :</p>
-									<div class="product_price">5.229.042 đ</div>
+									<div class="product_price">{{this.cur_price}} đ</div>
 								</div>
 								<div class="product_highprice" style="margin-top: 0.5rem;">
 									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>Nguyễn Văn
 									A
 								</div>
 								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-gavel"></i> Giá mua ngay :</p>
-									<div class="product_nowprice">5.450.042 đ</div>
+									<p style="margin-bottom: 0rem;"> Giá mua ngay :</p>
+									{{!-- product_nowprice --}}
+									<div class="product_price" style="color: red;">{{this.purchase_price}} đ</div>
+									<button type="button" onclick="location.href='/product/{{this._id}}'" class="btn btn-primary mt-2 cursor"><i
+											class="fas fa-gavel mr-2"></i>Đấu giá ngay</button>
 								</div>
 								<div style="margin-top: 0.5rem;">
 									<p style="margin-bottom: 0rem;">Ngày đăng:</p>
-									<div class="product_daypost">10/11/2018</div>
+									<div class="product_daypost">{{this.submit_date}}</div>
 								</div>
 								<div style="margin-top: 0.5rem;">
 									<p style="margin-bottom: 0rem;">Lượt ra giá hiện tại:</p>
-									<div class="product_nowgavel">5</div>
+									<div class="product_nowgavel">{{this.bid_count}}</div>
 								</div>
-								<div class="counter"></div>
+								
+								<div class="deals_timer_box_item clearfix mb-3" data-target-time="{{exp_date}}">
+									<div class="deals_timer_unit_item ">
+										<div id="deals_timer1_hr" class="deals_timer_day" style="color: red;font-weight:bold">1</div>
+										<span>days</span>
+									</div>
+									<div class="deals_timer_unit_item">
+										<div id="deals_timer1_hr" class="deals_timer_hr" style="color: red;font-weight:bold">46</div>
+										<span>hours</span>
+									</div>
+									<div class="deals_timer_unit_item">
+										<div id="deals_timer1_min" class="deals_timer_min" style="color: red;font-weight:bold">59</div>
+										<span>mins</span>
+									</div>
+									<div class="deals_timer_unit_item">
+										<div id="deals_timer1_sec" class="deals_timer_sec" style="color: red;font-weight:bold">40</div>
+										<span>secs</span>
+									</div>
+								</div>
+								<button type="button" onclick="location.href='/account/cart/{{this._id}}'" class="btn btn-primary mt-2 cursor"><i
+										class="fas fa-cart-plus mr-2"></i> Add to Cart</button>
 							</div>
 							<div class="product_fav"><i class="fas fa-heart"></i></div>
 							<ul class="product_marks">
@@ -152,349 +189,8 @@
 								<li class="product_mark product_new">new</li>
 							</ul>
 						</div>
+						{{/each}}
 
-						<!-- Product Item 2 -->
-						<div class="product_item discount">
-							<div class="product_border"></div>
-							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-									src="/images/featured_1.png" alt=""></div>
-							<div class="product_content">
-								<div class="product_name">
-									<div><a href="#" tabindex="0">Huawei MediaPad</a></div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Giá hiện tại :</p>
-									<div class="product_price">5.113.397 đ<span>6.972.814 đ</span></div>
-								</div>
-								<div class="product_highprice" style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>Nguyễn Văn
-									B
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-gavel"></i> Giá mua ngay :</p>
-									<div class="product_nowprice">5.450.042 đ</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Ngày đăng:</p>
-									<div class="product_daypost">10/11/2018</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Lượt ra giá hiện tại:</p>
-									<div class="product_nowgavel">5</div>
-								</div>
-								<div class="counter"></div>
-							</div>
-							<div class="product_fav"><i class="fas fa-heart"></i></div>
-							<ul class="product_marks">
-								<li class="product_mark product_discount">-25%</li>
-								<li class="product_mark product_new">new</li>
-							</ul>
-						</div>
-
-
-						<!-- Product Item 3 -->
-						<div class="product_item discount">
-							<div class="product_border"></div>
-							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-									src="/images/featured_2.png" alt=""></div>
-							<div class="product_content">
-								<div class="product_name">
-									<div><a href="#" tabindex="0">Apple iPod Shuffle</a></div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Giá hiện tại :</p>
-									<div class="product_price">5.345.824 đ<span>8.832.231 đ</span></div>
-								</div>
-								<div class="product_highprice" style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>Nguyễn Văn
-									C
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-gavel"></i> Giá mua ngay :</p>
-									<div class="product_nowprice">5.450.042 đ</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Ngày đăng:</p>
-									<div class="product_daypost">10/11/2018</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Lượt ra giá hiện tại:</p>
-									<div class="product_nowgavel">5</div>
-								</div>
-								<div class="counter"></div>
-							</div>
-							<div class="product_fav"><i class="fas fa-heart"></i></div>
-							<ul class="product_marks">
-								<li class="product_mark product_discount">-25%</li>
-								<li class="product_mark product_new">new</li>
-							</ul>
-						</div>
-
-						<!-- Product Item 4 -->
-						<div class="product_item">
-							<div class="product_border"></div>
-							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-									src="/images/featured_3.png" alt=""></div>
-							<div class="product_content">
-								<div class="product_name">
-									<div><a href="#" tabindex="0">Sony MDRZX310W</a></div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Giá hiện tại :</p>
-									<div class="product_price">4.416.115 đ</div>
-								</div>
-								<div class="product_highprice" style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>Nguyễn Văn
-									D
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-gavel"></i> Giá mua ngay :</p>
-									<div class="product_nowprice">5.450.042 đ</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Ngày đăng:</p>
-									<div class="product_daypost">10/11/2018</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Lượt ra giá hiện tại:</p>
-									<div class="product_nowgavel">5</div>
-								</div>
-								<div class="counter"></div>
-							</div>
-							<div class="product_fav"><i class="fas fa-heart"></i></div>
-							<ul class="product_marks">
-								<li class="product_mark product_discount">-25%</li>
-								<li class="product_mark product_new">new</li>
-							</ul>
-						</div>
-
-						<!-- Product Item 5 -->
-						<div class="product_item is_new">
-							<div class="product_border"></div>
-							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-									src="/images/featured_4.png" alt=""></div>
-							<div class="product_content">
-								<div class="product_name">
-									<div><a href="#" tabindex="0">LUNA Smartphone</a></div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Giá hiện tại :</p>
-									<div class="product_price">8.808.988 đ</div>
-								</div>
-								<div class="product_highprice" style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>Nguyễn Văn
-									E
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-gavel"></i> Giá mua ngay :</p>
-									<div class="product_nowprice">5.450.042 đ</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Ngày đăng:</p>
-									<div class="product_daypost">10/11/2018</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Lượt ra giá hiện tại:</p>
-									<div class="product_nowgavel">5</div>
-								</div>
-								<div class="counter"></div>
-							</div>
-							<div class="product_fav"><i class="fas fa-heart"></i></div>
-							<ul class="product_marks">
-								<li class="product_mark product_discount">-25%</li>
-								<li class="product_mark product_new">new</li>
-							</ul>
-						</div>
-
-						<!-- Product Item 6 -->
-						<div class="product_item discount">
-							<div class="product_border"></div>
-							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-									src="/images/shop_1.jpg" alt=""></div>
-							<div class="product_content">
-								<div class="product_name">
-									<div><a href="#" tabindex="0">Canon IXUS 175...</a></div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Giá hiện tại :</p>
-									<div class="product_price">7.832.231 đ<span>8.832.231 đ</span></div>
-								</div>
-								<div class="product_highprice" style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>Nguyễn Văn
-									E
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-gavel"></i> Giá mua ngay :</p>
-									<div class="product_nowprice">5.450.042 đ</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Ngày đăng:</p>
-									<div class="product_daypost">10/11/2018</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Lượt ra giá hiện tại:</p>
-									<div class="product_nowgavel">5</div>
-								</div>
-								<div class="counter"></div>
-							</div>
-							<div class="product_fav"><i class="fas fa-heart"></i></div>
-							<ul class="product_marks">
-								<li class="product_mark product_discount">-25%</li>
-								<li class="product_mark product_new">new</li>
-							</ul>
-						</div>
-
-						<!-- Product Item 7 -->
-						<div class="product_item is_new">
-							<div class="product_border"></div>
-							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-									src="/images/featured_5.png" alt=""></div>
-							<div class="product_content">
-								<div class="product_name">
-									<div><a href="#" tabindex="0">Canon STM Kit...</a></div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Giá hiện tại :</p>
-									<div class="product_price">9.297.085 đ </div>
-								</div>
-								<div class="product_highprice" style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>Nguyễn Văn
-									E
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-gavel"></i> Giá mua ngay :</p>
-									<div class="product_nowprice">5.450.042 đ</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Ngày đăng:</p>
-									<div class="product_daypost">10/11/2018</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Lượt ra giá hiện tại:</p>
-									<div class="product_nowgavel">5</div>
-								</div>
-								<div class="counter"></div>
-							</div>
-							<div class="product_fav"><i class="fas fa-heart"></i></div>
-							<ul class="product_marks">
-								<li class="product_mark product_discount">-25%</li>
-								<li class="product_mark product_new">new</li>
-							</ul>
-						</div>
-
-						<!-- Product Item 8 -->
-						<div class="product_item">
-							<div class="product_border"></div>
-							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-									src="/images/featured_6.png" alt=""></div>
-							<div class="product_content">
-								<div class="product_name">
-									<div><a href="#" tabindex="0">Samsung J330F</a></div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Giá hiện tại :</p>
-									<div class="product_price">9.297.085 đ <span>8.832.231 đ</span></div>
-								</div>
-								<div class="product_highprice" style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>Nguyễn Văn
-									E
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-gavel"></i> Giá mua ngay :</p>
-									<div class="product_nowprice">5.450.042 đ</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Ngày đăng:</p>
-									<div class="product_daypost">10/11/2018</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Lượt ra giá hiện tại:</p>
-									<div class="product_nowgavel">5</div>
-								</div>
-								<div class="counter"></div>
-							</div>
-							<div class="product_fav"><i class="fas fa-heart"></i></div>
-							<ul class="product_marks">
-								<li class="product_mark product_discount">-25%</li>
-								<li class="product_mark product_new">new</li>
-							</ul>
-						</div>
-						<!-- Product Item 9 -->
-						<div class="product_item is_new">
-							<div class="product_border"></div>
-							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-									src="/images/new_3.jpg" alt=""></div>
-							<div class="product_content">
-
-								<div class="product_name">
-									<div><a href="#" tabindex="0">Xiaomi Band 2...</a></div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Giá hiện tại :</p>
-									<div class="product_price">5.205.613 đ</div>
-								</div>
-								<div class="product_highprice" style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>Nguyễn Văn
-									E
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-gavel"></i> Giá mua ngay :</p>
-									<div class="product_nowprice">5.450.042 đ</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Ngày đăng:</p>
-									<div class="product_daypost">10/11/2018</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Lượt ra giá hiện tại:</p>
-									<div class="product_nowgavel">5</div>
-								</div>
-								<div class="counter"></div>
-							</div>
-							<div class="product_fav"><i class="fas fa-heart"></i></div>
-							<ul class="product_marks">
-								<li class="product_mark product_discount">-25%</li>
-								<li class="product_mark product_new">new</li>
-							</ul>
-						</div>
-						<!-- Product Item 10 -->
-						<div class="product_item is_new">
-							<div class="product_border"></div>
-							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-									src="/images/featured_7.png" alt=""></div>
-							<div class="product_content">
-
-								<div class="product_name">
-									<div><a href="#" tabindex="0">Lenovo IdeaPad</a></div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Giá hiện tại :</p>
-									<div class="product_price">5.205.613 đ</div>
-								</div>
-								<div class="product_highprice" style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>Nguyễn Văn
-									E
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-gavel"></i> Giá mua ngay :</p>
-									<div class="product_nowprice">5.450.042 đ</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Ngày đăng:</p>
-									<div class="product_daypost">10/11/2018</div>
-								</div>
-								<div style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;">Lượt ra giá hiện tại:</p>
-									<div class="product_nowgavel">5</div>
-								</div>
-								<div class="counter"></div>
-							</div>
-						</div>
-						<div class="product_fav"><i class="fas fa-heart"></i></div>
-						<ul class="product_marks">
-							<li class="product_mark product_discount">-25%</li>
-							<li class="product_mark product_new">new</li>
-						</ul>
 					</div>
 
 

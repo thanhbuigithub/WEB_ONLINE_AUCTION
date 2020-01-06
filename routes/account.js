@@ -1,10 +1,10 @@
 // var passport = require('passport');
 var express = require("express");
 var router = express.Router();
-var csrf = require("csurf");
-
-var Product = require("../models/product.model");
-var User = require("../models/user.model");
+const Category = require("../models/category.model");
+const User = require("../models/user.model");
+const Product = require("../models/product.model");
+var csrf = require('csurf');
 
 var csrfProtection = csrf();
 router.use(csrfProtection);
@@ -25,23 +25,10 @@ router.get(
 //     });
 // });
 // router.get('/information', member_controller.isLoggedIn, member_controller.get_profile);
-router.get(
-  "/:id/information/update",
-  member_controller.isLoggedIn,
-  member_controller.get_update_information
-);
-// router.post('/information/update',member_controller.post_update_information);
-router.post(
-  "/:id/information/update",
-  member_controller.post_update_information
-);
-router.get(
-  "/logout",
-  member_controller.isLoggedIn,
-  member_controller.get_logout
-);
-router.use("/", member_controller.notLogin_use);
-
+router.get('/:id/information/update', member_controller.isLoggedIn, member_controller.get_update_information);
+router.post('/:id/information/update', member_controller.post_update_information);
+router.get('/logout', member_controller.isLoggedIn, member_controller.get_logout);
+router.use('/', member_controller.notLogin_use);
 router.get(
   "/register",
   member_controller.notLoggedIn,

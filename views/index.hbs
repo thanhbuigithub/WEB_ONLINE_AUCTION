@@ -227,7 +227,7 @@
 											class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 											<div
 												class="product_image d-flex flex-column align-items-center justify-content-center">
-												<img src=src="/uploads/{{imgFileName}}" alt=""></div>
+												<img src="/uploads/{{imgFileName}}" alt=""></div>
 											<div class="product_content">
 												<div class="product_price">{{cur_price}}</div>
 												<div class="product_name ">
@@ -263,7 +263,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='/account/cart'"
+													<button type="button" onclick="location.href='/account/cart/{{_id}}'"
 														class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
@@ -447,7 +447,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='/account/cart'"
+													<button onclick="location.href='/account/cart/{{_id}}'"
 														class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
@@ -632,7 +632,7 @@
 														<input type="radio" name="product_color"
 															style="background:#999999">
 													</div>
-													<button onclick="location.href='/account/cart'"
+													<button onclick="location.href='/account/cart/{{_id}}'"
 														class="product_cart_button">Add to Cart</button>
 												</div>
 											</div>
