@@ -20,6 +20,7 @@ let transporter = nodemailer.createTransport({
 /* GET home page. */
 router.get("/:id", async function(req, res, next) {
   var id = req.params.id;
+  var user = req.user;
   var pro = await Product.instance.findById(id).exec();
   var cat = await Category.instance.findById(pro.cat_id).exec();
   var Seller = await User.findById(pro.seller_id)
@@ -58,14 +59,37 @@ router.get("/:id", async function(req, res, next) {
     Seller.point = (Seller.rate_point.plus / Seller.rate_point.sum) * 100;
   }
 
+  //Người mua
+  if (pro.bid_count > 0) {
+    var Winner = await User.findById(pro.winner_id)
+      .lean()
+      .exec();
+    Winner.full_name = Winner.info.fname + " " + Winner.info.lname;
+    if (Winner.rate_point.sum == 0) {
+      Winner.isNew = true;
+    } else {
+      Winner.isNew = false;
+      Winner.point = (Winner.rate_point.plus / Winner.rate_point.sum) * 100;
+    }
+  }
+
+  var submit_date = new Date(pro.submit_date);
+  pro.submit_date_convert = moment(
+    submit_date,
+    "YYYY-MM-DD'T'HH:mm:ss.SSSZ"
+  ).format("D/MM/YYYY");
+
   res.render("product", {
     title: "Product Page",
     product: pro,
     suggest_price: pro.cur_price + pro.step_price,
     bidList: historyList,
-    seller: Seller
+    seller: Seller,
+    is_seller: pro.seller_id.equals(user._id),
+    is_winner: pro.winner_id.equals(user._id),
+    is_bidded: pro.bid_count > 0,
+    winner: Winner
   });
-  console.log(historyList);
   req.session.retUrl = "/product/" + id;
 });
 

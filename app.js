@@ -13,7 +13,17 @@ var passport = require("passport");
 var flash = require("connect-flash");
 var validator = require("express-validator");
 var hbs = require("handlebars");
-
+var CronJob = require("cron").CronJob;
+const nodemailer = require("nodemailer");
+let transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: "web.auction.mailing.system", // generated ethereal user
+    pass: "thanhtc2" // generated ethereal password
+  }
+});
 //Config
 var settings = require("./configs/settings");
 var database = require("./configs/database");
@@ -138,4 +148,82 @@ app.use(function(err, req, res, next) {
   res.render("error");
 });
 
+// new CronJob(
+//   "0 0 0 */7 * *",
+// )
+// var job = new CronJob();
+// job
+//Check product end time
+Product.instance.find({ isEnd: false }).exec((err, products) => {
+  new CronJob(
+    "* * * * * *",
+    async function() {
+      for (var i = 0; i < products.length; i++) {
+        if (products[i].exp_date <= Date.now() && !products[i].isEnd) {
+          products[i].isEnd = true;
+          products[i].save();
+          if (products[i].bid_count == 0) {
+            console.log(products[i]);
+            AuctionFailedMail(products[i]);
+          } else {
+            AuctionSuccessMail(products[i]);
+          }
+        }
+      }
+    },
+    null,
+    true,
+    "America/Los_Angeles"
+  );
+});
+
+function AuctionFailedMail(product) {
+  User.findById(product.seller_id).exec(async (err, user) => {
+    let info = await transporter.sendMail({
+      from:
+        '"Web Auction Mailing System" <web.auction.mailing.system@gmail.com>', // sender address
+      to: user.local.email, // list of receivers
+      subject: "Đấu giá không thành công", // Subject line
+      text: "Không có ai đưa ra giá cho sản phẩm: " + product.name // plain text body
+      // html: "<b>Hello world?</b>" // html body
+    });
+    console.log(info);
+  });
+}
+
+function AuctionSuccessMail(product) {
+  User.findById(product.seller_id).exec(async (err, user) => {
+    let info = await transporter.sendMail({
+      from:
+        '"Web Auction Mailing System" <web.auction.mailing.system@gmail.com>', // sender address
+      to: user.local.email, // list of receivers
+      subject: "Đấu giá thành công", // Subject line
+      text:
+        "Sản phẩm " +
+        product.name +
+        " đã được đấu giá thành công với mức giá " +
+        product.cur_price +
+        "\nChi tiết: http://localhost:3000/product/" +
+        product._id // plain text body
+      // html: "<b>Hello world?</b>" // html body
+    });
+    console.log(info);
+  });
+  User.findById(product.winner_id).exec((err, user) => {
+    transporter.sendMail({
+      from:
+        '"Web Auction Mailing System" <web.auction.mailing.system@gmail.com>', // sender address
+      to: user.local.email, // list of receivers
+      subject: "Đấu giá thành công", // Subject line
+      text:
+        "Chúc mừng bạn đã đấu giá thành côg sản phẩm " +
+        product.name +
+        " với mức giá " +
+        product.cur_price +
+        "\nChi tiết: http://localhost:3000/product/" +
+        product._id // plain text body
+      // html: "<b>Hello world?</b>" // html body
+    });
+  });
+}
 module.exports = app;
