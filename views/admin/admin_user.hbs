@@ -108,6 +108,7 @@
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
+
         <div class="container-fluid tab-content" id="v-pills-tabContent">
 
           <!-- Page Heading -->
@@ -122,24 +123,26 @@
                 <th scope="col" class="text-center">#</th>
                 <th scope="col" class="text-center">Email</th>
                 <th scope="col" class="text-center">Tên người dùng</th>
-                <th scope="col" class="text-center">Thao tác</th>
+                <th scope="col" class="text-center align-content-center">Thao tác</th>
               </tr>
             </thead>
             <tbody>
+              {{#each Bidder}}
               <tr>
                 <th scope="row" class="text-center">1</th>
-                <td class="text-center">ngvana@gmail.com</td>
-                <td class="text-center">Nguyễn Văn A</td>
+                <td class="text-center">{{this.local.email}}</td>
+                <td class="text-center">{{this.info.fname}} {{this.info.lname}}</td>
                 <td class="text-center">
                   {{!-- <button type="button" class="btn btn-outline-primary mr-2"><i class="far fa-edit mr-2"></i>Sửa</button> --}}
-                  <button type="button" class="btn btn-outline-danger"><i class="far fa-trash-alt mr-2"></i>Xoá</button>
+                  <button type="submit" onclick="location.href='/admin/user-info/bidder/{{this._id}}'" class="btn btn-outline-danger align-content-center"><i class="fas fa-lock mr-2"></i>Khóa tài khoản</button>
                 </td>
               </tr>
-
+              {{/each}}
             </tbody>
           </table>
 
         </div>
+        
         <!-- /.container-fluid -->
 
         <!-- Begin Page Content -->
@@ -157,20 +160,21 @@
                 <th scope="col" class="text-center">#</th>
                 <th scope="col" class="text-center">Email</th>
                 <th scope="col" class="text-center">Tên người dùng</th>
-                <th scope="col" class="text-center">Thao tác</th>
+                <th scope="col" class="text-center align-content-center">Thao tác</th>
               </tr>
             </thead>
             <tbody>
+              {{#each Seller}}
               <tr>
                 <th scope="row" class="text-center">1</th>
-                <td class="text-center">ngvana@gmail.com</td>
-                <td class="text-center">Nguyễn Văn A</td>
+                <td class="text-center">{{this.local.email}}</td>
+                <td class="text-center">{{this.info.fname}} {{this.info.lname}}</td>
                 <td class="text-center">
                   {{!-- <button type="button" class="btn btn-outline-primary mr-2"><i class="far fa-edit mr-2"></i>Sửa</button> --}}
-                  <button type="button" class="btn btn-outline-danger"><i class="far fa-trash-alt mr-2"></i>Xoá</button>
+                  <button  type="submit" onclick="location.href='/admin/user-info/seller/{{this._id}}'" class="btn btn-outline-danger align-content-center"><i class="fas fa-lock mr-2"></i>Khóa tài khoản</button>
                 </td>
               </tr>
-
+              {{/each}}
             </tbody>
           </table>
 

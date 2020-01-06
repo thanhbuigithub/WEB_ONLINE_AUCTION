@@ -11,7 +11,6 @@ router.get('/', async function (req, res, next) {
     .sort({ submit_date: 1 })
     .exec();
 
-
   res.render('shop', { title: 'Shop Page', Products: Products});
 });
 
