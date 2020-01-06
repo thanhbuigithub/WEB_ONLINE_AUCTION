@@ -9,7 +9,18 @@ module.exports = app => {
     res.locals.settings = settings;
     res.locals.logged = req.isAuthenticated();
     res.locals.user = req.user;
-
+    if (res.locals.logged) {
+      res.locals.user.bids_count = 0;
+      res.locals.user.bids_pro_id = [];
+      var bids = await Bid.instance.find({ user_id: req.user._id }).exec();
+      for (var i = 0; i < bids.length; i++) {
+        var pro = await Product.instance.findById(bids[i].pro_id).exec();
+        if (!pro.isEnd) {
+          res.locals.user.bids_count++;
+          res.locals.user.bids_pro_id.push(pro._id);
+        }
+      }
+    }
     //local db
     var pros = await Product.instance.find().exec();
     var cats = await Category.instance.find().exec();

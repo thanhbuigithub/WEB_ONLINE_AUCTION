@@ -10,6 +10,7 @@
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
+    "cron": "^1.7.2",
     "csurf": "^1.10.0",
     "debug": "~2.6.9",
     "express": "~4.16.1",

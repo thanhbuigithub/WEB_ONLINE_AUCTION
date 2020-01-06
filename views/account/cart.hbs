@@ -11,42 +11,85 @@
 <div class="cart_section">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-10 offset-lg-1">
+			<div class="col-lg-12">
 				<div class="cart_container">
-					<div class="cart_title">Shopping Cart</div>
+					<div class="cart_title">{{title}}</div>
+					{{#if isEmpty}}
+					<h3>Bạn chưa có sản phẩm nào trong danh sách này!</h3>
+					{{else}}
+					{{#each products}}
 					<div class="cart_items">
 						<ul class="cart_list">
 							<li class="cart_item clearfix">
-								<div class="cart_item_image"><img src="/images/shopping_cart.jpg" alt=""></div>
+								<div class="cart_item_image"><img
+										style="max-height: 100%; position: absolute; top: 50%;-ms-transform: translateY(-50%); transform: translateY(-50%);"
+										src="/uploads/{{img_filename}}" alt=""></div>
 								<div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
 									<div class="cart_item_name cart_info_col">
-										<div class="cart_item_title">Name</div>
-										<div class="cart_item_text">MacBook Air 13</div>
+										<div class="cart_item_title">Tên sản phẩm</div>
+										<div class="cart_item_text">
+											<a href="../../product/{{_id}}">
+												<div class="resize" style="width: 300px; height: 70px">{{name}}</div>
+											</a>
+										</div>
+
 									</div>
 									<div class="cart_item_color cart_info_col">
-										<div class="cart_item_title">Color</div>
-										<div class="cart_item_text"><span
-												style="background-color:#999999;"></span>Silver</div>
+										<div class="cart_item_title text-center" style="width: 170px">Thời gian còn lại
+										</div>
+										{{!-- <div class="cart_item_text"><span
+												style="background-color:#999999;"></span>Silver</div> --}}
+										<div class="deals_timer_box_item clearfix px-0" data-target-time="{{exp_date}}"
+											style="width: 100%;margin-top: 15px">
+											<div class="deals_timer_unit_item">
+												<div id="deals_timer1_hr" class="deals_timer_day"></div>
+												<span>days</span>
+											</div>
+											<div class="deals_timer_unit_item">
+												<div id="deals_timer1_hr" class="deals_timer_hr"></div>
+												<span>hours</span>
+											</div>
+											<div class="deals_timer_unit_item">
+												<div id="deals_timer1_min" class="deals_timer_min"></div>
+												<span>mins</span>
+											</div>
+											<div class="deals_timer_unit_item">
+												<div id="deals_timer1_sec" class="deals_timer_sec"></div>
+												<span>secs</span>
+											</div>
+										</div>
 									</div>
-									<div class="cart_item_quantity cart_info_col">
-										<div class="cart_item_title">Quantity</div>
-										<div class="cart_item_text">1</div>
+									<div class="cart_item_quantity cart_info_col text-center">
+										<div class="cart_item_title">Tên người giữ giá</div>
+										{{#if winner_id}}
+										{{#if user_is_winner}}
+										<div class="cart_item_text text-success">{{winner_name}}</div>
+										{{else}}
+										<div class="cart_item_text text-danger">{{winner_name}}</div>
+										{{/if}}
+										{{else}}
+										<div class="cart_item_text text-danger">Chưa có</div>
+										{{/if}}
+
 									</div>
 									<div class="cart_item_price cart_info_col">
-										<div class="cart_item_title">Price</div>
-										<div class="cart_item_text">$2000</div>
+										<div class="cart_item_title">Giá hiện tại</div>
+										<div class="cart_item_text price">{{cur_price}}</div>
 									</div>
 
 								</div>
 							</li>
 						</ul>
 					</div>
+					{{/each}}
+					{{/if}}
+
 
 					<!-- Order Total -->
 					<div class="order_total">
 						<div class="order_total_content text-md-right">
-							<div class="order_total_title">Order Total:</div>
-							<div class="order_total_amount">$2000</div>
+							<div class="order_total_title">Tổng cộng:</div>
+							<div class="order_total_amount price">{{sum_price}}</div>
 						</div>
 					</div>
 

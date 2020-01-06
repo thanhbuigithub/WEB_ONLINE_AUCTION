@@ -329,9 +329,58 @@ $(document).ready(function() {
 
   function initFavs() {
     // Handle Favorites
-    var fav = $(".product_fav");
+    var fav = $(".fav");
+    var id = $(fav).data("id");
+    if (!logged) {
+      $(fav).css("visibility", "hidden");
+    } else {
+      $(fav).css("visibility", "visible");
+      var wish_list = user.wish_list;
+      if (wish_list.findIndex(v => v.pro_id == id) != -1)
+        $(fav).addClass("active");
+    }
     fav.on("click", function() {
       fav.toggleClass("active");
+      var check = $(this).hasClass("active");
+      console.log(check);
+      var proid = $(this).data("id");
+      var wishItem = {
+        pro_id: proid
+      };
+      var wish_list = $(".wishlist_count span");
+      if (check) {
+        $.ajax({
+          url: "/" + proid + "/addToWishList",
+          type: "post",
+          dataType: "json",
+          data: JSON.stringify(wishItem),
+          success: data => {
+            if (data == "-1") {
+              console.log("ajax wish list: send false");
+              window.location.href = "/";
+            }
+            if (data == "1") {
+              $(wish_list).html(parseInt($(wish_list).html()) + 1);
+            }
+          }
+        });
+      } else {
+        $.ajax({
+          url: "/" + proid + "/removeFromWishList",
+          type: "post",
+          dataType: "json",
+          data: JSON.stringify(wishItem),
+          success: data => {
+            if (data == "-1") {
+              console.log("ajax wish list: send false");
+              window.location.href = "/";
+            }
+            if (data == "1") {
+              $(wish_list).html(parseInt($(wish_list).html()) - 1);
+            }
+          }
+        });
+      }
     });
   }
 

@@ -42,8 +42,8 @@ module.exports = {
       element.childcat_name = cats.find(
         obj => obj._id.$oid === element.cat_id.$oid
       ).childcat_name[element.childcat_pos].name;
-      var date = new Date(element.submit_date);
-      element.isNew = (Date.now() - date) / 1000 < 3600;
+      var submit_date = new Date(element.submit_date);
+      element.isNew = (Date.now() - submit_date) / 1000 < 3600;
       if (element.img[0] != undefined)
         element.imgFileName = element.img[0].filename;
     });
