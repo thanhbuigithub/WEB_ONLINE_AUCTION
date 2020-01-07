@@ -78,44 +78,23 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid tab-content" id="v-pills-tabContent">
-
+          <form method="POST">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">New Category</h1>
           </div>
           <label for="txtCatName">Category</label>
-          <input type="text" class="form-control" id="txtCatName" name="CatName" placeholder="Enter category name"
+          <input type="text" class="form-control" id="txtCatName" name="txtCatName" placeholder="Enter category name"
           autofocus>
           <a class="btn btn-outline-primary mt-3" href="/admin/categories" role="button">
           <i class="fa fa-backward" aria-hidden="true"></i>
           Back to Category
           </a>
-          <button type="submit" class="btn btn-outline-success mt-3 float-right">
+          <button type="submit" onclick="location.href='/admin/categories/edit'" class="btn btn-outline-success mt-3 float-right">
           <i class="fa fa-check" aria-hidden="true"></i>
           Save
           </button>
-          {{!-- <table class="table">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col" class="text-center">Tên danh mục</th>
-								<th scope="col" class="text-center">Số sản phẩm</th>
-								<th scope="col" class="text-right text-center">Thao tác</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td class="text-center">Điện tử</td>
-								<td class="text-center">10</td>
-								<td class="text-right text-center">
-                  <button type="button" class="btn btn-outline-primary mr-2"><i class="far fa-edit mr-2"></i>Sửa</button>
-                  <button type="button" class="btn btn-outline-danger"><i class="far fa-trash-alt mr-2"></i>Xoá</button>
-                </td>
-							</tr>
-
-						</tbody>
-					</table> --}}
+          </form>
 
         </div>
         <!-- /.container-fluid -->

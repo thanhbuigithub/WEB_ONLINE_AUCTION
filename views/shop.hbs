@@ -142,12 +142,13 @@
 
 							<div class="product_content">
 								<div class="product_name">
-									<div><a href="#" tabindex="0">{{this.name}}</a></div>
+									<div><a href="/product/{{this._id}}" tabindex="0">{{this.name}}</a></div>
 								</div>
 								<div style="margin-top: 0.5rem;">
 									<p style="margin-bottom: 0rem;">Giá hiện tại :</p>
 									<div class="product_price">{{this.cur_price}} đ</div>
 								</div>
+
 								<div class="product_highprice" style="margin-top: 0.5rem;">
 									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>
 									{{#if winner_id}}
@@ -156,6 +157,7 @@
 									Chưa có
 									{{/if}}
 								</div>
+
 								<div style="margin-top: 0.5rem;">
 									<p style="margin-bottom: 0rem;"> Giá mua ngay :</p>
 									{{!-- product_nowprice --}}
@@ -203,14 +205,17 @@
 									class="btn btn-primary mt-2 cursor"><i class="fas fa-gavel mr-2"></i>Đấu giá
 									ngay</button>
 							</div>
-							<div class="product_fav"><i class="fas fa-heart"></i></div>
+							<div class="product_fav" data-id="{{this._id}}"><i class="fas fa-heart"></i></div>
+							{{#if this.isNew}}
 							<ul class="product_marks">
-								<li class="product_mark product_discount">-25%</li>
+								{{!-- <li class="product_mark product_discount">-25%</li> --}}
 								<li class="product_mark product_new">new</li>
 							</ul>
-						</div>
-						{{/each}}
+							{{/if}}
 
+						</div>
+
+						{{/each}}
 					</div>
 
 

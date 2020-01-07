@@ -17,6 +17,7 @@ var userSchema = new mongoose.Schema({
     password: {
       type: String
     },
+    is_upgrade : Boolean,
     permission: { type: Number, default: 0 }
   },
   rate_point: {
