@@ -4,13 +4,33 @@ var router = express.Router();
 const Category = require("../models/category.model");
 const User = require("../models/user.model");
 const Product = require("../models/product.model");
-var csrf = require('csurf');
+var csrf = require("csurf");
 
-var csrfProtection = csrf();
-router.use(csrfProtection);
+const multer = require("multer");
+var path = require("path");
+
+//Setup multer
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, path.join(__dirname, "../public/uploads"));
+  },
+  filename: function(req, file, cb) {
+    cb(null, "user-" + Date.now() + path.extname(file.originalname));
+  }
+});
 
 // Require Controller Module
 var member_controller = require("../controllers/accountController");
+
+var csrfProtection = csrf({ cookie: true });
+const upload = multer({ storage: storage }).single("img");
+router.post(
+  "/:id/information/update",
+  upload,
+  csrfProtection,
+  member_controller.post_update_information
+);
+router.use(csrfProtection);
 
 /* Local Account */
 
@@ -25,10 +45,18 @@ router.get(
 //     });
 // });
 // router.get('/information', member_controller.isLoggedIn, member_controller.get_profile);
-router.get('/:id/information/update', member_controller.isLoggedIn, member_controller.get_update_information);
-router.post('/:id/information/update', member_controller.post_update_information);
-router.get('/logout', member_controller.isLoggedIn, member_controller.get_logout);
-router.use('/', member_controller.notLogin_use);
+router.get(
+  "/:id/information/update",
+  member_controller.isLoggedIn,
+  member_controller.get_update_information
+);
+
+router.get(
+  "/logout",
+  member_controller.isLoggedIn,
+  member_controller.get_logout
+);
+router.use("/", member_controller.notLogin_use);
 router.get(
   "/register",
   member_controller.notLoggedIn,
@@ -57,7 +85,7 @@ router.get("/cart", member_controller.isLoggedIn, async function(
   var length = user.bids_count;
   var sum = 0;
   var pros = await Product.instance
-    .find({ _id: { $in: user.bids_pro_id } })
+    .find({ _id: { $in: user.bids_pro_id }, isEnd: false })
     .lean()
     .exec();
 
@@ -93,7 +121,7 @@ router.get("/wishlist", member_controller.isLoggedIn, async function(
     pros_id.push(user.wish_list[i].pro_id);
   }
   var pros = await Product.instance
-    .find({ _id: { $in: pros_id } })
+    .find({ _id: { $in: pros_id }, isEnd: false })
     .lean()
     .exec();
   console.log(pros_id);
@@ -119,5 +147,25 @@ router.get("/wishlist", member_controller.isLoggedIn, async function(
 
 router.get("/payment", member_controller.isLoggedIn, function(req, res, next) {
   res.render("account/payment", { title: "Payment" });
+});
+
+router.get("/evaluate/:id", member_controller.isLoggedIn, async function(
+  req,
+  res,
+  next
+) {
+  var id = req.params.id;
+  var user = await User.findById(id).exec();
+  if (user.rate_point.sum == 0) {
+    user.isNew = true;
+  } else {
+    user.isNew = false;
+    user.point = Math.round((user.rate_point.plus / user.rate_point.sum) * 100);
+  }
+  user.rate_point.minus = user.rate_point.sum - user.rate_point.plus;
+  res.render("account/evaluate", {
+    title: "Đánh giá " + user.info.fname + " " + user.info.lname,
+    _user: user
+  });
 });
 module.exports = router;

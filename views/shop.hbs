@@ -37,6 +37,7 @@
 <div class="shop">
 	<div class="container">
 		<!-- Breadcrumbs -->
+		{{#if cat_name}}
 		<div class="ibid-breadcrumbs">
 			<div class="container1">
 				<div class="row">
@@ -44,15 +45,21 @@
 						<h3>
 							<ol class="breadcrumb">
 								<li><a href="/">Home</a></li>
-								<li class="active">Điện tử</li>
+								<li class="active">{{cat_name}}</li>
+								{{#if childcat_name}}
+								<li class="active">/{{childcat_name}}</li>
+								{{/if}}
+
 							</ol>
 						</h3>
 					</div>
 				</div>
 			</div>
 		</div>
+		{{/if}}
+
 		<div class="row">
-			<div class="col-lg-2">
+			{{!-- <div class="col-lg-2">
 
 				<!-- Shop Sidebar -->
 				<div class="shop_sidebar">
@@ -93,15 +100,15 @@
 					</div>
 				</div>
 
-			</div>
+			</div> --}}
 
-			<div class="col-lg-10">
+			<div class="col-lg-12">
 
 				<!-- Shop Content -->
 
 				<div class="shop_content">
 					<div class="shop_bar clearfix">
-						<div class="shop_product_count"><span>402</span> sản phẩm được tìm thấy</div>
+						<div class="shop_product_count"><span>{{pros_count}}</span> sản phẩm được tìm thấy</div>
 						<div class="shop_sorting">
 							<span>Sắp xếp:</span>
 							<ul>
@@ -123,17 +130,16 @@
 					</div>
 					<div class="product_grid">
 
-						{{#each this.Products}}
+						{{#each this.products}}
 						<div class="product_grid_border"></div>
-
-						<div class="product_item is_new">
+						<div class="product_item {{#if isNew}}
+							is_new
+						{{/if}}">
 							<div class="product_border"></div>
-							
-							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-									src="  " alt=""></div>
-							
 
-							{{!--  /uploads/{{this.img[0].filename}}--}}
+							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+									src="/uploads/{{imgFileName}}" alt=""></div>
+
 							<div class="product_content">
 								<div class="product_name">
 									<div><a href="#" tabindex="0">{{this.name}}</a></div>
@@ -143,45 +149,59 @@
 									<div class="product_price">{{this.cur_price}} đ</div>
 								</div>
 								<div class="product_highprice" style="margin-top: 0.5rem;">
-									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>Nguyễn Văn
-									A
+									<p style="margin-bottom: 0rem;"><i class="fas fa-trophy"></i> Đứng đầu</p>
+									{{#if winner_id}}
+									{{winner_fullname}}
+									{{else}}
+									Chưa có
+									{{/if}}
 								</div>
 								<div style="margin-top: 0.5rem;">
 									<p style="margin-bottom: 0rem;"> Giá mua ngay :</p>
 									{{!-- product_nowprice --}}
-									<div class="product_price" style="color: red;">{{this.purchase_price}} đ</div>
-									<button type="button" onclick="location.href='/product/{{this._id}}'" class="btn btn-primary mt-2 cursor"><i
-											class="fas fa-gavel mr-2"></i>Đấu giá ngay</button>
+
+									<div class="product_price" style="color: red;">
+										{{#if purchase_price}}
+										{{this.purchase_price}} đ
+										{{else}}
+										Không có
+										{{/if}}
+									</div>
 								</div>
 								<div style="margin-top: 0.5rem;">
 									<p style="margin-bottom: 0rem;">Ngày đăng:</p>
-									<div class="product_daypost">{{this.submit_date}}</div>
+									<div class="product_daypost">{{this.submit_date_convert}}</div>
 								</div>
 								<div style="margin-top: 0.5rem;">
 									<p style="margin-bottom: 0rem;">Lượt ra giá hiện tại:</p>
 									<div class="product_nowgavel">{{this.bid_count}}</div>
 								</div>
-								
+
 								<div class="deals_timer_box_item clearfix mb-3" data-target-time="{{exp_date}}">
 									<div class="deals_timer_unit_item ">
-										<div id="deals_timer1_hr" class="deals_timer_day" style="color: red;font-weight:bold">1</div>
+										<div id="deals_timer1_hr" class="deals_timer_day"
+											style="color: red;font-weight:bold">1</div>
 										<span>days</span>
 									</div>
 									<div class="deals_timer_unit_item">
-										<div id="deals_timer1_hr" class="deals_timer_hr" style="color: red;font-weight:bold">46</div>
+										<div id="deals_timer1_hr" class="deals_timer_hr"
+											style="color: red;font-weight:bold">46</div>
 										<span>hours</span>
 									</div>
 									<div class="deals_timer_unit_item">
-										<div id="deals_timer1_min" class="deals_timer_min" style="color: red;font-weight:bold">59</div>
+										<div id="deals_timer1_min" class="deals_timer_min"
+											style="color: red;font-weight:bold">59</div>
 										<span>mins</span>
 									</div>
 									<div class="deals_timer_unit_item">
-										<div id="deals_timer1_sec" class="deals_timer_sec" style="color: red;font-weight:bold">40</div>
+										<div id="deals_timer1_sec" class="deals_timer_sec"
+											style="color: red;font-weight:bold">40</div>
 										<span>secs</span>
 									</div>
 								</div>
-								<button type="button" onclick="location.href='/account/cart/{{this._id}}'" class="btn btn-primary mt-2 cursor"><i
-										class="fas fa-cart-plus mr-2"></i> Add to Cart</button>
+								<button type="button" onclick="location.href='/product/{{this._id}}'"
+									class="btn btn-primary mt-2 cursor"><i class="fas fa-gavel mr-2"></i>Đấu giá
+									ngay</button>
 							</div>
 							<div class="product_fav"><i class="fas fa-heart"></i></div>
 							<ul class="product_marks">
@@ -199,17 +219,25 @@
 				<!-- Shop Page Navigation -->
 
 				<div class="shop_page_nav d-flex flex-row justify-content-end">
-					<div class="page_prev d-flex flex-column align-items-center justify-content-center"><i
-							class="fas fa-chevron-left"></i></div>
+					{{#if is_not_first_page}}
+					<a href="./{{pre_page}}">
+						<div class="page_prev d-flex flex-column align-items-center justify-content-center"><i
+								class="fas fa-chevron-left"></i></div>
+					</a>
+					{{/if}}
 					<ul class="page_nav d-flex flex-row">
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
+						<li><a>{{cur_page}}</a></li>
+						{{!-- <li><a href="#">2</a></li>
 						<li><a href="#">3</a></li>
 						<li><a href="#">...</a></li>
-						<li><a href="#">21</a></li>
+						<li><a href="#">21</a></li> --}}
 					</ul>
-					<div class="page_next d-flex flex-column align-items-center justify-content-center"><i
-							class="fas fa-chevron-right"></i></div>
+					{{#if is_not_last_page}}
+					<a href="./{{next_page}}">
+						<div class="page_next d-flex flex-column align-items-center justify-content-center"><i
+								class="fas fa-chevron-right"></i></div>
+					</a>
+					{{/if}}
 				</div>
 			</div>
 

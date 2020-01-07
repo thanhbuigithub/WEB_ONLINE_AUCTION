@@ -9,17 +9,17 @@ const Bid = require("../models/bid.model");
 /* GET home page. */
 router.get("/", async function(req, res, next) {
   var danhSachSapKetThuc = await Product.instance
-    .find()
+    .find({ isEnd: false })
     .sort({ exp_date: 1 })
     .limit(5)
     .exec();
   var danhSachLuotRaGia = await Product.instance
-    .find()
+    .find({ isEnd: false })
     .sort({ bid_count: -1 })
     .limit(5)
     .exec();
   var danhSachGiaCao = await Product.instance
-    .find()
+    .find({ isEnd: false })
     .sort({ cur_price: -1 })
     .limit(5)
     .exec();
@@ -72,6 +72,32 @@ router.post("/:id/removeFromWishList", async (req, res) => {
     await user.save();
     res.json("1");
   }
+});
+
+router.post("/evaluate_bidder", async (req, res) => {
+  var id = req.body.id;
+  var point = parseInt(req.body.point);
+  var text = req.body.text;
+  var user = await User.findById(id).exec();
+  if (user.evaluate) {
+    user.evaluate.push({
+      point: point,
+      text: text
+    });
+  } else {
+    user.evaluate = [];
+    user.evaluate.push({
+      point: point,
+      text: text
+    });
+  }
+  console.log(user.local.rate_point);
+  user.rate_point.sum++;
+  if (point > 0) {
+    user.rate_point.plus += point;
+  }
+  await user.save();
+  res.redirect("/account/" + req.user._id + "/information");
 });
 
 module.exports = router;

@@ -13,6 +13,7 @@ var passport = require("passport");
 var flash = require("connect-flash");
 var validator = require("express-validator");
 var hbs = require("handlebars");
+const json = require("big-json");
 var CronJob = require("cron").CronJob;
 const nodemailer = require("nodemailer");
 let transporter = nodemailer.createTransport({
@@ -226,4 +227,5 @@ function AuctionSuccessMail(product) {
     });
   });
 }
+
 module.exports = app;

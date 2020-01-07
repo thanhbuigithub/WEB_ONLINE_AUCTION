@@ -71,12 +71,19 @@
 					<div class="header_search">
 						<div class="header_search_content">
 							<div class="header_search_form_container">
-								<form action="#" class="header_search_form clearfix">
-									<input type="search" required="required" class="header_search_input"
+								<form action="/shop" class="header_search_form clearfix" method="GET">
+									<input type="text" name="search" class="header_search_input pr-3"
 										placeholder="Tìm kiếm sản phẩm">
-									<div class="custom_dropdown">
-										<div class="custom_dropdown_list">
-											<span class="custom_dropdown_placeholder clc">Toàn bộ</span>
+									<div class="custom_dropdown form-group pl-0">
+										<select class="form-control" id="category" style="height: 50px" name="cat">
+											<option value="all">Toàn bộ</option>
+											{{#each lcCategories}}
+											<option value="_id">{{name}}</option>
+											{{/each}}
+										</select>
+										{{!-- <div class="custom_dropdown_list">
+											<input class="custom_dropdown_placeholder clc form-control" name="cat">Toàn
+											bộ</span>
 											<i class="fas fa-chevron-down"></i>
 											<ul class="custom_list clc">
 												<li><a class="clc" href="#">Toàn bộ</a></li>
@@ -84,10 +91,9 @@
 												<li><a class="clc" href="#">{{name}}</a></li>
 												{{/each}}
 											</ul>
-										</div>
+										</div> --}}
 									</div>
-									<button onclick="location.href='/search'" type="submit"
-										class="header_search_button trans_300" value="Submit"><img
+									<button type="submit" class="header_search_button trans_300" value="Submit"><img
 											src="/images/search.png" alt=""></button>
 								</form>
 							</div>
@@ -101,7 +107,7 @@
 					<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 						<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 							<div class="wishlist_icon"><img src="/images/heart.png" alt="">
-								<div class="wishlist_count cart_count mr-1"><span></span></div>
+								<div class="wishlist_count cart_count mr-1"><span>0</span></div>
 							</div>
 							<div class="wishlist_content">
 								<div class="wishlist_text"><a href="/account/wishlist">Wishlist</a></div>
@@ -142,7 +148,8 @@
 						<!-- Categories Menu -->
 
 						<div class="cat_menu_container">
-							<div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
+							<div class="cat_menu_title d-flex flex-row align-items-center justify-content-start"
+								style="cursor: pointer;" onclick="window.location='/shop/all/1';">
 								<div class="cat_burger"><span></span><span></span><span></span></div>
 								<div class="cat_menu_text">danh mục</div>
 							</div>
@@ -150,9 +157,10 @@
 							<ul class="cat_menu">
 								<!-- <li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
 									<li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li> -->
+
+								{{#each lcCategories}}
 								<li class="hassubs">
-									{{#each lcCategories}}
-									<a href="/shop">{{name}}<i class="fas fa-chevron-right"></i></a>
+									<a href="/shop/{{_id}}/1">{{name}}<i class="fas fa-chevron-right"></i></a>
 									<ul>
 										<!-- <li class="hassubs">
 												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
@@ -164,14 +172,16 @@
 												</ul>
 											</li> -->
 										{{#each childcat_name}}
-										<li><a href="/shop">{{name}}<i class="fas fa-chevron-right"></i></a></li>
+										<li><a href="/shop/{{../_id}}/{{@index}}/1">{{name}}<i
+													class="fas fa-chevron-right"></i></a></li>
 										{{/each}}
 
 
 										<!-- <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li> -->
 									</ul>
-									{{/each}}
 								</li>
+								{{/each}}
+
 							</ul>
 						</div>
 

@@ -439,7 +439,10 @@ $(document).ready(function() {
         setInterval(function() {
           // find the amount of "seconds" between now and target
           var current_date = new Date().getTime();
-          var seconds_left = (target_date - current_date) / 1000;
+          var seconds_left = 0;
+          if (target_date > current_date) {
+            seconds_left = (target_date - current_date) / 1000;
+          }
           console.log(seconds_left);
 
           // do some time calculations
@@ -559,5 +562,7 @@ $("#img").change(function() {
 });
 
 function notification() {
-  window.alert("Ra giá thành công!");
+  var r = confirm("Bạn có thật sự muốn ra giá sản phẩm này!");
+  if (r == true) window.alert("Ra giá thành công!");
+  if (r == false) return false;
 }

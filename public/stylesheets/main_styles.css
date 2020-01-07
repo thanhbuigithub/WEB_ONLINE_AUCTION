@@ -1981,8 +1981,8 @@ select option
 .deal_marks
 {
 	position: absolute;
-	top: 70px;
-	left: 30px;
+	top: -10px;
+	left: -10px;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
 	-ms-transition: all 200ms ease;
@@ -1991,8 +1991,8 @@ select option
 }
 .deals:hover .deal_marks
 {
-	top: 60px;
-	left: 18px;
+	top: -5px;
+	left: -5px;
 }
 .slick-active .product_marks
 {

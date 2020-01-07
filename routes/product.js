@@ -26,13 +26,19 @@ router.get("/:id", async function(req, res, next) {
   var Seller = await User.findById(pro.seller_id)
     .lean()
     .exec();
-
+  var relate_pros = await Product.instance
+    .find({ cat_id: pro.cat_id, isEnd: false })
+    .limit(6)
+    .exec();
+  relate_pros.forEach(element => {
+    element.imgFileName = element.img[0].filename;
+  });
   //Thêm tên danh mục
   pro.childcat_name = cat.childcat_name[pro.childcat_pos].name;
 
   //Lịch sử dấu giá
   var historyList = await Bid.instance
-    .find()
+    .find({ pro_id: id })
     .lean()
     .sort({ price: -1, bid_time: 1 })
     .limit(5)
@@ -56,7 +62,9 @@ router.get("/:id", async function(req, res, next) {
     Seller.isNew = true;
   } else {
     Seller.isNew = false;
-    Seller.point = (Seller.rate_point.plus / Seller.rate_point.sum) * 100;
+    Seller.point = Math.round(
+      (Seller.rate_point.plus / Seller.rate_point.sum) * 100
+    );
   }
 
   //Người mua
@@ -69,7 +77,9 @@ router.get("/:id", async function(req, res, next) {
       Winner.isNew = true;
     } else {
       Winner.isNew = false;
-      Winner.point = (Winner.rate_point.plus / Winner.rate_point.sum) * 100;
+      Winner.point = Math.round(
+        (Winner.rate_point.plus / Winner.rate_point.sum) * 100
+      );
     }
   }
 
@@ -79,16 +89,35 @@ router.get("/:id", async function(req, res, next) {
     "YYYY-MM-DD'T'HH:mm:ss.SSSZ"
   ).format("D/MM/YYYY");
 
+  var isWinner = false;
+  var isSeller = false;
+  if (user) {
+    if (pro.winner_id) {
+      isWinner = pro.winner_id.equals(user._id);
+    }
+    isSeller = pro.seller_id.equals(user._id);
+  }
+
+  var is_accepted = true;
+  if (req.user) {
+    if (req.user.rate_point.sum > 0) {
+      is_accepted =
+        (req.user.rate_point.plus / req.user.rate_point.sum) * 100 >= 80;
+    }
+  }
+
   res.render("product", {
     title: "Product Page",
     product: pro,
     suggest_price: pro.cur_price + pro.step_price,
     bidList: historyList,
     seller: Seller,
-    is_seller: pro.seller_id.equals(user._id),
-    is_winner: pro.winner_id.equals(user._id),
+    is_seller: isSeller,
+    is_winner: isWinner,
     is_bidded: pro.bid_count > 0,
-    winner: Winner
+    winner: Winner,
+    is_accepted: is_accepted,
+    relate_pros: relate_pros
   });
   req.session.retUrl = "/product/" + id;
 });
@@ -100,6 +129,14 @@ router.post("/:id/bid", member_controller.isLoggedIn, async function(
 ) {
   var id = req.params.id;
   var pro = await Product.instance.findById(id).exec();
+  var second_left = (pro.exp_date - Date.now()) / 1000;
+  console.log(second_left);
+  if (second_left < 300 && pro.auto_renew) {
+    pro.exp_date.setMinutes(pro.exp_date.getMinutes() + 10);
+    pro.markModified("exp_date");
+    await pro.save();
+    console.log(pro.exp_date);
+  }
   var user = req.user;
   var max_price = parseInt(req.body.max_price);
   var newBid = {

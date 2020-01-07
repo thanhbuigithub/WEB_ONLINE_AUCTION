@@ -46,19 +46,26 @@
 <!-- Product infomation -->
 
 <div class="container mt-5">
-
-  <div class="row">
-    <div class="col-md-3 align-items-center text-center d-flex flex-column">
-      <img src="/images/user.svg" alt="Ảnh đại diện" class="img-rounded center-block"
-        style="width: 200px;height: 200px">      
-      <button type="submit" class="btn btn-danger mt-4">Thêm ảnh đại diện</button>
-      <label class="file mt-3">
-        <input type="file" id="fileUser" name="fileUser">
+  <form action="/account/{{user._id}}/information/update" method="post" enctype="multipart/form-data">
+    <div class="row">
+      {{!-- Ảnh đại diện --}}
+      <div class="col-md-3 align-items-center text-center d-flex flex-column">
+        {{#if user.avatar_filename}}
+        <img id="imgHolder" src="/uploads/{{user.avatar_filename}}" alt="" class="img-rounded center-block mb-4"
+          style="width: 250px">
+        {{else}}
+        <img id="imgHolder" src="/images/user.svg" alt="" class="img-rounded center-block mb-4" style="width: 250px">
+        {{/if}}
+        <label for="img" class="h5">Thêm ảnh đại diện</label>
+        <input class="btn btn-danger" type="file" id="img" name="img" style="max-width: 200px"></input>
+        <div class="h6 reqImg text-danger mt-3"></div>
+        {{!-- <label class="file mt-3">
+        <input type="file" id="file" multiple>
         <span class="file-custom"></span>
-      </label>
-    </div>
-    <div class="col-md-9 pl-4">
-      <form action="/account/{{user._id}}/information/update" method="post">
+      </label> --}}
+      </div>
+      {{!-- Thông tin cá nhân --}}
+      <div class="col-md-9 pl-4">
         <div class="form-group">
           <div class="row ">
             {{#if hasErrors}}
@@ -138,8 +145,9 @@
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <button type="submit" class="btn btn-outline-success btn-lg mt-4 float-right "><i class="fa fa-check mr-2"
             aria-hidden="true"></i>Save</button>
-      </form>
-    </div>
-  </div>
 
+      </div>
+
+    </div>
+  </form>
 </div>

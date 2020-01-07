@@ -18,446 +18,394 @@
 
 ******************************/
 
-$(document).ready(function()
-{
-	"use strict";
+$(document).ready(function() {
+  "use strict";
 
-	/* 
+  /* 
 
 	1. Vars and Inits
 
 	*/
 
-	var menuActive = false;
-	var header = $('.header');
+  var menuActive = false;
+  var header = $(".header");
 
-	setHeader();
+  setHeader();
 
-	initCustomDropdown();
-	initPageMenu();
-	initViewedSlider();
-	initBrandsSlider();
-	initIsotope();
-	initPriceSlider();
-	// initFavs();
-	initCountingDown();
-	
+  //initCustomDropdown();
+  initPageMenu();
+  initViewedSlider();
+  initBrandsSlider();
+  initIsotope();
+  initPriceSlider();
+  // initFavs();
+  initCountingDown();
 
-	$(window).on('resize', function()
-	{
-		setHeader();
-	});
+  $(window).on("resize", function() {
+    setHeader();
+  });
 
-	/* 
+  /* 
 
 	2. Set Header
 
 	*/
 
-	function setHeader()
-	{
-		//To pin main nav to the top of the page when it's reached
-		//uncomment the following
+  function setHeader() {
+    //To pin main nav to the top of the page when it's reached
+    //uncomment the following
 
-		// var controller = new ScrollMagic.Controller(
-		// {
-		// 	globalSceneOptions:
-		// 	{
-		// 		triggerHook: 'onLeave'
-		// 	}
-		// });
+    // var controller = new ScrollMagic.Controller(
+    // {
+    // 	globalSceneOptions:
+    // 	{
+    // 		triggerHook: 'onLeave'
+    // 	}
+    // });
 
-		// var pin = new ScrollMagic.Scene(
-		// {
-		// 	triggerElement: '.main_nav'
-		// })
-		// .setPin('.main_nav').addTo(controller);
+    // var pin = new ScrollMagic.Scene(
+    // {
+    // 	triggerElement: '.main_nav'
+    // })
+    // .setPin('.main_nav').addTo(controller);
 
-		if(window.innerWidth > 991 && menuActive)
-		{
-			closeMenu();
-		}
-	}
+    if (window.innerWidth > 991 && menuActive) {
+      closeMenu();
+    }
+  }
 
-	/* 
+  /* 
 
 	3. Init Custom Dropdown
 
 	*/
 
-	function initCustomDropdown()
-	{
-		if($('.custom_dropdown_placeholder').length && $('.custom_list').length)
-		{
-			var placeholder = $('.custom_dropdown_placeholder');
-			var list = $('.custom_list');
-		}
+  function initCustomDropdown() {
+    if ($(".custom_dropdown_placeholder").length && $(".custom_list").length) {
+      var placeholder = $(".custom_dropdown_placeholder");
+      var list = $(".custom_list");
+    }
 
-		placeholder.on('click', function (ev)
-		{
-			if(list.hasClass('active'))
-			{
-				list.removeClass('active');
-			}
-			else
-			{
-				list.addClass('active');
-			}
+    placeholder.on("click", function(ev) {
+      if (list.hasClass("active")) {
+        list.removeClass("active");
+      } else {
+        list.addClass("active");
+      }
 
-			$(document).one('click', function closeForm(e)
-			{
-				if($(e.target).hasClass('clc'))
-				{
-					$(document).one('click', closeForm);
-				}
-				else
-				{
-					list.removeClass('active');
-				}
-			});
+      $(document).one("click", function closeForm(e) {
+        if ($(e.target).hasClass("clc")) {
+          $(document).one("click", closeForm);
+        } else {
+          list.removeClass("active");
+        }
+      });
+    });
 
-		});
+    $(".custom_list a").on("click", function(ev) {
+      ev.preventDefault();
+      var index = $(this)
+        .parent()
+        .index();
 
-		$('.custom_list a').on('click', function (ev)
-		{
-			ev.preventDefault();
-			var index = $(this).parent().index();
+      placeholder.text($(this).text()).css("opacity", "1");
+      if (list.hasClass("active")) {
+        list.removeClass("active");
+      } else {
+        list.addClass("active");
+      }
+    });
 
-			placeholder.text( $(this).text() ).css('opacity', '1');
+    $("select").on("change", function(e) {
+      placeholder.text(this.value);
 
-			if(list.hasClass('active'))
-			{
-				list.removeClass('active');
-			}
-			else
-			{
-				list.addClass('active');
-			}
-		});
+      $(this).animate({ width: placeholder.width() + "px" });
+    });
+  }
 
-
-		$('select').on('change', function (e)
-		{
-			placeholder.text(this.value);
-
-			$(this).animate({width: placeholder.width() + 'px' });
-		});
-	}
-
-	/* 
+  /* 
 
 	4. Init Page Menu
 
 	*/
 
-	function initPageMenu()
-	{
-		if($('.page_menu').length && $('.page_menu_content').length)
-		{
-			var menu = $('.page_menu');
-			var menuContent = $('.page_menu_content');
-			var menuTrigger = $('.menu_trigger');
+  function initPageMenu() {
+    if ($(".page_menu").length && $(".page_menu_content").length) {
+      var menu = $(".page_menu");
+      var menuContent = $(".page_menu_content");
+      var menuTrigger = $(".menu_trigger");
 
-			//Open / close page menu
-			menuTrigger.on('click', function()
-			{
-				if(!menuActive)
-				{
-					openMenu();
-				}
-				else
-				{
-					closeMenu();
-				}
-			});
+      //Open / close page menu
+      menuTrigger.on("click", function() {
+        if (!menuActive) {
+          openMenu();
+        } else {
+          closeMenu();
+        }
+      });
 
-			//Handle page menu
-			if($('.page_menu_item').length)
-			{
-				var items = $('.page_menu_item');
-				items.each(function()
-				{
-					var item = $(this);
-					if(item.hasClass("has-children"))
-					{
-						item.on('click', function(evt)
-						{
-							evt.preventDefault();
-							evt.stopPropagation();
-							var subItem = item.find('> ul');
-						    if(subItem.hasClass('active'))
-						    {
-						    	subItem.toggleClass('active');
-								TweenMax.to(subItem, 0.3, {height:0});
-						    }
-						    else
-						    {
-						    	subItem.toggleClass('active');
-						    	TweenMax.set(subItem, {height:"auto"});
-								TweenMax.from(subItem, 0.3, {height:0});
-						    }
-						});
-					}
-				});
-			}
-		}
-	}
+      //Handle page menu
+      if ($(".page_menu_item").length) {
+        var items = $(".page_menu_item");
+        items.each(function() {
+          var item = $(this);
+          if (item.hasClass("has-children")) {
+            item.on("click", function(evt) {
+              evt.preventDefault();
+              evt.stopPropagation();
+              var subItem = item.find("> ul");
+              if (subItem.hasClass("active")) {
+                subItem.toggleClass("active");
+                TweenMax.to(subItem, 0.3, { height: 0 });
+              } else {
+                subItem.toggleClass("active");
+                TweenMax.set(subItem, { height: "auto" });
+                TweenMax.from(subItem, 0.3, { height: 0 });
+              }
+            });
+          }
+        });
+      }
+    }
+  }
 
-	function openMenu()
-	{
-		var menu = $('.page_menu');
-		var menuContent = $('.page_menu_content');
-		TweenMax.set(menuContent, {height:"auto"});
-		TweenMax.from(menuContent, 0.3, {height:0});
-		menuActive = true;
-	}
+  function openMenu() {
+    var menu = $(".page_menu");
+    var menuContent = $(".page_menu_content");
+    TweenMax.set(menuContent, { height: "auto" });
+    TweenMax.from(menuContent, 0.3, { height: 0 });
+    menuActive = true;
+  }
 
-	function closeMenu()
-	{
-		var menu = $('.page_menu');
-		var menuContent = $('.page_menu_content');
-		TweenMax.to(menuContent, 0.3, {height:0});
-		menuActive = false;
-	}
+  function closeMenu() {
+    var menu = $(".page_menu");
+    var menuContent = $(".page_menu_content");
+    TweenMax.to(menuContent, 0.3, { height: 0 });
+    menuActive = false;
+  }
 
-	/* 
+  /* 
 
 	5. Init Recently Viewed Slider
 
 	*/
 
-	function initViewedSlider()
-	{
-		if($('.viewed_slider').length)
-		{
-			var viewedSlider = $('.viewed_slider');
+  function initViewedSlider() {
+    if ($(".viewed_slider").length) {
+      var viewedSlider = $(".viewed_slider");
 
-			viewedSlider.owlCarousel(
-			{
-				loop:true,
-				margin:30,
-				autoplay:true,
-				autoplayTimeout:6000,
-				nav:false,
-				dots:false,
-				responsive:
-				{
-					0:{items:1},
-					575:{items:2},
-					768:{items:3},
-					991:{items:4},
-					1199:{items:6}
-				}
-			});
+      viewedSlider.owlCarousel({
+        loop: true,
+        margin: 30,
+        autoplay: true,
+        autoplayTimeout: 6000,
+        nav: false,
+        dots: false,
+        responsive: {
+          0: { items: 1 },
+          575: { items: 2 },
+          768: { items: 3 },
+          991: { items: 4 },
+          1199: { items: 6 }
+        }
+      });
 
-			if($('.viewed_prev').length)
-			{
-				var prev = $('.viewed_prev');
-				prev.on('click', function()
-				{
-					viewedSlider.trigger('prev.owl.carousel');
-				});
-			}
+      if ($(".viewed_prev").length) {
+        var prev = $(".viewed_prev");
+        prev.on("click", function() {
+          viewedSlider.trigger("prev.owl.carousel");
+        });
+      }
 
-			if($('.viewed_next').length)
-			{
-				var next = $('.viewed_next');
-				next.on('click', function()
-				{
-					viewedSlider.trigger('next.owl.carousel');
-				});
-			}
-		}
-	}
+      if ($(".viewed_next").length) {
+        var next = $(".viewed_next");
+        next.on("click", function() {
+          viewedSlider.trigger("next.owl.carousel");
+        });
+      }
+    }
+  }
 
-	/* 
+  /* 
 
 	6. Init Brands Slider
 
 	*/
 
-	function initBrandsSlider()
-	{
-		if($('.brands_slider').length)
-		{
-			var brandsSlider = $('.brands_slider');
+  function initBrandsSlider() {
+    if ($(".brands_slider").length) {
+      var brandsSlider = $(".brands_slider");
 
-			brandsSlider.owlCarousel(
-			{
-				loop:true,
-				autoplay:true,
-				autoplayTimeout:5000,
-				nav:false,
-				dots:false,
-				autoWidth:true,
-				items:8,
-				margin:42
-			});
+      brandsSlider.owlCarousel({
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        nav: false,
+        dots: false,
+        autoWidth: true,
+        items: 8,
+        margin: 42
+      });
 
-			if($('.brands_prev').length)
-			{
-				var prev = $('.brands_prev');
-				prev.on('click', function()
-				{
-					brandsSlider.trigger('prev.owl.carousel');
-				});
-			}
+      if ($(".brands_prev").length) {
+        var prev = $(".brands_prev");
+        prev.on("click", function() {
+          brandsSlider.trigger("prev.owl.carousel");
+        });
+      }
 
-			if($('.brands_next').length)
-			{
-				var next = $('.brands_next');
-				next.on('click', function()
-				{
-					brandsSlider.trigger('next.owl.carousel');
-				});
-			}
-		}
-	}
+      if ($(".brands_next").length) {
+        var next = $(".brands_next");
+        next.on("click", function() {
+          brandsSlider.trigger("next.owl.carousel");
+        });
+      }
+    }
+  }
 
-	/* 
+  /* 
 
 	7. Init Isotope
 
 	*/
 
-	function initIsotope()
-	{
-		var sortingButtons = $('.shop_sorting_button');
+  function initIsotope() {
+    var sortingButtons = $(".shop_sorting_button");
 
-		$('.product_grid').isotope({
-			itemSelector: '.product_item',
-            getSortData: {
-            	price: function(itemElement)
-            	{
-            		var priceEle = $(itemElement).find('.product_price').text().replace( '$', '' );
-            		return parseFloat(priceEle);
-            	},
-            	name: '.product_name div a'
-            },
-            animationOptions: {
-                duration: 750,
-                easing: 'linear',
-                queue: false
-            }
-        });
+    $(".product_grid").isotope({
+      itemSelector: ".product_item",
+      getSortData: {
+        price: function(itemElement) {
+          var priceEle = $(itemElement)
+            .find(".product_price")
+            .text()
+            .replace("đ", "");
+          return parseFloat(priceEle);
+        },
+        name: ".product_name div a"
+      },
+      animationOptions: {
+        duration: 750,
+        easing: "linear",
+        queue: false
+      }
+    });
 
-        // Sort based on the value from the sorting_type dropdown
-        sortingButtons.each(function()
-        {
-        	$(this).on('click', function()
-        	{
-        		$('.sorting_text').text($(this).text());
-        		var option = $(this).attr('data-isotope-option');
-        		option = JSON.parse(option);
-				$('.product_grid').isotope(option);
-        	});
-        });
+    // Sort based on the value from the sorting_type dropdown
+    sortingButtons.each(function() {
+      $(this).on("click", function() {
+        $(".sorting_text").text($(this).text());
+        var option = $(this).attr("data-isotope-option");
+        option = JSON.parse(option);
+        $(".product_grid").isotope(option);
+      });
+    });
+  }
 
-	}
-
-	 /* 
+  /* 
 
 	8. Init Price Slider
 
 	*/
 
-    function initPriceSlider()
-    {
-    	if($("#slider-range").length)
-    	{
-    		$("#slider-range").slider(
-			{
-				range: true,
-				min: 0,
-				max: 50000000,
-				values: [ 0, 50000000 ],
-				slide: function( event, ui )
-				{
-					$( "#amount" ).val( ui.values[ 0 ] +" đ" +" - "+ ui.values[ 1 ] + " đ"  );
-				}
-			});
-				
-			$( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) + " đ" + " - " + $( "#slider-range" ).slider( "values", 1 ) + " đ");
-			$('.ui-slider-handle').on('mouseup', function()
-			{
-				$('.product_grid').isotope({
-		            filter: function()
-		            {
-		            	var priceRange = $('#amount').val();
-			        	var priceMin = parseInt(priceRange.split('-')[0].replace('đ', ''));
-			        	var priceMax = parseInt(priceRange.split('-')[1].replace('đ', ''));
-			        	var itemPrice = $(this).find('.product_price').clone().children().remove().end().text().replace( 'đ', '' );
+  function initPriceSlider() {
+    if ($("#slider-range").length) {
+      $("#slider-range").slider({
+        range: true,
+        min: 0,
+        max: 50000000,
+        values: [0, 50000000],
+        slide: function(event, ui) {
+          $("#amount").val(ui.values[0] + " đ" + " - " + ui.values[1] + " đ");
+        }
+      });
 
-			        	return (itemPrice > priceMin) && (itemPrice < priceMax);
-		            },
-		            animationOptions: {
-		                duration: 750,
-		                easing: 'linear',
-		                queue: false
-		            }
-		        });
-			});
-    	}	
+      $("#amount").val(
+        $("#slider-range").slider("values", 0) +
+          " đ" +
+          " - " +
+          $("#slider-range").slider("values", 1) +
+          " đ"
+      );
+      $(".ui-slider-handle").on("mouseup", function() {
+        $(".product_grid").isotope({
+          filter: function() {
+            var priceRange = $("#amount").val();
+            var priceMin = parseInt(priceRange.split("-")[0].replace("đ", ""));
+            var priceMax = parseInt(priceRange.split("-")[1].replace("đ", ""));
+            var itemPrice = $(this)
+              .find(".product_price")
+              .clone()
+              .children()
+              .remove()
+              .end()
+              .text()
+              .replace("đ", "");
+
+            return itemPrice > priceMin && itemPrice < priceMax;
+          },
+          animationOptions: {
+            duration: 750,
+            easing: "linear",
+            queue: false
+          }
+        });
+      });
     }
+  }
 
-    /* 
+  /* 
 
 	9. Init Favorites
 
 	*/
 
-	function initFavs()
-	{
-		// Handle Favorites
-		var items = document.getElementsByClassName('product_fav');
-		for(var x = 0; x < items.length; x++)
-		{
-			var item = items[x];
-			item.addEventListener('click', function(fn)
-			{
-				fn.target.classList.toggle('active');
-			});
-		}
-	}
+  function initFavs() {
+    // Handle Favorites
+    var items = document.getElementsByClassName("product_fav");
+    for (var x = 0; x < items.length; x++) {
+      var item = items[x];
+      item.addEventListener("click", function(fn) {
+        fn.target.classList.toggle("active");
+      });
+    }
+  }
 
-	/* 9. Init Countdownter*/
+  /* 9. Init Countdownter*/
 
-	function initCountingDown()
-	{
-			// Set the date we're counting down to
-	var countDownDate = new Date().getTime() + 7*1000*60*60*24;
+  function initCountingDown() {
+    // Set the date we're counting down to
+    var countDownDate = new Date().getTime() + 7 * 1000 * 60 * 60 * 24;
 
-	// Update the count down every 1 second
-	var x = setInterval(function() {
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+      // Get today's date and time
+      var now = new Date().getTime();
 
-	// Get today's date and time
-	var now = new Date().getTime();
-		
-	// Find the distance between now and the count down date
-	var distance = countDownDate - now;
-		
-	// Time calculations for days, hours, minutes and seconds
-	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-		
-	// Output the result in an element with id="demo"
-	var x = document.getElementsByClassName("counter");
-	var i;
-	for (i = 0; i < x.length; i++) {
-		x[i].innerHTML = days + " d: " + hours + " h: "
-		+ minutes + " m: " + seconds + " s ";
-	}
-		
-	// If the count down is over, write some text 
-	if (distance < 0) {
-		clearInterval(x);
-		document.getElementsByClassName("counter").innerHTML = "Kết thúc";
-	}
-	}, 1000);
-	}
-	
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
 
-	
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Output the result in an element with id="demo"
+      var x = document.getElementsByClassName("counter");
+      var i;
+      for (i = 0; i < x.length; i++) {
+        x[i].innerHTML =
+          days + " d: " + hours + " h: " + minutes + " m: " + seconds + " s ";
+      }
+
+      // If the count down is over, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementsByClassName("counter").innerHTML = "Kết thúc";
+      }
+    }, 1000);
+  }
 });

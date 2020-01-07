@@ -3,10 +3,12 @@ var passport = require("passport");
 var Request = require("request");
 var User = require("../models/user.model");
 var bcrypt = require("bcryptjs");
-
+var Product = require("../models/product.model");
+var User = require("../models/user.model");
+var Bid = require("../models/bid.model");
 
 // GET Register
-exports.get_register = function (req, res, next) {
+exports.get_register = function(req, res, next) {
   var messages = req.flash("error");
   res.render("account/register", {
     title: "Đăng kí tài khoản",
@@ -25,26 +27,41 @@ exports.post_register = passport.authenticate("local.register", {
 });
 
 // GET Profile
-exports.get_profile = (req, res, next) => {
-  res.render('account/user_information', {
-    title: 'User Information',
+exports.get_profile = async (req, res, next) => {
+  var user = req.user;
+  var bid_pros_end = await Product.instance
+    .find({ winner_id: user._id, isEnd: true })
+    .exec();
+  var sell_pros_end = await Product.instance
+    .find({ seller_id: user._id, isEnd: true })
+    .exec();
+  var sell_pros = await Product.instance
+    .find({ seller_id: user._id, isEnd: false })
+    .exec();
+  Product.addInfo(bid_pros_end, res.locals.lcCategories, res.locals.lcUsers);
+  Product.addInfo(sell_pros_end, res.locals.lcCategories, res.locals.lcUsers);
+  Product.addInfo(sell_pros, res.locals.lcCategories, res.locals.lcUsers);
+  res.render("account/user_information", {
+    title: "User Information",
+    bid_pros_end: bid_pros_end,
+    sell_pros_end: sell_pros_end,
+    sell_pros: sell_pros
   });
 };
 
 //UPDATE INFORMATION
-exports.get_update_information = function (req, res, next) {
-  var messages = req.flash('error');
-  res.render('account/update_information', {
+exports.get_update_information = function(req, res, next) {
+  var messages = req.flash("error");
+  res.render("account/update_information", {
     csrfToken: req.csrfToken(),
-    title: 'Update Information',
+    title: "Update Information",
     messages: messages,
     hasErrors: messages.length > 0
   });
 };
 
-exports.post_update_information = function (req, res, next) {
-
-  User.findById(req.params.id, function (err, user) {
+exports.post_update_information = function(req, res, next) {
+  User.findById(req.params.id, function(err, user) {
     var first_name = req.body.first_name.trim();
     var last_name = req.body.last_name.trim();
     var username = req.body.username.trim();
@@ -53,64 +70,79 @@ exports.post_update_information = function (req, res, next) {
     var addr = req.body.addr.trim();
     var password = req.body.password;
     var Npasswordcheck = req.body.txtNPassword;
-    var Npassword = bcrypt.hashSync(req.body.txtNPassword, bcrypt.genSaltSync(8));
+    var Npassword = bcrypt.hashSync(
+      req.body.txtNPassword,
+      bcrypt.genSaltSync(8)
+    );
     var Cpassword = req.body.txtCPassword;
+    var avatar_filename;
+    if (req.file) {
+      avatar_filename = req.file.filename;
+    }
+
     if (err) {
-      req.flash('error', 'No account found');
+      req.flash("error", "No account found");
       return res.redirect(`/account/${req.params.id}/information/update`);
     }
 
     if (user) {
       var check = false;
       if (password && !Npasswordcheck && !Cpassword) {
-        req.flash('error', 'Vui lòng nhập đầy đủ thông tin mật khẩu để cập nhật ! Nếu không hãy xóa thông tin mật khẩu cũ để tiếp tục!');
+        req.flash(
+          "error",
+          "Vui lòng nhập đầy đủ thông tin mật khẩu để cập nhật ! Nếu không hãy xóa thông tin mật khẩu cũ để tiếp tục!"
+        );
         check = true;
       }
-      if (password && (!bcrypt.compareSync(password, user.local.password))) {
-        req.flash('error', 'Xác nhận mật khẩu cũ không trùng khớp !');
+      if (password && !bcrypt.compareSync(password, user.local.password)) {
+        req.flash("error", "Xác nhận mật khẩu cũ không trùng khớp !");
         check = true;
       }
 
       if (Npasswordcheck !== Cpassword) {
-        req.flash('error', 'Xác nhận mật khẩu mới không trùng khớp !');
+        req.flash("error", "Xác nhận mật khẩu mới không trùng khớp !");
         check = true;
       }
       if (check) {
         return res.redirect(`/account/${req.params.id}/information/update`);
       }
-
     }
 
     if (password && Npasswordcheck && Cpassword) {
-      user.info.fname = first_name,
-        user.info.lname = last_name,
-        user.local.username = username,
-        user.info.dob = dob,
-        user.local.email = email,
-        user.info.addr = addr,
-        user.local.password = Npassword;
-    }
-    else if (!password && !Npasswordcheck && !Cpassword) {
-      user.info.fname = first_name,
-        user.info.lname = last_name,
-        user.local.username = username,
-        user.info.dob = dob,
-        user.local.email = email,
-        user.info.addr = addr
+      (user.info.fname = first_name),
+        (user.info.lname = last_name),
+        (user.local.username = username),
+        (user.info.dob = dob),
+        (user.local.email = email),
+        (user.info.addr = addr),
+        (user.local.password = Npassword);
+      if (avatar_filename) {
+        user.avatar_filename = avatar_filename;
+      }
+    } else if (!password && !Npasswordcheck && !Cpassword) {
+      (user.info.fname = first_name),
+        (user.info.lname = last_name),
+        (user.local.username = username),
+        (user.info.dob = dob),
+        (user.local.email = email),
+        (user.info.addr = addr);
+      if (avatar_filename) {
+        user.avatar_filename = avatar_filename;
+      }
     }
 
     user.save((error, result) => {
       if (error) {
-        req.flash('error', 'ERROR!');
+        req.flash("error", "ERROR!");
         return res.redirect(`/account/${req.params.id}/information/update`);
       }
 
       return res.redirect(`/account/${req.params.id}/information`);
-    })
+    });
   });
 };
 // GET Login
-exports.get_login = function (req, res, next) {
+exports.get_login = function(req, res, next) {
   var messages = req.flash("error");
   res.render("account/login", {
     title: "Đăng nhập",
@@ -128,12 +160,12 @@ exports.post_login = passport.authenticate("local.login", {
 });
 
 // LOGOUT
-exports.get_logout = function (req, res, next) {
+exports.get_logout = function(req, res, next) {
   req.logout();
   res.redirect(req.headers.referer);
 };
 //Kiểm tra có đăng nhập chưa ?
-exports.isLoggedIn = function (req, res, next) {
+exports.isLoggedIn = function(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
@@ -142,7 +174,7 @@ exports.isLoggedIn = function (req, res, next) {
 };
 
 //Kiểm tra có phải là seller không ?
-exports.isSeller = function (req, res, next) {
+exports.isSeller = function(req, res, next) {
   if (req.isAuthenticated()) {
     if (req.user.local.permission >= 1) return next();
   }
@@ -151,7 +183,7 @@ exports.isSeller = function (req, res, next) {
   else res.redirect("/");
 };
 
-exports.notLoggedIn = function (req, res, next) {
+exports.notLoggedIn = function(req, res, next) {
   if (!req.isAuthenticated()) {
     return next();
   }
@@ -165,19 +197,17 @@ exports.recaptcha = (request, response, next) => {
   recaptcha_url += "response=" + request.body["g-recaptcha-response"] + "&";
   recaptcha_url += "remoteip=" + request.connection.remoteAddress;
   recaptcha_url += "remoteip=" + request.connection.remoteAddress;
-  Request(recaptcha_url, function (error, resp, body) {
+  Request(recaptcha_url, function(error, resp, body) {
     body = JSON.parse(body);
     if (body.success !== undefined && !body.success) {
-      request.flash('error', 'Vui lòng xác nhận reCAPTCHA !');
-      response.redirect('/account/register');
-    }
-    else {
+      request.flash("error", "Vui lòng xác nhận reCAPTCHA !");
+      response.redirect("/account/register");
+    } else {
       next();
     }
   });
-
 };
-exports.notLogin_use = function (req, res, next) {
+exports.notLogin_use = function(req, res, next) {
   next();
 };
 
