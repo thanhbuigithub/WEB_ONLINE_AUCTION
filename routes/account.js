@@ -76,7 +76,7 @@ router.get(
 );
 router.post("/login", member_controller.post_login, member_controller.restrict);
 
-router.get("/cart", member_controller.isLoggedIn, async function (
+router.get("/cart", member_controller.isLoggedIn, async function(
   req,
   res,
   next
@@ -108,7 +108,7 @@ router.get("/cart", member_controller.isLoggedIn, async function (
   });
 });
 
-router.get("/wishlist", member_controller.isLoggedIn, async function (
+router.get("/wishlist", member_controller.isLoggedIn, async function(
   req,
   res,
   next
@@ -145,17 +145,21 @@ router.get("/wishlist", member_controller.isLoggedIn, async function (
   });
 });
 
-router.get("/:id/upgrade", member_controller.isLoggedIn, async (req, res, next) => {
-  var user = await User.findById({"_id":req.params.id}).exec();
-  if(!user.local.is_upgrade && user.local.is_upgrade === false){
-    console.log("Không được phép nâng cấp !");
-  }else{
-    user.local.is_upgrade = false;
+router.get(
+  "/:id/upgrade",
+  member_controller.isLoggedIn,
+  async (req, res, next) => {
+    var user = await User.findById({ _id: req.params.id }).exec();
+    // if(!user.local.is_upgrade && user.local.is_upgrade === false){
+    //   console.log("Không được phép nâng cấp !");
+    // }else{
+    user.local.is_upgrade = true;
     console.log("Chờ xét duyệt !");
     res.redirect(`/account/${req.params.id}/information`);
+    // }
   }
-})
-router.get("/payment", member_controller.isLoggedIn, function (req, res, next) {
+);
+router.get("/payment", member_controller.isLoggedIn, function(req, res, next) {
   res.render("account/payment", { title: "Payment" });
 });
 

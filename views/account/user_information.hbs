@@ -71,8 +71,12 @@
 				</div>
 				<button type="button" onclick="location.href='/account/{{user._id}}/information/update'"
 					class="btn btn-primary mt-4">Thay đổi thông tin</button>
+				{{#if user.local.is_upgrade}}
+				{{else}}
 				<button type="button" onclick="location.href='/account/{{user._id}}/upgrade'"
 					class="btn btn-outline-warning mt-4 ml-3">Nâng cấp thành người bán</button>
+				{{/if}}
+
 
 			</form>
 			<!-- <form>
